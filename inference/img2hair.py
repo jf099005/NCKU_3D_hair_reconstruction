@@ -40,6 +40,10 @@ VisionRunningMode = mp.tasks.vision.RunningMode
 FaceLandmarkerOptions = mp.tasks.vision.FaceLandmarkerOptions
 FaceLandmarkerResult = mp.tasks.vision.FaceLandmarkerResult
 
+import argparse
+import torchvision
+import torch.nn.functional as F
+
 torch.autograd.set_grad_enabled(False)
 
 
@@ -316,6 +320,7 @@ class DiffLocksInference():
         patch_embeddings_reshaped = patch_embeddings.reshape(batch_size, h, w, hidden_size)
         patch_embeddings_reshaped=patch_embeddings_reshaped.permute(0,3,1,2).contiguous() #Make it bchw 
         print("patch_embeddings_reshaped",patch_embeddings_reshaped.shape)
+
         extra_args['latents_dict']["dinov2"]={
                                     "cls_token": cls_token,
                                     "final_latent": patch_embeddings_reshaped,
@@ -324,7 +329,13 @@ class DiffLocksInference():
 
         #run diffusion
         with torch.autocast(device_type="cuda", dtype=torch.bfloat16): #we need this because flash attention only works with float16 and bfloat16
-            scalp_texture = sample_images_cfg(1, cfg_val=self.cfg_val, cfg_interval=[0.0, 5.0], model_ema=self.model_ema, model_config=self.model_config, nr_iters=self.nr_iters_denoise, extra_args=extra_args)
+            scalp_texture = sample_images_cfg(1, 
+                                              cfg_val=self.cfg_val, 
+                                              cfg_interval=[0.0, 5.0], 
+                                              model_ema=self.model_ema, 
+                                              model_config=self.model_config, 
+                                              nr_iters=self.nr_iters_denoise, 
+                                              extra_args=extra_args)
         scalp_texture=scalp_texture.float()
         scalp_texture_orig=scalp_texture
         if out_path:
@@ -344,7 +355,14 @@ class DiffLocksInference():
         # density_map[density_map>0.02]+=1.0
         
 
-        strand_points_world, strand_points_tbn = sample_strands_from_scalp_with_density(scalp_texture, density_map, self.strand_codec, normalization_dict=self.normalization_dict, scalp_mesh_data=self.scalp_mesh_data, tbn_space_to_world_func=tbn_space_to_world, nr_chunks=self.nr_chunks_decode_strands, upsample_multiplier=3)
+        strand_points_world, strand_points_tbn = sample_strands_from_scalp_with_density(
+            scalp_texture, 
+            density_map, 
+            self.strand_codec, 
+            normalization_dict=self.normalization_dict, 
+            scalp_mesh_data=self.scalp_mesh_data, 
+            tbn_space_to_world_func=tbn_space_to_world, 
+            nr_chunks=self.nr_chunks_decode_strands, upsample_multiplier=3)
 
 
         #get also material

@@ -94,10 +94,10 @@ def compute_loss_kl(mean, logstd):
     return kl_loss
 
 def kl(mean, logstd):
+    logstd = torch.clamp(logstd, min=-8.0, max=2.0)
     kl = (-0.5 - logstd + 0.5 * mean ** 2 + 0.5 * torch.exp(2 * logstd))
     return kl
 
     
 
     
-

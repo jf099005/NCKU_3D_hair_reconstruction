@@ -1,0 +1,8 @@
+__pycache__/
+checkpoints/
+*.zip
+*.png
+*.jpg
+*.jpeg
+out_training/
+outputs_inference/

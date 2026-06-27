@@ -150,7 +150,7 @@ def world_to_tbn_space(strands_tbn, strands_positions, root_normals):
     strands_positions = strands_positions-root_pos
 
     #we want to map tangent to X, bitangent to Z and normal to Y, so we swap B and N
-    indices_tbn=torch.tensor([0,2,1], device="cuda").long()
+    indices_tbn=torch.tensor([0,2,1], device=strands_tbn.device).long()
     strands_tbn=torch.index_select(strands_tbn, 3, indices_tbn)
     #make the Tangent to be along +x
     strands_tbn[..., 0] = -strands_tbn[..., 0]
@@ -406,7 +406,6 @@ class World2Local(torch.nn.Module):
 
     def forward(self, strands_tbn, strands_positions, root_normals):
         return world_to_tbn_space(strands_tbn, strands_positions, root_normals)
-
 
 
 

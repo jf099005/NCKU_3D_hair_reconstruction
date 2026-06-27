@@ -682,7 +682,7 @@ def sample_dpmpp_2m_sde_cfg(model, x, sigmas, cfg_val, cfg_interval, extra_args=
             cfg_val_cur=1.0
         # print("sigmas[i]",sigmas[i])
         # print("cfg_interval", cfg_interval)
-        print("cfg_val_cur",cfg_val_cur, " for sigma ", sigmas[i])
+        # print("cfg_val_cur",cfg_val_cur, " for sigma ", sigmas[i])
 
 
         # denoised = model(x, sigmas[i] * s_in, **extra_args)

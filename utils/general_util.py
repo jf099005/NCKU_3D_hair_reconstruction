@@ -432,7 +432,7 @@ def dilate_erode_mask(mask):
 
 #from pytorch3d
 def random_quaternions(
-    n: int, dtype: Optional[torch.dtype] = None) -> torch.Tensor:
+    n: int, dtype: Optional[torch.dtype] = None, device: Optional[torch.device] = None) -> torch.Tensor:
     """
     Generate random quaternions representing rotations,
     i.e. versors with nonnegative real part.
@@ -446,7 +446,9 @@ def random_quaternions(
     Returns:
         Quaternions as tensor of shape (N, 4).
     """
-    o = torch.randn((n, 4), dtype=dtype, device=torch.device("cuda"))
+    if device is None:
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    o = torch.randn((n, 4), dtype=dtype, device=device)
     s = (o * o).sum(1)
     o = o / _copysign(torch.sqrt(s), o[:, 0])[:, None]
     return o

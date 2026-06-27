@@ -24,10 +24,12 @@ def dir_empty(dir_path):
 
 class StrandsData(dict):
     def __init__(self, npz_data, meta_data, scalp_mesh_data, nr_full_strands_per_hairstyle, compute_tbn=True, flip=False):
-        self.positions = npz_data["positions"] #nr_strands x nr_points_per_strand x 3
-        self.root_normal = npz_data["root_normal"] #nr_strands x 3
-        self.root_uv = npz_data["root_uv"] #nr_strands x 2
-        self.root_position = npz_data["positions"][:,0,:] #nr_strands x 3
+        self.positions = np.array(npz_data["positions"], dtype=np.float32, copy=True) #nr_strands x nr_points_per_strand x 3
+        self.root_normal = np.array(npz_data["root_normal"], dtype=np.float32, copy=True) #nr_strands x 3
+        self.root_uv = np.array(npz_data["root_uv"], dtype=np.float32, copy=True) #nr_strands x 2
+        self.root_position = np.array(self.positions[:,0,:], dtype=np.float32, copy=True) #nr_strands x 3
+        if compute_tbn and "tbn" in npz_data:
+            self.tbn = np.array(npz_data["tbn"], dtype=np.float32, copy=True)
         # print("init positiosis ", npz_data["positions"].shape)
         # print("inti root position",self.root_position.shape)
        
@@ -46,7 +48,7 @@ class StrandsData(dict):
         if nr_full_strands_per_hairstyle is not None and nr_full_strands_per_hairstyle not in chunked_values:
             self.subsample_to_nr_strands(nr_full_strands_per_hairstyle)
 
-        if compute_tbn:
+        if compute_tbn and not hasattr(self, "tbn"):
             self.compute_tbn(scalp_mesh_data["verts"], scalp_mesh_data["uv"],scalp_mesh_data["faces"],
                                     scalp_mesh_data["v_tangents"], scalp_mesh_data["v_bitangents"],scalp_mesh_data["v_normals"])
 
@@ -60,6 +62,8 @@ class StrandsData(dict):
         self.root_normal = self.root_normal[indices_strands,:]
         self.root_uv = self.root_uv[indices_strands,:]
         self.root_position = self.root_position[indices_strands,:]
+        if hasattr(self, "tbn"):
+            self.tbn = self.tbn[indices_strands,:,:]
 
 
     def compute_tbn(self, mesh_verts, mesh_uv, mesh_faces, mesh_v_tangents, mesh_v_bitangents, mesh_v_normals):
@@ -650,7 +654,7 @@ class DiffLocksDataset(Dataset):
         return self.smplx_base_mesh, self.smplx_base_mesh_data
     
     @staticmethod
-    def get_normalization_data():
+    def get_normalization_data(device="cuda"):
         normalization_dict={}
 
         ###values computed with compute_mean_and_std.py
@@ -658,18 +662,18 @@ class DiffLocksDataset(Dataset):
         #center the strand data to be drawn from unit gaussian
 
         #For strand data contining xyz positions
-        xyz_mean = torch.tensor([[-0.0001, -0.0080, -0.0602]]).cuda()
-        xyz_std = torch.tensor([0.0600, 0.0564, 0.0562]).cuda()
+        xyz_mean = torch.tensor([[-0.0001, -0.0080, -0.0602]], device=device)
+        xyz_std = torch.tensor([0.0600, 0.0564, 0.0562], device=device)
         normalization_dict["xyz_mean"]=xyz_mean
         normalization_dict["xyz_std"]=xyz_std
 
-        dir_mean = torch.tensor([[-8.7517e-07, -9.2789e-05, -4.3253e-04]]).cuda()
-        dir_std = torch.tensor([0.0005, 0.0005, 0.0004]).cuda()
+        dir_mean = torch.tensor([[-8.7517e-07, -9.2789e-05, -4.3253e-04]], device=device)
+        dir_std = torch.tensor([0.0005, 0.0005, 0.0004], device=device)
         normalization_dict["dir_mean"]=dir_mean
         normalization_dict["dir_std"]=dir_std
 
-        curv_mean = torch.tensor([[ 6.2361e-09, -2.4707e-06,  3.8570e-07]]).cuda()
-        curv_std = torch.tensor([3.0512e-05, 3.7916e-05, 2.7756e-05]).cuda()
+        curv_mean = torch.tensor([[ 6.2361e-09, -2.4707e-06,  3.8570e-07]], device=device)
+        curv_std = torch.tensor([3.0512e-05, 3.7916e-05, 2.7756e-05], device=device)
         normalization_dict["curv_mean"]=curv_mean
         normalization_dict["curv_std"]=curv_std
 
