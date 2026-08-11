@@ -50,7 +50,8 @@ import math
 
 torch.autograd.set_grad_enabled(False)
 
-
+ROOT = "/mnt/20F408ADF408876E/NCKU_3D_hair_reconstruction/"
+BLENDER_PATH = "/home/jf099005-u/blender-5.2.0-linux-x64/blender"
 
 class Mediapipe():
     def __init__(self, mode):
@@ -729,10 +730,10 @@ class DiffLocksInference():
 
 def run():
 
-    path_strand_codec="./checkpoints/strand_vae/strand_codec.pt"
-    path_config = "./configs/config_scalp_texture_conditional.json"
-    path_diffusion_model_ckpt_path = "./checkpoints/difflocks_diffusion/scalp_v9_40k_06730000.pth" #longest trained one yet
-    path_material_model_ckpt_path = "./checkpoints/rgb2material/rgb2material.pt" 
+    path_strand_codec=os.path.join(ROOT, "./checkpoints/strand_vae/strand_codec.pt")
+    path_config = os.path.join(ROOT, "./configs/config_scalp_texture_conditional.json")
+    path_diffusion_model_ckpt_path = os.path.join(ROOT, "./checkpoints/difflocks_diffusion/scalp_v9_40k_06730000.pth") #longest trained one yet
+    path_material_model_ckpt_path = os.path.join(ROOT, "./checkpoints/rgb2material/rgb2material.pt") 
     
     out_path="./outputs_inference/"
 
@@ -891,7 +892,7 @@ def scalp_texture(
     # print (f"mask: {len(mask_file_paths)}")
     if len(T_list) != len(mask_file_paths) + 1:
         print(f"Error: Input images ({len(T_list)}) "
-              "must be one more than masks ({len(mask_file_paths)}).")
+              f"must be one more than masks ({len(mask_file_paths)}).")
         return
 
     return difflocks, T_list, 
@@ -1244,7 +1245,7 @@ def create_blender_file(
 
     if args.blender_path != "": 
         args_mock = lambda: None
-        args_mock.blender_path = "/home/kyh/blender/blender" 
+        args_mock.blender_path = BLENDER_PATH 
         args_mock.blender_nr_threads = 4
         args_mock.out_path = out_path
         args_mock.blender_strands_subsample = 1
@@ -1258,7 +1259,7 @@ def create_blender_file(
         args_mock.blender_path, 
         "-t", str(args_mock.blender_nr_threads), 
         "--background", 
-        "--python", "./inference/npz2blender_kung2.py",
+        "--python", os.path.join(ROOT, "./inference/npz2blender_kung2.py"),
         "--", 
         "--input_npz", npz_out_path,
         "--out_path", args_mock.out_path, 
@@ -1681,66 +1682,42 @@ def align_hairline_by_shifting_hard(T_list, out_path, shift_pixels=10, soften_si
 
 def run_kung():
 
-    # --- blender path setting ---
-    class Args:
-        def __init__(self):
-            self.blender_path = "/home/kyh/blender/blender" 
+    parser = argparse.ArgumentParser(description="Kung Hair Inference")
+    parser.add_argument("--input_config", type=str, default="./fusing_configs.json")
+    parser.add_argument("--blender_path", type=str, default=BLENDER_PATH)
+    parser.add_argument("--output_path", type=str, default="./outputs_inference/")
+    args = parser.parse_args()
+
+    # # --- blender path setting ---
+    # class Args:
+    #     def __init__(self):
+    #         self.blender_path = BLENDER_PATH 
             
-    try:
-        args
-    except NameError:
-        args = Args()
+    # try:
+    #     args
+    #     args = Args()
 
     # --- input model setting ---
-    path_strand_codec="./checkpoints/strand_vae/strand_codec.pt"
-    path_config = "./configs/config_scalp_texture_conditional.json"
-    path_diffusion_model_ckpt_path = "./checkpoints/difflocks_diffusion/scalp_v9_40k_06730000.pth" #longest trained one yet
-    path_material_model_ckpt_path = "./checkpoints/rgb2material/rgb2material.pt" 
+    path_strand_codec=os.path.join(ROOT, "./checkpoints/strand_vae/strand_codec.pt")
+    path_config = os.path.join(ROOT, "./configs/config_scalp_texture_conditional.json")
+    path_diffusion_model_ckpt_path = os.path.join(ROOT, "./checkpoints/difflocks_diffusion/scalp_v9_40k_06730000.pth") #longest trained one yet
+    path_material_model_ckpt_path = os.path.join(ROOT, "./checkpoints/rgb2material/rgb2material.pt") 
     
 
-    # --- output result setting ---
-    out_path="./outputs_inference/"
+    # --- output result setting ---a
+    out_path=args.output_path
     os.makedirs(out_path, exist_ok=True)
     os.makedirs(os.path.join(out_path, "masks"), exist_ok=True)
 
 
+
+
     # --- input file setting ----
-    input_file_paths = [
-        # "./samples/hair/cooper_4.jpg",   # base
-        # "./samples/hair/uggams_3.png",
-        # "./samples/hair/freeman_2.png",
-        # "./samples/hair/hathaway_1.jpg"
-
-        # "./samples/hair/freeman_2.png",
-        # "./samples/hair/uggams_3.png",
-        # "./samples/hair/cooper_4.jpg",
-        # "./samples/hair/hathaway_1.jpg"
-
-        # "./samples/hair/21.png",
-        # "./samples/hair/buzzcut_3.jpg",
-        # "./samples/hair/16.png"
-
-        # "./samples/hair/medium_11.png",
-        # "./samples/hair/20.png"  
-        
-        # "./samples/hair/comparison3.png"    
-        
-        "./samples/hair/freeman_2.png",
-        "./samples/hair/uggams_3.png"
-    ]
-    
-    mask_file_paths = [
-        "./samples/mask/M0/mask1.png",  
-        # "./samples/mask/M0/mask2.png",  
-        # "./samples/mask/M0/mask3.png" 
-
-        # "./samples/mask/M7/M73.png",
-        # "./samples/mask/M7/M74.png"
-
-        # "./samples/mask/M6/M65.png"
-
-    ]
-
+    input_file = json.load(open(args.input_config, "r"))
+    input_file_paths = input_file["input_file_paths"]
+    print(input_file_paths)
+    mask_file_paths = input_file["mask_file_paths"]
+    print(mask_file_paths)
     # --- 1. Generate multiple Scalp Texture ---
     difflocks, T_list = scalp_texture(
         path_strand_codec,
@@ -1779,6 +1756,7 @@ def run_kung():
         soften_sigma=3.0,
         noise_std=0.08
     )
+
     # T_list = align_hairline_by_shifting_noadptive(
     #     T_list, 
     #     out_path, 
@@ -1903,7 +1881,7 @@ def test_create_blender_file():
     # --- blender path setting ---
     class Args:
         def __init__(self):
-            self.blender_path = "/home/kyh/blender/blender" 
+            self.blender_path = BLENDER_PATH 
             
     try:
         args

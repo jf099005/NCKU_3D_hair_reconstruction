@@ -1,0 +1,14 @@
+{
+    "input_file_paths": [
+        "./samples/hair/cooper_4.jpg",
+        "./samples/hair/uggams_3.png",
+        "./samples/hair/freeman_2.png",
+        "./samples/hair/hathaway_1.jpg"
+    ],
+
+    "mask_file_paths": [
+        "./samples/mask/M0/mask1.png",
+        "./samples/mask/M0/mask2.png",
+        "./samples/mask/M0/mask3.png"
+    ]
+}

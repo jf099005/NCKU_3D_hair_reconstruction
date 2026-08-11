@@ -4,5 +4,9 @@ checkpoints/
 *.png
 *.jpg
 *.jpeg
+*npz
+*.pth
+*.blend
 out_training/
 outputs_inference/
+checkpoints/
