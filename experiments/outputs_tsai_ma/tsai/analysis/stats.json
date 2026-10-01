@@ -1,0 +1,82 @@
+{
+  "grid_n": 32,
+  "joint_fm_kwargs": {
+    "mode": "clique",
+    "max_passes": 3,
+    "lam": 100,
+    "node_unit": "cell",
+    "balance_tol": null,
+    "movable_only": false,
+    "overlap": "projection"
+  },
+  "objectives": {
+    "before": [
+      20077,
+      63659752
+    ],
+    "after": [
+      2090,
+      1043323
+    ],
+    "projection_before": [
+      12326403,
+      17028391
+    ],
+    "projection_after": [
+      112914,
+      161901
+    ]
+  },
+  "kept": {
+    "before": {
+      "base": 48059,
+      "donor": 47360
+    },
+    "after": {
+      "base": 55573,
+      "donor": 39704
+    }
+  },
+  "n_strands": {
+    "base": 95610,
+    "donor": 95411
+  },
+  "heads": {
+    "base": {
+      "n_strands": 95610,
+      "mean_abs_flux": 0.05379774421453476,
+      "n_edge_cells": 90,
+      "n_valid_rc": 730
+    },
+    "donor": {
+      "n_strands": 95411,
+      "mean_abs_flux": 0.03610078990459442,
+      "n_edge_cells": 46,
+      "n_valid_rc": 730
+    },
+    "fused_before": {
+      "n_strands": 95419,
+      "mean_abs_flux": 0.04854726046323776,
+      "n_edge_cells": 66,
+      "n_valid_rc": 730
+    },
+    "fused_after": {
+      "n_strands": 95277,
+      "mean_abs_flux": 0.044833555817604065,
+      "n_edge_cells": 68,
+      "n_valid_rc": 730
+    }
+  },
+  "timings": {
+    "grid": 12.02,
+    "base/flux_and_vector_field": 7.67,
+    "donor/flux_and_vector_field": 14.09,
+    "fused_before/flux_and_vector_field": 12.63,
+    "fused_after/flux_and_vector_field": 11.31,
+    "fused/hull_score": 6.75
+  },
+  "mean_hull_score": {
+    "before": 0.3034136891365051,
+    "after": 0.03303738310933113
+  }
+}

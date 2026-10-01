@@ -69,7 +69,7 @@ from highlighting.generate_from_3D_models.joint_contour import ScalpGrid, update
 #   balance_tol=0.02  the donor region may only grow/shrink by this fraction of the nodes
 #   movable_only=True only move nodes whose root cell has roots of both heads
 JOINT_FM_KWARGS = dict(
-    mode="clique", max_passes=3, lam=0,
+    mode="clique", max_passes=3, lam=100,
     node_unit="cell", balance_tol=None, movable_only=False,
     overlap = "projection"
 )
@@ -362,6 +362,16 @@ class DiffLocksInference():
             torch.manual_seed(self.seed)
 
     def rgb2hair(self, rgb_img, out_path=None):
+        out = self.rgb2scalp_texture(rgb_img, out_path)
+        if out is None:
+            return None
+        scalp_texture_orig, patch_embeddings_reshaped = out
+        return self.scalp_texture2hair(scalp_texture_orig, patch_embeddings_reshaped, out_path)
+
+    def rgb2scalp_texture(self, rgb_img, out_path=None):
+        """face crop -> DINOv2 -> diffusion. Returns (raw scalp texture [1, C+1, H, W] with the
+        density as its last channel, still in diffusion units; DINOv2 patch tokens BCHW for
+        rgb2material), or None if no face was found. Also saves rgb.png (the cropped face)."""
         assert rgb_img.shape[1] == 3, "rgb_img needs to have 3 channels"
         assert len(rgb_img.shape) == 4, "rgb_img needs to be in format BCHW, so it needs 4 dimensions"
 
@@ -427,6 +437,19 @@ class DiffLocksInference():
         if out_path:
             np.savez(os.path.join(out_path, "scalp_texture.npz"), scalp_texture=scalp_texture_orig.cpu().numpy())
         print("scalp_texture", scalp_texture.shape)
+
+        #save also img
+        if out_path:
+            torchvision.utils.save_image(rgb_img, os.path.join(out_path, "rgb.png"))
+
+        return scalp_texture_orig, patch_embeddings_reshaped
+
+    def scalp_texture2hair(self, scalp_texture_orig, patch_embeddings_reshaped, out_path=None):
+        """decode a raw scalp texture (as returned by rgb2scalp_texture, possibly edited, e.g.
+        hairline-aligned) to strands + rgb2material material. Saves difflocks_output_strands.npz
+        and hair.json in out_path. Returns (strand_points_world, hair_material_dict)."""
+        if out_path is not None:
+            os.makedirs(out_path,exist_ok=True)
         scalp_texture = scalp_texture_orig[:,0:-1,:,:] #get only the scalp texture part
         # scalp_texture_pca = img_2_pca(scalp_texture)
         # torchvision.utils.save_image(scalp_texture_pca.squeeze(0), "scalp_texture_sampled_diffusion.png")
@@ -483,10 +506,6 @@ class DiffLocksInference():
             # highlighting/generate_from_3D_models/joint_contour.update_joint_mask (needs both).
             np.savez(npz_out_path, positions=strand_points_world.cpu().numpy(), root_uv=root_uv01.cpu().numpy())
 
-        #save also img
-        if out_path:
-            torchvision.utils.save_image(rgb_img, os.path.join(out_path, "rgb.png"))
-
         return strand_points_world, hair_material_dict
 
 
@@ -503,6 +522,16 @@ class DiffLocksInference():
         strand_points_world, hair_material_dict = self.rgb2hair(rgb_img, out_path) 
 
         return strand_points_world, hair_material_dict
+
+    def file2scalp_texture(self, file_path, out_path):
+        """file_path -> rgb2scalp_texture (no decoding)."""
+        frame=cv2.imread(file_path)
+        frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+        rgb_img = torch.tensor(frame).cuda()
+        rgb_img=rgb_img.permute(2,0,1).unsqueeze(0).float()/255.0
+        if out_path is not None:
+            os.makedirs(out_path,exist_ok=True)
+        return self.rgb2scalp_texture(rgb_img, out_path)
     
 
     #=====================================================================================
@@ -806,6 +835,47 @@ def ensure_individual_strands_npz(difflocks, source_img_path, out_path, tag):
     return npz_path
 
 
+def ensure_aligned_strands_npz(difflocks, base_img_path, donor_img_path, out_path, base_tag, donor_tag):
+    """Hairline-aligned version of ensure_individual_strands_npz for both heads at once:
+    run diffusion for base and donor (scalp textures only), align their hairlines in
+    scalp-texture space with the kung scripts' align_hairline_by_shifting (both get the
+    union density, each fills its own gap with its features shifted up), then decode each
+    aligned texture to strands. The alignment depends on both images, so the results go to
+    <out_path>/individual_strands_aligned/ (separate from the unaligned cache) and are reused
+    on later runs only as a pair. Returns (base_npz_path, donor_npz_path)."""
+    aligned_root = os.path.join(out_path, "individual_strands_aligned")
+    dirs = [os.path.join(aligned_root, base_tag), os.path.join(aligned_root, donor_tag)]
+    npz_paths = [os.path.join(d, "difflocks_output_strands.npz") for d in dirs]
+    if all(os.path.exists(p) for p in npz_paths):
+        return tuple(npz_paths)
+
+    # --- 1. diffusion only (no decoding): raw scalp textures + DINOv2 tokens for rgb2material ---
+    T_list, dinov2_list = [], []
+    for img_path, d in zip((base_img_path, donor_img_path), dirs):
+        print(f"--- individual_strands_aligned: scalp texture of {img_path} ---")
+        out = difflocks.file2scalp_texture(img_path, d)
+        if out is None:
+            raise RuntimeError(f"no face detected in {img_path}")
+        T_list.append(out[0])
+        dinov2_list.append(out[1])
+
+    # --- 2. align hairlines (same function and parameters as img2hair_kung_mul2.py) ---
+    T_list = align_hairline_by_shifting(
+        T_list,
+        aligned_root,
+        shift_pixels=20,
+        soften_sigma=3.0,
+        noise_std=0.08
+    )
+
+    # --- 3. decode each aligned texture to its own strands ---
+    for T_aligned, dinov2_tokens, d in zip(T_list, dinov2_list, dirs):
+        np.savez(os.path.join(d, "scalp_texture_aligned.npz"), scalp_texture=T_aligned.cpu().numpy())
+        print(f"--- individual_strands_aligned: decoding -> {d} ---")
+        difflocks.scalp_texture2hair(T_aligned, dinov2_tokens, d)
+    return tuple(npz_paths)
+
+
 # per-strand colors of the fused hair (and the debug renders): every strand of the base
 # input is forced to white, every strand of the donor input to black, regardless of the
 # real hair color - so the render shows exactly which head each kept strand comes from.
@@ -831,7 +901,8 @@ def root_texels(root_uv, res):
     return rc[:, 0], rc[:, 1]
 
 
-def refine_mask_per_strand(mask_file_path, base_img_path, donor_img_path, difflocks, out_path, mask_res):
+def refine_mask_per_strand(mask_file_path, base_img_path, donor_img_path, difflocks, out_path, mask_res,
+                           align_hairline=False):
     """Turn the fusion mask into per-strand masks of the two input hairstyles with joint_contour.
 
     The mask (True = donor) is read at the scalp-texture resolution and in the scalp-texture
@@ -842,7 +913,8 @@ def refine_mask_per_strand(mask_file_path, base_img_path, donor_img_path, difflo
     (label True) cross as little as possible. The result is used per strand:
     result["visible_a"] / result["visible_b"] say which base / donor strands go into the fused
     hair (compose_hair_per_strand). Both heads are the individually reconstructed hairstyles
-    (ensure_individual_strands_npz).
+    (ensure_individual_strands_npz), or, with align_hairline, the hairstyles decoded from
+    hairline-aligned scalp textures (ensure_aligned_strands_npz).
 
     Returns (base, donor, result): base / donor = {"positions", "root_uv"} of each head,
     result = joint_contour.update_joint_mask's output dict.
@@ -852,8 +924,14 @@ def refine_mask_per_strand(mask_file_path, base_img_path, donor_img_path, difflo
 
     base_tag = f"base_{os.path.splitext(os.path.basename(base_img_path))[0]}"
     donor_tag = f"0_{os.path.splitext(os.path.basename(donor_img_path))[0]}"
-    base = load_strands_npz(ensure_individual_strands_npz(difflocks, base_img_path, out_path, base_tag))
-    donor = load_strands_npz(ensure_individual_strands_npz(difflocks, donor_img_path, out_path, donor_tag))
+    if align_hairline:
+        base_npz, donor_npz = ensure_aligned_strands_npz(
+            difflocks, base_img_path, donor_img_path, out_path, base_tag, donor_tag)
+    else:
+        base_npz = ensure_individual_strands_npz(difflocks, base_img_path, out_path, base_tag)
+        donor_npz = ensure_individual_strands_npz(difflocks, donor_img_path, out_path, donor_tag)
+    base = load_strands_npz(base_npz)
+    donor = load_strands_npz(donor_npz)
 
     print(f"--- joint_contour: per-strand masks of base {os.path.basename(base_img_path)} + "
           f"donor {os.path.basename(donor_img_path)} ---")
@@ -1325,7 +1403,8 @@ def create_blender_file(
     return blend_path
 
 
-def debug_render_individual_hairstyle(blender_path, out_path, tag, positions, strand_colors):
+def debug_render_individual_hairstyle(blender_path, out_path, tag, positions, strand_colors,
+                                      individual_dir="individual_strands"):
     """Debug helper: builds a .blend for one input's individually-reconstructed hairstyle
     and renders its 5 axis-aligned views tiled into one render_multiview.png
     (experiments/gpu_render.py), so it can be checked
@@ -1336,7 +1415,7 @@ def debug_render_individual_hairstyle(blender_path, out_path, tag, positions, st
     ones in EXCLUDED_STRAND_COLOR, so the render shows both the full head and its share
     of the fused hair.
     """
-    debug_dir = os.path.join(out_path, "individual_strands", tag)
+    debug_dir = os.path.join(out_path, individual_dir, tag)
     os.makedirs(debug_dir, exist_ok=True)
     debug_npz_path = os.path.join(debug_dir, "debug_colored_strands.npz")
     np.savez(debug_npz_path, positions=positions, strand_colors=np.asarray(strand_colors, dtype=np.float32))
@@ -1775,6 +1854,9 @@ def run_kung():
     parser.add_argument("--output_path", type=str, default="./outputs_inference/")
     parser.add_argument("--seed", type=int, default=5,
                         help="diffusion seed, reset before each image (negative = random)")
+    parser.add_argument("--align_hairline", action="store_true",
+                        help="align the two scalp textures' hairlines (kung's align_hairline_by_shifting) "
+                             "before decoding them to strands and fusing")
     args = parser.parse_args()
     DiffLocksInference.seed = args.seed if args.seed >= 0 else None
 
@@ -1826,9 +1908,11 @@ def run_kung():
     # --- 1. Reconstruct both hairstyles and turn the mask into per-strand masks ---
     # (joint_contour: each strand's label = its root's mask cell, refined so the kept base
     # and donor strands cross as little as possible when the two heads are overlaid)
+    # (with --align_hairline: diffusion -> hairline alignment in scalp-texture space -> decoding)
     mask_res = difflocks.model_config["input_size"][0]   # scalp texture resolution (256)
     base, donor, result = refine_mask_per_strand(
-        mask_file_paths[0], input_file_paths[0], input_file_paths[1], difflocks, out_path, mask_res)
+        mask_file_paths[0], input_file_paths[0], input_file_paths[1], difflocks, out_path, mask_res,
+        align_hairline=args.align_hairline)
 
     # --- 2a. debug: flux (divergence) / vector field / grid score analysis (out_path/analysis/) ---
     debug_field_analysis(base, donor, result, out_path)
@@ -1841,7 +1925,8 @@ def run_kung():
         tag += os.path.splitext(os.path.basename(img_path))[0]
         debug_render_individual_hairstyle(
             args.blender_path, out_path, tag, head["positions"],
-            np.where(keep[:, None], np.float32(color), np.float32(EXCLUDED_STRAND_COLOR)))
+            np.where(keep[:, None], np.float32(color), np.float32(EXCLUDED_STRAND_COLOR)),
+            individual_dir="individual_strands_aligned" if args.align_hairline else "individual_strands")
 
     # --- 3. Compose the fused hair per strand (no scalp-texture blending / re-decoding) ---
     npz_out_path = compose_hair_per_strand(base, donor, result, out_path)
