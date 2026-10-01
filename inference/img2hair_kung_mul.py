@@ -33,6 +33,8 @@ from utils.vis_util import img_2_pca
 import torchvision.transforms as T
 import k_diffusion as K
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, os.path.pardir)) + "/"
+BLENDER_PATH = "/home/kyh/blender/blender"
 from data_loader.dataloader import DEFAULT_BODY_DATA_DIR, DiffLocksDataset
 from data_loader.mesh_utils import tbn_space_to_world
 VisionRunningMode = mp.tasks.vision.RunningMode
@@ -505,111 +507,67 @@ class DiffLocksInference():
         scalp_texture_orig = scalp_texture_orig.float()
         
         return scalp_texture_orig, cls_token
-    
 
-    def extract_hair_color(self, frame_cropped, out_path, idx):
-            
-        # 2. 取得頭髮遮罩 (與 frame_cropped 完全對齊)
-        # 注意：在 selfie_multiclass 模型中，類別 1 通常是頭髮
+
+    # 統一染色流程（舊版 median 作法）：用髮型分割抓出頭髮像素，取 RGB 中位數，
+    # 生成一張 256x256 純色圖當作該張照片的 Color Map。
+    def extract_color_map_median(self, frame_cropped):
         category_mask = self.mediapipe_img.run_segmentation(frame_cropped)
-        hair_mask_2d = (category_mask == 1) 
-
-        # 3. 提取顏色
+        hair_mask_2d = (category_mask == 1) # 類別 1 為頭髮
         hair_pixels = frame_cropped[hair_mask_2d]
-        
+
         if len(hair_pixels) > 0:
-            # 取中位數 RGB
             extracted_rgb = np.median(hair_pixels, axis=0).astype(np.uint8)
         else:
             extracted_rgb = np.array([50, 50, 50], dtype=np.uint8) # 預設深灰色
 
-        # 4. 生成 256x256 顏色圖片並儲存
-        if out_path:
-            os.makedirs(out_path, exist_ok=True)
-            
-            # 建立純色圖
-            color_img_256 = np.zeros((256, 256, 3), dtype=np.uint8)
-            color_img_256[:] = extracted_rgb
-            
-            # 儲存 (RGB -> BGR)
-            # color_save_path = os.path.join(out_path, f"hair_color_pure_{idx}.png")
-            # cv2.imwrite(color_save_path, cv2.cvtColor(color_img_256, cv2.COLOR_RGB2BGR))
-            if out_path:
-                # 1. 定義頭髮顏色專用的子資料夾路徑
-                hair_color_dir = os.path.join(out_path, "hair_color")
-                hair_mask_dir = os.path.join(out_path, "hair_mask")
-                
-                # 2. 如果資料夾不存在，就自動生成 (exist_ok=True 防止重複報錯)
-                os.makedirs(hair_color_dir, exist_ok=True)
-                os.makedirs(hair_mask_dir, exist_ok=True)
-                
-                # 3. 更新圖片儲存路徑，指向該子資料夾
-                color_save_path = os.path.join(hair_color_dir, f"hair_color_pure_{idx}.png")
-                
-                # 建立純色圖 (256x256)
-                color_img_256 = np.zeros((256, 256, 3), dtype=np.uint8)
-                color_img_256[:] = extracted_rgb
-                
-                # 儲存圖片 (RGB -> BGR)
-                cv2.imwrite(color_save_path, cv2.cvtColor(color_img_256, cv2.COLOR_RGB2BGR))
-                
-                # (選配) 若要儲存遮罩，建議也放在子資料夾或另外建立
-                mask_save_path = os.path.join(hair_mask_dir, f"hair_mask_{idx}.png")
-                cv2.imwrite(mask_save_path, (hair_mask_2d * 255).astype(np.uint8))
-                
-                print(f"成功提取顏色: {extracted_rgb}, 已儲存至 {color_save_path}")
-    
+        color_img_256 = np.zeros((256, 256, 3), dtype=np.uint8)
+        color_img_256[:] = extracted_rgb
+
+        color_map_orig = torch.from_numpy(color_img_256).cuda().permute(2, 0, 1).unsqueeze(0).float() / 255.0
+        return color_map_orig
+
 
     def files_to_scalp_textures(self, file_paths: list, out_path=None):
-        all_texture_data = [] 
-        
+        all_texture_data = []
+
         for idx, file_path in enumerate(file_paths):
             print(f"Processing image {idx+1}/{len(file_paths)}: {file_path}")
-            
+
             frame=cv2.imread(file_path)
             if frame is None:
                 print(f"Warning: Could not read file {file_path}. Skipping.")
                 continue
 
             frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
-            
-            # mediapipe and crop_face
-            # img_to_process = frame
-            # rgb_img_tensor = torch.tensor(img_to_process).cuda()
-            # rgb_img_tensor = rgb_img_tensor.permute(2,0,1).unsqueeze(0).float()/255.0
-            
-            # frame_mp=(rgb_img_tensor.permute(0,2,3,1).squeeze(0)*255.0).to(torch.uint8) 
-            # frame_mp=frame_mp.detach().cpu().numpy()
-            # face_landmarks_px, face_landmarks = self.mediapipe_img.run(frame_mp)
-            # if face_landmarks is None: 
-            #     print(f"No face detected in {file_path}. Skipping.")
-            #     continue
-            # frame_cropped=crop_face(frame_mp, face_landmarks, output_size=770)
-            _, face_landmarks = self.mediapipe_img.run(frame)
-            if face_landmarks is None: continue
-            frame_cropped = crop_face(frame, face_landmarks, output_size=770)
 
-            # extract hair color
-            self.extract_hair_color(frame_cropped, out_path, idx)
+            _, face_landmarks = self.mediapipe_img.run(frame)
+            if face_landmarks is None:
+                print(f"No face detected in {file_path}. Skipping.")
+                continue
+            frame_cropped = crop_face(frame, face_landmarks, output_size=770)
 
             # Back to tensor for DINOv2
             rgb_img_cropped = torch.tensor(frame_cropped).cuda()
             rgb_img_cropped = rgb_img_cropped.permute(2,0,1).unsqueeze(0).float()/255.0
-            
-            
+
             # Generate Scalp Texture
             scalp_texture_orig, cls_token = self._generate_texture_from_rgb(rgb_img_cropped)
 
-            
+            # 統一染色流程（舊版 median 作法）
+            color_map_orig = self.extract_color_map_median(frame_cropped)
+
             all_texture_data.append({
                 "scalp_texture_orig": scalp_texture_orig,
                 "cls_token": cls_token,
+                "color_map_orig": color_map_orig, # <-- median 純色貼圖
                 "input_file": file_path
             })
-            
+
             if out_path:
                  os.makedirs(out_path, exist_ok=True)
                  np.savez(os.path.join(out_path, f"scalp_texture_{idx}.npz"), scalp_texture=scalp_texture_orig.cpu().numpy())
+                 save_color_map(color_map_orig, out_path, f"color_map_orig_{idx+1}")
 
         return all_texture_data
     
@@ -694,10 +652,23 @@ def save_grayscale_mask(mask_tensor: torch.Tensor, output_path: str, filename: s
     mask_tensor = mask_tensor.clamp(0, 1)
     
     full_path = os.path.join(output_path, f"{filename}.png")
-    # vutils.save_image requires the input tensor to be 
+    # vutils.save_image requires the input tensor to be
     # in the (C, H, W) 或 (B, C, H, W)
     vutils.save_image(mask_tensor.cpu(), full_path)
     print(f"mask picture store_path: {full_path}")
+
+
+def save_color_map(color_map_tensor: torch.Tensor, output_path: str, filename: str):
+    """將混合後的 Color Map 張量儲存為 PNG 圖片檔案。"""
+    if color_map_tensor is None:
+        print("Warning: Cannot save color map, tensor is None.")
+        return
+
+    color_map_tensor = color_map_tensor.clamp(0.0, 1.0)
+
+    full_path = os.path.join(output_path, f"{filename}.png")
+    vutils.save_image(color_map_tensor.cpu(), full_path)
+    print(f"Blended Color Map store_path: {full_path}")
 
 
 def load_and_resize_mask(
@@ -773,11 +744,12 @@ def scalp_texture(
         out_path=os.path.join(out_path, "intermediates")
     )
     
-    T_list = [data['scalp_texture_orig'] for data in all_texture_data] 
+    T_list = [data['scalp_texture_orig'] for data in all_texture_data]
+    C_list = [data['color_map_orig'] for data in all_texture_data]
 
     for i, T_orig in enumerate(T_list):
         visualize_scalp_texture(T_orig, out_path, f"scalp_texture_{i+1}")
-    
+
     # print (f"T_list: {len(T_list)}")
     # print (f"mask: {len(mask_file_paths)}")
     if len(T_list) != len(mask_file_paths) + 1:
@@ -785,7 +757,7 @@ def scalp_texture(
               "must be one more than masks ({len(mask_file_paths)}).")
         return
 
-    return difflocks, T_list, 
+    return difflocks, T_list, C_list
 
 
 # --- 2-1. Executing the Scalp Texture Blending Logic ---
@@ -803,13 +775,6 @@ def scalp_texture_blending(
     device = T_list[0].device
     # print(f"Scalp Texture shape: ({B}, {C}, {H}, {W})")
 
-    # 2-1. Turn C-list(NumPy) into Tensor
-    # converted sharp: (Batch, 3, 256, 256), range: [0, 1]
-    C_tensors = []
-    for c_img in C_list:
-        c_tensor = torch.from_numpy(c_img).permute(2, 0, 1).unsqueeze(0).float().to(device) / 255.0
-        C_tensors.append(c_tensor)
-
     # 2-2. Load mask
     M_list_T = []
     M_list_C = []
@@ -825,25 +790,25 @@ def scalp_texture_blending(
     # 3. scalp texture blending logic
     # 3-1. Initialize the Base Layer (using T1 as the starting point)
     T_orig_mixed = T_list[0].clone()
-    C_orig_mixed = C_tensors[0].clone()
-    
+    C_orig_mixed = C_list[0].clone()
+
     # 3-2. Iterative Loop : M1/T2, M2/T3, M3/T4 ...
     for i in range(len(M_list_T)):
-        M_T = M_list_T[i] 
-        M_C = M_list_C[i]         
-        T_target = T_list[i+1] 
-        C_target = C_tensors[i+1]
+        M_T = M_list_T[i]
+        M_C = M_list_C[i]
+        T_target = T_list[i+1]
+        C_target = C_list[i+1]
 
         # save mask
         save_grayscale_mask(M_T, os.path.join(out_path, "masks"), f"mask_M{i+1}")
-        
+
         M_expanded_T = M_T.expand_as(T_orig_mixed)
         M_expanded_C = M_C.expand_as(C_orig_mixed)
-        
+
         # blending： T_orig_mixed = (1 - M) * T_current + M * T_target
         T_orig_mixed = (1.0 - M_expanded_T) * T_orig_mixed + M_expanded_T * T_target
         C_orig_mixed = (1.0 - M_expanded_C) * C_orig_mixed + M_expanded_C * C_target
-        
+
         print(f"Used M{i+1} to blend T{i+2} into the result")
 
     # 3-3-1. Save blending result
@@ -853,20 +818,19 @@ def scalp_texture_blending(
     # 3-3-2. Save blending hair color result
     hair_color_dir = os.path.join(out_path, "intermediates", "hair_color")
     os.makedirs(hair_color_dir, exist_ok=True)
-    c_final_np = (C_orig_mixed.squeeze(0).permute(1, 2, 0).cpu().numpy() * 255.0).astype(np.uint8)
-    cv2.imwrite(os.path.join(hair_color_dir, "hair_color_FINAL_MIXED.png"), cv2.cvtColor(c_final_np, cv2.COLOR_RGB2BGR))
+    save_color_map(C_orig_mixed, hair_color_dir, "hair_color_FINAL_MIXED")
 
     # 4. Blended Decoding Step
     # 4-1. Separate Scalp Texture (T) and Density Map (D)
     scalp_texture_mixed = T_orig_mixed[:, 0:-1, :, :] # latent code (T)
     density_map_mixed = T_orig_mixed[:, -1:, :, :]    # density map(D)
-    
-    # 4-2. Process the Density Map
-    density_map_mixed = density_map_mixed * (0.5 / difflocks.model_config["sigma_data"]) + 0.5 
-    density_map_mixed = density_map_mixed.clamp(0, 1)
-    density_map_mixed[density_map_mixed < 0.02] = 0.0 
 
-    return scalp_texture_mixed, density_map_mixed
+    # 4-2. Process the Density Map
+    density_map_mixed = density_map_mixed * (0.5 / difflocks.model_config["sigma_data"]) + 0.5
+    density_map_mixed = density_map_mixed.clamp(0, 1)
+    density_map_mixed[density_map_mixed < 0.02] = 0.0
+
+    return scalp_texture_mixed, density_map_mixed, C_orig_mixed
 
 
 # --- 2-2. Executing the Scalp Texture interpolating Logic ---
@@ -876,78 +840,67 @@ def scalp_texture_interpolating(
         mask_file_paths,
         out_path,
         difflocks
-):  
+):
     print("--- 2-2. Executing the Scalp Texture interpolating Logic ---")
-
-    # 1-1. Get size and device
-    B, C, H, W = T_list[0].shape
-    device = T_list[0].device
-    # print(f"Scalp Texture shape: ({B}, {C}, {H}, {W})")
 
     # 1-2. interpolating weight
     alpha = 0.0
     alpha = max(0.0, min(1.0, alpha))
 
-    # 2. Turn C-list(NumPy) into Tensor
-    # converted sharp: (Batch, 3, 256, 256), range: [0, 1]
-    C_tensors = []
-    for c_img in C_list:
-        c_tensor = torch.from_numpy(c_img).permute(2, 0, 1).unsqueeze(0).float().to(device) / 255.0
-        C_tensors.append(c_tensor)
-
     # 3-1. scalp texture and hair color interpolating logic
-    T_orig_mixed = T_list[0].clone()
-    C_orig_mixed = C_tensors[0].clone()
-
     T_orig_mixed = (1.0 - alpha) * T_list[0] + alpha * T_list[1]
-    C_orig_mixed = (1.0 - alpha) * C_tensors[0] + alpha * C_tensors[1]
+    C_orig_mixed = (1.0 - alpha) * C_list[0] + alpha * C_list[1]
 
     # 3-3-1. Save interpolating result
     visualize_scalp_texture(T_orig_mixed, out_path, "scalp_texture_FINAL_MIXED")
-    # print("Finish Multiple Scalp Texture Blending")
 
     # 3-3-2. Save blending hair color result
     hair_color_dir = os.path.join(out_path, "intermediates", "hair_color")
     os.makedirs(hair_color_dir, exist_ok=True)
-    c_final_np = (C_orig_mixed.squeeze(0).permute(1, 2, 0).cpu().numpy() * 255.0).astype(np.uint8)
-    cv2.imwrite(os.path.join(hair_color_dir, "hair_color_FINAL_MIXED.png"), cv2.cvtColor(c_final_np, cv2.COLOR_RGB2BGR))
+    save_color_map(C_orig_mixed, hair_color_dir, "hair_color_FINAL_MIXED")
 
     # 4. Blended Decoding Step
     # 4-1. Separate Scalp Texture (T) and Density Map (D)
     scalp_texture_mixed = T_orig_mixed[:, 0:-1, :, :] # latent code (T)
     density_map_mixed = T_orig_mixed[:, -1:, :, :]    # density map(D)
-    
-    # 4-2. Process the Density Map
-    density_map_mixed = density_map_mixed * (0.5 / difflocks.model_config["sigma_data"]) + 0.5 
-    density_map_mixed = density_map_mixed.clamp(0, 1)
-    density_map_mixed[density_map_mixed < 0.02] = 0.0 
 
-    return scalp_texture_mixed, density_map_mixed
+    # 4-2. Process the Density Map
+    density_map_mixed = density_map_mixed * (0.5 / difflocks.model_config["sigma_data"]) + 0.5
+    density_map_mixed = density_map_mixed.clamp(0, 1)
+    density_map_mixed[density_map_mixed < 0.02] = 0.0
+
+    return scalp_texture_mixed, density_map_mixed, C_orig_mixed
 
 
 # --- 3. Decode the Blended Scalp Texture to 3D Hair Strands ---
 def Decode_to_3D_hair(
         scalp_texture_mixed,
         density_map_mixed,
+        color_map_mixed,
         difflocks,
         out_path
 ):
     print("--- 3. Decode the Blended Scalp Texture to 3D Hair Strands ---")
-    
+
     # 1. Decode Scalp Texture to 3D Coordinates
-    strand_points_world, strand_points_tbn, root_uv = sample_strands_from_scalp_with_density(
-        scalp_texture_mixed, 
-        density_map_mixed, 
-        difflocks.strand_codec, 
-        normalization_dict=difflocks.normalization_dict, 
-        scalp_mesh_data=difflocks.scalp_mesh_data, 
-        tbn_space_to_world_func=tbn_space_to_world, 
-        nr_chunks=difflocks.nr_chunks_decode_strands, 
+    strand_points_world, strand_points_tbn, _root_uv = sample_strands_from_scalp_with_density(
+        scalp_texture_mixed,
+        density_map_mixed,
+        difflocks.strand_codec,
+        normalization_dict=difflocks.normalization_dict,
+        scalp_mesh_data=difflocks.scalp_mesh_data,
+        tbn_space_to_world_func=tbn_space_to_world,
+        nr_chunks=difflocks.nr_chunks_decode_strands,
         upsample_multiplier=3)
-    
+
     # 2. Output results
     npz_out_path=os.path.join(out_path, "mixed_output_strands.npz")
-    np.savez(npz_out_path, positions=strand_points_world.cpu().numpy())
+    save_dict = {"positions": strand_points_world.cpu().numpy()}
+    if color_map_mixed is not None:
+        # (1, 3, H, W) -> (H, W, 3)，供 npz2blender_kung.py 直接讀取上色
+        save_dict["color_map"] = color_map_mixed.clamp(0, 1).cpu().numpy().squeeze(0).transpose(1, 2, 0)
+        print(f"Color Map shape: {save_dict['color_map'].shape} saved to NPZ.")
+    np.savez(npz_out_path, **save_dict)
     print(f"save 3D hair strands: {npz_out_path}")
 
     return npz_out_path
@@ -958,27 +911,26 @@ def create_blender_file(
         args,
         out_path,
         npz_out_path
-):  
+):
     print("--- 4. Create blender file ---")
 
-    if args.blender_path != "": 
-        args_mock = lambda: None
-        args_mock.blender_path = "/home/kyh/blender/blender" 
-        args_mock.blender_nr_threads = 4
-        args_mock.out_path = out_path
-        args_mock.blender_strands_subsample = 1
-        args_mock.blender_vertex_subsample = 1 
-        args_mock.alembic_resolution = 3
-        args_mock.do_shrinkwrap = False
-        args_mock.export_alembic = False
-    
+    args_mock = lambda: None
+    args_mock.blender_path = args.blender_path
+    args_mock.blender_nr_threads = 4
+    args_mock.out_path = out_path
+    args_mock.blender_strands_subsample = 1
+    args_mock.blender_vertex_subsample = 1
+    args_mock.alembic_resolution = 3
+    args_mock.do_shrinkwrap = False
+    args_mock.export_alembic = False
+
     # create cmd
     cmd=[
-        args_mock.blender_path, 
-        "-t", str(args_mock.blender_nr_threads), 
-        "--background", 
-        "--python", "./inference/npz2blender_kung.py",
-        "--", 
+        args_mock.blender_path,
+        "-t", str(args_mock.blender_nr_threads),
+        "--background",
+        "--python", os.path.join(ROOT, "inference", "npz2blender_kung.py"),
+        "--",
         "--input_npz", npz_out_path,
         "--out_path", args_mock.out_path, 
         "--strands_subsample", str(args_mock.blender_strands_subsample), 
@@ -1061,45 +1013,52 @@ def align_hairline_by_shifting(T_list, out_path, shift_pixels=10, soften_sigma=4
 
 def run_kung():
 
-    # --- blender path setting ---
-    class Args:
-        def __init__(self):
-            self.blender_path = "/home/kyh/blender/blender" 
-            
-    try:
-        args
-    except NameError:
-        args = Args()
+    parser = argparse.ArgumentParser(description="Kung Hair Inference")
+    parser.add_argument("--input_config", type=str, default=None,
+                         help="JSON file with 'input_file_paths' and 'mask_file_paths'")
+    parser.add_argument("--blender_path", type=str, default=BLENDER_PATH)
+    parser.add_argument("--output_path", type=str, default="./outputs_inference/")
+    args = parser.parse_args()
 
     # --- input model setting ---
     path_strand_codec="./checkpoints/strand_vae/strand_codec.pt"
     path_config = "./configs/config_scalp_texture_conditional.json"
     path_diffusion_model_ckpt_path = "./checkpoints/difflocks_diffusion/scalp_v9_40k_06730000.pth" #longest trained one yet
-    path_material_model_ckpt_path = "./checkpoints/rgb2material/rgb2material.pt" 
-    
+    path_material_model_ckpt_path = "./checkpoints/rgb2material/rgb2material.pt"
+
 
     # --- output result setting ---
-    out_path="./outputs_inference/"
+    out_path=args.output_path
     os.makedirs(out_path, exist_ok=True)
     os.makedirs(os.path.join(out_path, "masks"), exist_ok=True)
 
 
-    # --- input file setting ----
+    # --- input file setting (預設值，會被 --input_config 覆蓋) ----
     input_file_paths = [
         "./samples/hair/freeman_2.png",   # base
-        "./samples/hair/uggams_3.png", 
+        "./samples/hair/uggams_3.png",
         "./samples/hair/cooper_4.jpg",
         "./samples/hair/hathaway_1.jpg"
     ]
-    
+
     mask_file_paths = [
-        "./samples/mask/mask1.png",  
-        "./samples/mask/mask2.png",  
-        "./samples/mask/mask3.png",  
+        "./samples/mask/mask1.png",
+        "./samples/mask/mask2.png",
+        "./samples/mask/mask3.png",
     ]
 
+    if args.input_config and os.path.exists(args.input_config):
+        with open(args.input_config, 'r', encoding='utf-8') as f:
+            cfg = json.load(f)
+        input_file_paths = cfg.get("input_file_paths", input_file_paths)
+        mask_file_paths = cfg.get("mask_file_paths", mask_file_paths)
+        print(f"Loaded input_config: {args.input_config} "
+              f"({len(input_file_paths)} images, {len(mask_file_paths)} masks)")
+    elif args.input_config:
+        print(f"警告: 找不到 --input_config 指定的檔案 {args.input_config}，使用預設輸入清單。")
+
     # --- 1. Generate multiple Scalp Texture ---
-    difflocks, T_list = scalp_texture(
+    difflocks, T_list, C_list = scalp_texture(
         path_strand_codec,
         path_config,
         path_diffusion_model_ckpt_path,
@@ -1111,41 +1070,15 @@ def run_kung():
 
     # --- 1.5 Align Hairline ---
     T_list = align_hairline_by_shifting(
-        T_list, 
-        out_path, 
-        shift_pixels=20, 
+        T_list,
+        out_path,
+        shift_pixels=20,
         soften_sigma=4.0,
         noise_std=0.05
     )
 
-    # --- 1.5 Extract Haircolor ---
-    # read C_list
-    # 1. 確保路徑指向 intermediates/hair_color
-    hair_color_dir = os.path.join(out_path, "intermediates", "hair_color")
-    
-    # 2. 讀取並嚴格排序 (確保 0, 1, 2, 3 的順序正確)
-    color_files = sorted(
-        [f for f in os.listdir(hair_color_dir) if f.startswith("hair_color_pure_") and f.endswith(".png")],
-        key=lambda x: int(x.split('_')[-1].split('.')[0])
-    )
-    
-    C_list = []
-    for filename in color_files:
-        img_path = os.path.join(hair_color_dir, filename)
-        img_bgr = cv2.imread(img_path)
-        if img_bgr is not None:
-            # 轉為 RGB 以符合後續 Tensor 運算
-            C_list.append(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB))
-            
-    # 3. 除錯檢查：這行非常重要，能幫你確認數量
-    print(f"DEBUG: T_list 數量 = {len(T_list)}, C_list 數量 = {len(C_list)}")
-    
-    if len(C_list) < len(T_list):
-        raise ValueError(f"錯誤：髮色圖片數量({len(C_list)}) 少於紋理數量({len(T_list)})！請檢查資料夾。")
-    
-
     # --- 2-1. Executing the Scalp Texture Blending Logic ---
-    scalp_texture_mixed, density_map_mixed = scalp_texture_blending(
+    scalp_texture_mixed, density_map_mixed, color_map_mixed = scalp_texture_blending(
             T_list,
             C_list,
             mask_file_paths,
@@ -1154,7 +1087,7 @@ def run_kung():
     )
 
     # --- 2-2. Executing the Scalp Texture interpolating Logic ---
-    # scalp_texture_mixed, density_map_mixed = scalp_texture_interpolating(
+    # scalp_texture_mixed, density_map_mixed, color_map_mixed = scalp_texture_interpolating(
     #         T_list,
     #         C_list,
     #         mask_file_paths,
@@ -1167,10 +1100,11 @@ def run_kung():
     npz_out_path = Decode_to_3D_hair(
             scalp_texture_mixed,
             density_map_mixed,
+            color_map_mixed,
             difflocks,
             out_path
     )
-    
+
     # --- 4. Create .blend ---
     create_blender_file(
         args,

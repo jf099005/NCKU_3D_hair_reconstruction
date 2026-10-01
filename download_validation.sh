@@ -21,6 +21,3 @@ if [ $? -ne 0 ]; then
     echo "❌ Error downloading body data. Exiting script."
     exit 1
 fi
-
-
-

@@ -355,7 +355,7 @@ class DiffLocksInference():
         # density_map[density_map>0.02]+=1.0
         
 
-        strand_points_world, strand_points_tbn = sample_strands_from_scalp_with_density(
+        strand_points_world, strand_points_tbn, _root_uv01 = sample_strands_from_scalp_with_density(
             scalp_texture, 
             density_map, 
             self.strand_codec, 
@@ -419,8 +419,6 @@ class DiffLocksInference():
 
 
 def run():
-
-
     path_strand_codec="./checkpoints/strand_vae/strand_codec.pt"
     path_config = "./configs/config_scalp_texture_conditional.json"
     path_diffusion_model_ckpt_path = "./checkpoints/difflocks_diffusion/scalp_v9_40k_06730000.pth" #longest trained one yet

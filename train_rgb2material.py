@@ -168,12 +168,16 @@ def train(args, hyperparams, loader_train, loader_test, experiment_name, output_
         Phase('test', loader_test, grad=False),
     ]
 
-    #model 
+    #model
     model = RGB2MaterialModel(
                     input_dim=1024,
                     out_dim=11,
                     hidden_dim=64,
                        ).to(args.device)
+    if args.resume_checkpoint:
+        print("Resuming rgb2material weights from", args.resume_checkpoint)
+        state_dict = torch.load(args.resume_checkpoint, map_location=args.device)
+        model.load_state_dict(state_dict)
     # model = torch.compile(model)
 
   
@@ -251,7 +255,7 @@ def train(args, hyperparams, loader_train, loader_test, experiment_name, output_
               
 
                 cb.after_forward_pass(phase=phase, loss=loss, 
-                                      loss_pos=loss_zero, loss_dir=loss_zero, loss_curv=loss_zero,
+                                    loss_pos=loss_zero, loss_dir=loss_zero, loss_curv=loss_zero,
                                     lr=optimizer.param_groups[0]['lr'])
 
             cb.epoch_ended(phase=phase)
@@ -273,6 +277,7 @@ def main():
     parser.add_argument('--dataset_processed_path', required=True, help='Path to the hair_synth processed dataset to train on')
     parser.add_argument('--exp_info', default="", help='Experiment info string useful for distinguishing one experiment for another')
     parser.add_argument('--device', default="cuda")
+    parser.add_argument('--resume_checkpoint', default=None, help='Path to a pretrained rgb2material.pt state_dict to resume/fine-tune training from (e.g. ./checkpoints/rgb2material/rgb2material.pt)')
     args = parser.parse_args()
 
     #get the output path which will be at the root of the package 

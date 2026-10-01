@@ -178,10 +178,75 @@ def multi_diffusion_cfg_v2(model_ema, model_config, multi_extra_args, masks, cfg
             total_weight += mask
 
         combined_noise_pred /= (total_weight + 1e-6)
-        
+
         # 4. 執行 Euler 步進
         d = (x - combined_noise_pred) / sigma
         dt = next_sigma - sigma
         x = x + d * dt
-        
+
+    return x
+
+
+# ============================================================================================================================
+@torch.no_grad()
+def blended_latent_diffusion_cfg(model_ema, model_config, base_extra_args, base_mask,
+                                  background_latents, background_masks,
+                                  cfg_val=1.0, cfg_interval=[0.0, 5.0], nr_iters=50):
+    """
+    Region fusion following "Blended Latent Diffusion" (Avrahami et al., https://arxiv.org/pdf/2206.02779).
+
+    Unlike MultiDiffusion (multi_diffusion_cfg_v2 above), which blends the noise
+    *predictions* of several live branches before every step, Blended Latent Diffusion
+    blends *latents* after the step: one region (base_extra_args/base_mask) is generated
+    through the live denoising trajectory, while every other region is pinned to an
+    already fully-denoised clean latent (background_latents) that gets re-noised to the
+    current sigma at every step (zbg ~ noise(zinit, t)) and pasted into the trajectory
+    through its own mask (zt <- zfg*m + zbg*(1-m)), so only a single model forward pass
+    per step is needed instead of one per region.
+
+    base_extra_args: extra_args dict for the region that is actively diffused
+    base_mask: mask (1,1,H,W) for the base region
+    background_latents: list of already-denoised clean latents (zinit), one per other region
+    background_masks: list of masks (1,1,H,W), matching background_latents, one per other region
+    (base_mask + sum(background_masks) is expected to partition the canvas, i.e. sum to 1 everywhere)
+    """
+    model_ema.eval()
+    sigma_min, sigma_max = model_config['sigma_min'], model_config['sigma_max']
+    size = model_config['input_size']
+    device = "cuda"
+
+    x = torch.randn([1, model_config['input_channels'], size[0], size[1]], device=device) * sigma_max
+    sigmas = K.sampling.get_sigmas_karras(nr_iters, sigma_min, sigma_max, rho=7., device=device)
+    pbar = tqdm(range(len(sigmas) - 1), desc="BlendedLatentDiffusion")
+
+    for i in pbar:
+        sigma = sigmas[i]
+        next_sigma = sigmas[i + 1]
+        is_cfg_step = cfg_interval[0] <= sigma <= cfg_interval[1]
+
+        # --- foreground: one denoising step conditioned on the base region ---
+        cond_noise = model_ema(x, sigma.expand(x.shape[0]), **base_extra_args)
+
+        if is_cfg_step:
+            uncond_args = base_extra_args.copy()
+            uncond_args['latents_dict'] = None
+            uncond_noise = model_ema(x, sigma.expand(x.shape[0]), **uncond_args)
+            noise_pred = uncond_noise + cfg_val * (cond_noise - uncond_noise)
+        else:
+            noise_pred = cond_noise
+
+        d = (x - noise_pred) / sigma
+        dt = next_sigma - sigma
+        z_fg = x + d * dt
+
+        # --- background: re-noise every fixed clean latent to the next sigma level and paste it in ---
+        composite = z_fg * base_mask
+        for z_init, mask in zip(background_latents, background_masks):
+            z_bg = z_init + torch.randn_like(z_init) * next_sigma
+            composite = composite + z_bg * mask
+
+        x = composite
+
+        pbar.set_postfix({"sigma": f"{sigma.item():.2f}", "CFG": is_cfg_step})
+
     return x

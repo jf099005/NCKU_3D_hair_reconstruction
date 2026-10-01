@@ -1,0 +1,10 @@
+{
+    "input_file_paths": [
+        "./samples/new_samples/Lee.png",
+        "./samples/new_samples/Tsai.png"
+    ],
+
+    "mask_file_paths": [
+        "./samples/mask/M6/M62.png"
+    ]
+}

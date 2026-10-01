@@ -608,6 +608,18 @@ def create_blended_reference_texture(image_paths, mask_paths, blur_radius=15, de
 
 
 
+def apply_per_strand_colors(curves_data, strand_colors, nr_pts_per_strand):
+    """strand_colors: (nr_strands, 3) in [0, 1]; every point of a strand gets its strand's color."""
+    strand_colors = np.clip(np.asarray(strand_colors, dtype=np.float32), 0.0, 1.0)
+    full_colors = np.ones((strand_colors.shape[0] * nr_pts_per_strand, 4), dtype=np.float32)
+    full_colors[:, :3] = np.repeat(strand_colors, nr_pts_per_strand, axis=0)
+    attr_name = "VertexColor"
+    color_attr = curves_data.attributes.get(attr_name) or \
+                 curves_data.attributes.new(name=attr_name, type='FLOAT_COLOR', domain='POINT')
+    color_attr.data.foreach_set("color", full_colors.flatten())
+    print(f"逐髮絲上色完成：{strand_colors.shape[0]} 根髮絲。")
+
+
 def main():
     print("main")
 
@@ -633,6 +645,10 @@ def main():
 
     hair_geom=np.load(path_hair)
     points=hair_geom["positions"] #nr_strands x nr_points_per_strand x 3
+    color_map_from_npz=hair_geom["color_map"] if "color_map" in hair_geom.files else None
+    # per-strand colors (nr_strands x 3, [0, 1]) written by img2hair_tsai_1.py: used as-is,
+    # taking priority over color_map (no projection involved)
+    strand_colors_from_npz=hair_geom["strand_colors"] if "strand_colors" in hair_geom.files else None
 
 
     subsample_nr_strands=False
@@ -644,6 +660,8 @@ def main():
         num_strands_to_keep = int(points.shape[0] * args.strands_subsample)
         strands_to_keep = np.random.choice(points.shape[0], num_strands_to_keep, replace=False)
         points = points[strands_to_keep, :, :].copy()
+        if strand_colors_from_npz is not None:
+            strand_colors_from_npz = strand_colors_from_npz[strands_to_keep]
         print("after removing random curves, points is ", points.shape)
 
         #removing verts now 
@@ -703,36 +721,35 @@ def main():
     # apply_hair_mask_coloring(curves_data, points, mask_path)
     # apply_hair_mask_with_gradient(curves_data, points, mask_path)
 
-    # root_m = os.path.join(path_cur_script, "..", "samples", "hair_color", "hc7.png")
-    root_m = os.path.join(path_cur_script, "..", "outputs_inference", "intermediates", "hair_color", "hair_color_FINAL_MIXED.png")
-    # tip_m = os.path.join(path_cur_script, "..", "samples", "hair_color", "hc2.png")
-    # apply_dual_mask_hair_coloring(curves_data, points, root_m, tip_m)
+    # 統一染色來源：優先使用 npz 內附的 color_map（由 img2hair_kung_*.py 寫入，
+    # 與這次執行的 --out_path 綁在一起，不會有路徑對不上的問題）。
+    # 找不到才 fallback 去讀 out_path 底下的 hair_color_FINAL_MIXED.png 舊格式。
+    root_m = os.path.join(args.out_path, "intermediates", "hair_color", "hair_color_FINAL_MIXED.png")
 
-    # output_warp_path = os.path.join(args.out_path, "debug_warped_ref.png")
-    # save_spherized_reference(root_m, output_warp_path)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    points_tensor = torch.from_numpy(points).to(device).float()
 
-    # apply_spherical_projection_coloring(curves_data, points, root_m)
-
-
-    if os.path.exists(root_m):
+    if strand_colors_from_npz is not None:
+        apply_per_strand_colors(curves_data, strand_colors_from_npz, points.shape[1])
+        print("已使用 npz 內附的 strand_colors 完成逐髮絲上色。")
+    elif color_map_from_npz is not None:
+        # color_map_from_npz: (H, W, 3), 範圍 [0, 1]
+        ref_tensor = torch.from_numpy(color_map_from_npz).permute(2, 0, 1).unsqueeze(0).to(device).float()
+        apply_spherical_grid_sample_coloring_r(curves_data, points_tensor, ref_tensor)
+        print("已使用 npz 內附的 color_map 完成上色。")
+    elif os.path.exists(root_m):
         # 1. 儲存 Warp 調試圖 (視覺化)
         output_warp_path = os.path.join(args.out_path, "debug_warped_ref.png")
         save_spherized_reference(root_m, output_warp_path)
 
-        # 2. 準備 PyTorch 數據
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        points_tensor = torch.from_numpy(points).to(device).float()
-        
-        # 載入參考圖並轉為 NCHW Tensor
+        # 2. 載入參考圖並轉為 NCHW Tensor
         ref_img = Image.open(root_m).convert('RGB')
         ref_tensor = transforms.ToTensor()(ref_img).unsqueeze(0).to(device)
 
-        # 3. 呼叫球面投影函數 (使用剛才幫你寫的函數)
-        # 注意：這裡傳入 points_tensor，函數內會自動處理方向向量
-    #     apply_spherical_grid_sample_coloring(curves_data, points_tensor, ref_tensor)
+        # 3. 呼叫球面投影函數
         apply_spherical_grid_sample_coloring_r(curves_data, points_tensor, ref_tensor)
     else:
-        print(f"警告：找不到參考圖 {root_m}，跳過上色。")
+        print(f"警告：npz 沒有附帶 color_map，也找不到參考圖 {root_m}，跳過上色。")
 
 
     # # hair color parameter setting

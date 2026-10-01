@@ -23,44 +23,44 @@ password=$(urle $password)
 echo -e "\nDownloading files..."
 
 
-#BODY DATA
-filename='difflocks_dataset_body_data.7z'
-wget --post-data "username=$username&password=$password" \
-  "https://download.is.tue.mpg.de/download.php?domain=difflocks&sfile=$filename" \
-  -O "$TARGET_PATH/$filename" --no-check-certificate --continue
-# Check if wget failed (non-zero exit code)
-if [ $? -ne 0 ]; then
-    echo "❌ Error downloading body data. Exiting script."
-    exit 1
-fi
+# #BODY DATA
+# filename='difflocks_dataset_body_data.7z'
+# wget --post-data "username=$username&password=$password" \
+#   "https://download.is.tue.mpg.de/download.php?domain=difflocks&sfile=$filename" \
+#   -O "$TARGET_PATH/$filename" --no-check-certificate --continue
+# # Check if wget failed (non-zero exit code)
+# if [ $? -ne 0 ]; then
+#     echo "❌ Error downloading body data. Exiting script."
+#     exit 1
+# fi
 
-#IMGS
-for i in $(seq 0 20); do
-    filename="difflocks_dataset_imgs_chunk_${i}.7z"
-     # Run wget and capture status
-    wget --post-data "username=$username&password=$password" \
-         "https://download.is.tue.mpg.de/download.php?domain=difflocks&sfile=${filename}" \
-         -O "$TARGET_PATH/$filename" --no-check-certificate --continue
-    # Check if wget failed (non-zero exit code)
-    if [ $? -ne 0 ]; then
-        echo "❌ Error downloading $filename. Exiting script."
-        exit 1
-    fi
-done
+# #IMGS
+# for i in $(seq 0 20); do
+#     filename="difflocks_dataset_imgs_chunk_${i}.7z"
+#      # Run wget and capture status
+#     wget --post-data "username=$username&password=$password" \
+#          "https://download.is.tue.mpg.de/download.php?domain=difflocks&sfile=${filename}" \
+#          -O "$TARGET_PATH/$filename" --no-check-certificate --continue
+#     # Check if wget failed (non-zero exit code)
+#     if [ $? -ne 0 ]; then
+#         echo "❌ Error downloading $filename. Exiting script."
+#         exit 1
+#     fi
+# done
 
-#IMGS v2
-for i in $(seq 0 20); do
-    filename="difflocks_dataset_imgs_v2_chunk_${i}.7z"
-     # Run wget and capture status
-    wget --post-data "username=$username&password=$password" \
-         "https://download.is.tue.mpg.de/download.php?domain=difflocks&sfile=${filename}" \
-         -O "$TARGET_PATH/$filename" --no-check-certificate --continue
-    # Check if wget failed (non-zero exit code)
-    if [ $? -ne 0 ]; then
-        echo "❌ Error downloading $filename. Exiting script."
-        exit 1
-    fi
-done
+# #IMGS v2
+# for i in $(seq 0 20); do
+#     filename="difflocks_dataset_imgs_v2_chunk_${i}.7z"
+#      # Run wget and capture status
+#     wget --post-data "username=$username&password=$password" \
+#          "https://download.is.tue.mpg.de/download.php?domain=difflocks&sfile=${filename}" \
+#          -O "$TARGET_PATH/$filename" --no-check-certificate --continue
+#     # Check if wget failed (non-zero exit code)
+#     if [ $? -ne 0 ]; then
+#         echo "❌ Error downloading $filename. Exiting script."
+#         exit 1
+#     fi
+# done
 
 #HAIRSTYLES
 for i in $(seq 0 4455); do

@@ -33,6 +33,8 @@ from utils.vis_util import img_2_pca
 import torchvision.transforms as T
 import k_diffusion as K
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, os.path.pardir)) + "/"
+BLENDER_PATH = "/home/kyh/blender/blender"
 from data_loader.dataloader import DEFAULT_BODY_DATA_DIR, DiffLocksDataset
 from data_loader.mesh_utils import tbn_space_to_world
 VisionRunningMode = mp.tasks.vision.RunningMode
@@ -71,6 +73,24 @@ class Mediapipe():
                                         min_face_presence_confidence=0.1,
                                         )
         self.detector = vision.FaceLandmarker.create_from_options(options)
+
+        # 髮型分割器配置（供 median 取色使用）
+        base_options_seg = python.BaseOptions(
+            model_asset_path=os.path.join(SCRIPT_DIR,'./assets/selfie_multiclass.tflite'),
+            delegate=mp.tasks.BaseOptions.Delegate.CPU
+        )
+        options_seg = vision.ImageSegmenterOptions(
+            running_mode=mode,
+            base_options=base_options_seg,
+            output_category_mask=True
+        )
+        self.segmenter = vision.ImageSegmenter.create_from_options(options_seg)
+
+    def run_segmentation(self, rgb_image_numpy):
+        image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_image_numpy)
+        segmentation_result = self.segmenter.segment(image)
+        category_mask = segmentation_result.category_mask.numpy_view()
+        return category_mask
 
     def run(self, rgb_image_numpy):
     
@@ -493,25 +513,21 @@ class DiffLocksInference():
             
             # --- 2. 生成 Scalp Texture Latent Code ---
             scalp_texture_orig, cls_token, patch_embeddings_reshaped = self._generate_texture_from_rgb(rgb_img_cropped)
-            
-            # 取得 Scalp Texture 的目標尺寸 (例如 256x256)
-            _, _, H, W = scalp_texture_orig.shape
-            device = scalp_texture_orig.device
-            
-            # --- 3. 【核心修改：提取高保真 Color Map】---
-            # 將 770x770 的裁剪圖片縮放至 Scalp Texture 的尺寸 (H x W)
-            # 由於這是裁剪後的圖片，它包含了頭部區域的真實顏色和空間細節。
-            
-            # 執行雙線性插值縮放 (Bilinear Interpolation)
-            import torch.nn.functional as F # 假設 F 已被導入
-            color_map_orig = F.interpolate(
-                rgb_img_cropped, 
-                size=(H, W), 
-                mode='bilinear', 
-                align_corners=False # 縮放貼圖時使用 False
-            )
-            # color_map_orig shape: (1, 3, H, W) 範圍 [0, 1]
-            print(f"Color Map extracted and resized to: {color_map_orig.shape}")
+
+            # --- 3. 統一染色流程（舊版 median 作法）---
+            # 用髮型分割抓出頭髮像素，取 RGB 中位數，生成 256x256 純色圖當作 Color Map。
+            category_mask = self.mediapipe_img.run_segmentation(frame_cropped)
+            hair_mask_2d = (category_mask == 1) # 類別 1 為頭髮
+            hair_pixels = frame_cropped[hair_mask_2d]
+            if len(hair_pixels) > 0:
+                extracted_rgb = np.median(hair_pixels, axis=0).astype(np.uint8)
+            else:
+                extracted_rgb = np.array([50, 50, 50], dtype=np.uint8) # 預設深灰色
+
+            color_img_256 = np.zeros((256, 256, 3), dtype=np.uint8)
+            color_img_256[:] = extracted_rgb
+            color_map_orig = torch.from_numpy(color_img_256).cuda().permute(2, 0, 1).unsqueeze(0).float() / 255.0
+            print(f"Color Map extracted (median): {extracted_rgb}")
 
             if out_path:
                  intermediate_dir = os.path.join(out_path, "color_map")
@@ -870,24 +886,23 @@ def create_blender_file(
 ):  
     print("--- 4. Create blender file ---")
 
-    if args.blender_path != "": 
-        args_mock = lambda: None
-        args_mock.blender_path = "/home/kyh/blender/blender" 
-        args_mock.blender_nr_threads = 4
-        args_mock.out_path = out_path
-        args_mock.blender_strands_subsample = 1
-        args_mock.blender_vertex_subsample = 1 
-        args_mock.alembic_resolution = 3
-        args_mock.do_shrinkwrap = False
-        args_mock.export_alembic = False
-    
+    args_mock = lambda: None
+    args_mock.blender_path = args.blender_path
+    args_mock.blender_nr_threads = 4
+    args_mock.out_path = out_path
+    args_mock.blender_strands_subsample = 1
+    args_mock.blender_vertex_subsample = 1
+    args_mock.alembic_resolution = 3
+    args_mock.do_shrinkwrap = False
+    args_mock.export_alembic = False
+
     # create cmd
     cmd=[
-        args_mock.blender_path, 
-        "-t", str(args_mock.blender_nr_threads), 
-        "--background", 
-        "--python", "./inference/npz2blender_kung.py",
-        "--", 
+        args_mock.blender_path,
+        "-t", str(args_mock.blender_nr_threads),
+        "--background",
+        "--python", os.path.join(ROOT, "inference", "npz2blender_kung.py"),
+        "--",
         "--input_npz", npz_out_path,
         "--out_path", args_mock.out_path, 
         "--strands_subsample", str(args_mock.blender_strands_subsample), 
@@ -908,42 +923,47 @@ def create_blender_file(
 
 def run_kung():
 
-    # --- blender path setting ---
-    class Args:
-        def __init__(self):
-            self.blender_path = "/home/kyh/blender/blender" 
-            
-    try:
-        args
-    except NameError:
-        args = Args()
+    parser = argparse.ArgumentParser(description="Kung Hair Inference (color)")
+    parser.add_argument("--input_config", type=str, default=None,
+                         help="JSON file with 'input_file_paths' and 'mask_file_paths'")
+    parser.add_argument("--blender_path", type=str, default=BLENDER_PATH)
+    parser.add_argument("--output_path", type=str, default="./outputs_inference/")
+    args = parser.parse_args()
 
     # --- input model setting ---
     path_strand_codec="./checkpoints/strand_vae/strand_codec.pt"
     path_config = "./configs/config_scalp_texture_conditional.json"
     path_diffusion_model_ckpt_path = "./checkpoints/difflocks_diffusion/scalp_v9_40k_06730000.pth" #longest trained one yet
-    path_material_model_ckpt_path = "./checkpoints/rgb2material/rgb2material.pt" 
-    
+    path_material_model_ckpt_path = "./checkpoints/rgb2material/rgb2material.pt"
+
 
     # --- output result setting ---
-    out_path="./outputs_inference/"
+    out_path=args.output_path
     os.makedirs(out_path, exist_ok=True)
     os.makedirs(os.path.join(out_path, "masks"), exist_ok=True)
 
 
-    # --- input file setting ----
+    # --- input file setting (預設值，會被 --input_config 覆蓋) ----
     input_file_paths = [
         "./samples/hair/freeman_2.png",   # base
-        "./samples/hair/uggams_3.png",  
-        "./samples/hair/cooper_4.jpg",  
-        "./samples/hair/hathaway_1.jpg",  
+        "./samples/hair/uggams_3.png",
+        "./samples/hair/cooper_4.jpg",
+        "./samples/hair/hathaway_1.jpg",
     ]
-    
+
     mask_file_paths = [
-        "./samples/mask/mask1.png",  
-        "./samples/mask/mask2.png",  
-        "./samples/mask/mask3.png",  
+        "./samples/mask/mask1.png",
+        "./samples/mask/mask2.png",
+        "./samples/mask/mask3.png",
     ]
+
+    if args.input_config:
+        with open(args.input_config, 'r', encoding='utf-8') as f:
+            cfg = json.load(f)
+        input_file_paths = cfg.get("input_file_paths", input_file_paths)
+        mask_file_paths = cfg.get("mask_file_paths", mask_file_paths)
+        print(f"Loaded input_config: {args.input_config} "
+              f"({len(input_file_paths)} images, {len(mask_file_paths)} masks)")
 
     # --- 1. Generate multiple Scalp Texture ---
     difflocks, T_list, C_list= scalp_texture(

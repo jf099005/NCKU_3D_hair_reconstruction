@@ -1,0 +1,12 @@
+{
+    "input_file_paths": [
+        "./samples/hair/21.png",
+        "./samples/hair/buzzcut_3.jpg",
+        "./samples/hair/16.png"
+    ],
+
+    "mask_file_paths": [
+        "./samples/mask/M7/M73.png",
+        "./samples/mask/M7/M74.png"
+    ]
+}
