@@ -47,6 +47,24 @@ VIEW_TO_CAMERA = {
 }
 
 
+def use_gpu(scene):
+    """Render with Cycles on the GPU: OptiX by default, CYCLES_DEVICE=CUDA when OptiX crashes on a hair scene,
+    CYCLES_DEVICE=NONE for a CPU render (same as highlighting's render scripts and experiments/gpu_render.py).
+    Falls back to the CPU when no device of that type is found. Note: an empty CUDA_VISIBLE_DEVICES in the
+    environment makes Cycles list the GPU but render on the CPU, so don't start Blender under it."""
+    device_type = os.environ.get("CYCLES_DEVICE", "OPTIX").upper()
+    scene.render.engine = 'CYCLES'
+    prefs = bpy.context.preferences.addons['cycles'].preferences
+    prefs.compute_device_type = device_type
+    prefs.refresh_devices()
+    found = False
+    for device in prefs.devices:
+        device.use = device.type == device_type
+        found |= device.use
+    scene.cycles.device = 'GPU' if found else 'CPU'
+    print(f"Cycles device: {scene.cycles.device} ({device_type if found else 'no ' + device_type + ' device'})")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--input_npz', required=True)
@@ -110,6 +128,7 @@ def main():
         apply_melanin_coloring(args)
 
     scene = bpy.context.scene
+    use_gpu(scene)
     scene.cycles.samples = args.samples
     scene.render.resolution_x = args.resolution
     scene.render.resolution_y = args.resolution

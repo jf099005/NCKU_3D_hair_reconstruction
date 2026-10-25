@@ -1,0 +1,21 @@
+{
+  "params": {
+    "shift_pixels": 20,
+    "soften_sigma": 3.0,
+    "noise_std": 0.08
+  },
+  "heads": {
+    "base_Ma": {
+      "dynamic_shift": 10,
+      "gap_texels": 1078,
+      "hair_texels_raw": 34972,
+      "hair_texels_aligned": 35965
+    },
+    "0_Tsai": {
+      "dynamic_shift": 0,
+      "gap_texels": 0,
+      "hair_texels_raw": 36050,
+      "hair_texels_aligned": 35965
+    }
+  }
+}

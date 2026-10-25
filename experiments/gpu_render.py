@@ -11,14 +11,16 @@ from PIL import Image, ImageDraw, ImageFont  # bundled with Blender's Python
 scene = bpy.context.scene
 scene.render.engine = 'CYCLES'
 
-# RTX 4070 / OptiX
+# OptiX by default; CYCLES_DEVICE=CUDA when OptiX crashes on a scene
+# (Blender 5.0: "Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow)")
+device_type = os.environ.get("CYCLES_DEVICE", "OPTIX").upper()
 prefs = bpy.context.preferences.addons['cycles'].preferences
-prefs.compute_device_type = 'OPTIX'
+prefs.compute_device_type = device_type
 prefs.refresh_devices()
 
 for device in prefs.devices:
     print(device.type, device.name)
-    device.use = (device.type == 'OPTIX')
+    device.use = (device.type == device_type)
 
 scene.cycles.device = 'GPU'
 

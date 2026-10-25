@@ -1,0 +1,1862 @@
+usage: run_benchmark.py [-h] [--run_name RUN_NAME] [--out OUT]
+                        [--methods METHODS] [--metrics METRICS]
+                        [--cases CASES] [--max_strands MAX_STRANDS]
+                        [--grid_n GRID_N] [--no_figures] [--no_render]
+                        [--overwrite] [--verbose] [--max_mem_gb MAX_MEM_GB]
+                        [--min_free_gb MIN_FREE_GB] [--retry_skipped]
+                        [--no_isolate] [--tsai2] [--trim_percent TRIM_PERCENT]
+                        benchmark_dir
+run_benchmark.py: error: the following arguments are required: benchmark_dir
+benchmark /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0: 50 cases, m = 2, methods ['mask_only', 'tsai_joint_fm'] -> /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run
+memory guard: kill a case above 21.3 GB RSS or below 4.0 GB free
+[1/50] case_0000
+  case_0000: base_29_idx_35629 + base_68_idx_36392 (99077, 100372 strands), left_right; load 2.1s, membership 13.3s
+    mask_only: 0.0s, grid score 0.1879, crossing pairs 217594232, kept [71088, 28512]
+| 2026-10-15 13:49:40,824 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 323.83s, grid score 0.0848, crossing pairs 7155502, kept [58095, 40811]
+[2/50] case_0001
+  case_0001: base_35_idx_35904 + base_72_idx_18875 (100518, 92141 strands), front_back; load 1.7s, membership 12.9s
+    mask_only: 0.0s, grid score 0.1615, crossing pairs 72771644, kept [29905, 71447]
+| 2026-10-15 13:55:36,960 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 304.88s, grid score 0.0326, crossing pairs 5517283, kept [21342, 79969]
+[3/50] case_0002
+  case_0002: base_33_idx_76353 + base_41_idx_9945 (99453, 94455 strands), half_plane; load 2.0s, membership 12.9s
+    mask_only: 0.0s, grid score 0.3007, crossing pairs 296227233, kept [56658, 37762]
+| 2026-10-15 14:01:13,095 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 338.51s, grid score 0.0388, crossing pairs 9428085, kept [62032, 32328]
+[4/50] case_0003
+  case_0003: base_75_idx_17704 + base_15_idx_94832 (94942, 97927 strands), front_back; load 1.8s, membership 12.9s
+    mask_only: 0.0s, grid score 0.0325, crossing pairs 2519109, kept [72392, 21911]
+| 2026-10-15 14:07:20,750 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 308.02s, grid score 0.0326, crossing pairs 2471631, kept [72455, 21848]
+[5/50] case_0004
+  case_0004: base_15_idx_92663 + base_41_idx_61194 (96790, 100569 strands), polygon; load 2.1s, membership 13.2s
+    mask_only: 0.0s, grid score 0.2692, crossing pairs 730038921, kept [50003, 46792]
+| 2026-10-15 14:13:03,010 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: SKIPPED_OOM RSS 21.9 GB > --max_mem_gb 21.3
+[6/50] case_0005
+  case_0005: base_20_idx_51928 + base_9_idx_60120 (94257, 97886 strands), half_plane; load 1.9s, membership 12.8s
+    mask_only: 0.0s, grid score 0.2564, crossing pairs 1440618712, kept [33922, 63934]
+| 2026-10-15 14:19:25,500 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: SKIPPED_OOM RSS 21.4 GB > --max_mem_gb 21.3
+[7/50] case_0006
+  case_0006: base_69_idx_41742 + base_75_idx_10886 (100696, 82119 strands), polygon; load 1.8s, membership 12.3s
+    mask_only: 0.0s, grid score 0.1122, crossing pairs 5307077, kept [74102, 18443]
+| 2026-10-15 14:25:56,236 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 281.01s, grid score 0.0178, crossing pairs 648604, kept [71909, 19682]
+[8/50] case_0007
+  case_0007: base_17_idx_43989 + base_26_idx_19709 (96765, 101171 strands), left_right; load 2.2s, membership 13.2s
+    mask_only: 0.0s, grid score 0.1401, crossing pairs 222228174, kept [19113, 80724]
+| 2026-10-15 14:31:09,609 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 354.91s, grid score 0.0000, crossing pairs 0, kept [0, 99816]
+[9/50] case_0008
+  case_0008: base_0_idx_69418 + base_36_idx_42564 (95810, 98587 strands), left_right; load 2.3s, membership 13.0s
+    mask_only: 0.0s, grid score 0.1776, crossing pairs 172913884, kept [23904, 73740]
+| 2026-10-15 14:37:38,505 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 330.68s, grid score 0.0497, crossing pairs 2662883, kept [427, 96931]
+[10/50] case_0009
+  case_0009: base_26_idx_33729 + base_65_idx_52011 (99109, 94464 strands), front_back; load 2.1s, membership 13.0s
+    mask_only: 0.0s, grid score 0.0747, crossing pairs 27154647, kept [22335, 71975]
+| 2026-10-15 14:43:41,830 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 346.47s, grid score 0.0592, crossing pairs 6410014, kept [10861, 82609]
+[11/50] case_0010
+  case_0010: base_30_idx_77769 + base_68_idx_9235 (97929, 94602 strands), front_back; load 2.2s, membership 12.9s
+    mask_only: 0.0s, grid score 0.0285, crossing pairs 3109380, kept [50091, 44397]
+| 2026-10-15 14:49:58,708 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 302.25s, grid score 0.0285, crossing pairs 3094036, kept [50050, 44438]
+[12/50] case_0011
+  case_0011: base_30_idx_77769 + base_41_idx_9945 (97929, 94455 strands), half_plane; load 1.0s, membership 12.8s
+    mask_only: 0.0s, grid score 0.2573, crossing pairs 269065427, kept [30207, 67378]
+| 2026-10-15 14:55:32,696 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 332.85s, grid score 0.0121, crossing pairs 1232574, kept [4651, 92051]
+[13/50] case_0012
+  case_0012: base_55_idx_17478 + base_41_idx_18223 (100125, 99429 strands), polygon; load 2.5s, membership 13.3s
+    mask_only: 0.0s, grid score 0.2733, crossing pairs 1113046315, kept [79477, 20671]
+| 2026-10-15 15:01:47,486 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: SKIPPED_OOM RSS 21.6 GB > --max_mem_gb 21.3
+[14/50] case_0013
+  case_0013: base_67_idx_36358 + base_72_idx_43336 (94438, 83342 strands), polygon; load 2.0s, membership 12.0s
+    mask_only: 0.0s, grid score 0.0308, crossing pairs 2601306, kept [57602, 29377]
+| 2026-10-15 15:08:13,956 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 273.79s, grid score 0.0304, crossing pairs 2353672, kept [57673, 29273]
+[15/50] case_0014
+  case_0014: base_15_idx_50537 + base_43_idx_85279 (95882, 98864 strands), polygon; load 2.3s, membership 13.0s
+    mask_only: 0.0s, grid score 0.1789, crossing pairs 115112163, kept [73819, 23759]
+| 2026-10-15 15:13:18,198 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 354.51s, grid score 0.0314, crossing pairs 6395105, kept [75153, 22356]
+[16/50] case_0015
+  case_0015: base_75_idx_17704 + base_42_idx_67191 (94942, 97595 strands), half_plane; load 2.1s, membership 12.9s
+    mask_only: 0.0s, grid score 0.2457, crossing pairs 244709245, kept [63906, 34637]
+| 2026-10-15 15:19:47,383 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 309.02s, grid score 0.0841, crossing pairs 10479964, kept [55326, 41137]
+[17/50] case_0016
+  case_0016: base_14_idx_1307 + base_75_idx_10886 (93010, 82119 strands), front_back; load 1.7s, membership 11.8s
+    mask_only: 0.0s, grid score 0.2342, crossing pairs 151606291, kept [33887, 58000]
+| 2026-10-15 15:25:28,452 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 275.62s, grid score 0.0605, crossing pairs 6779055, kept [38427, 49432]
+[18/50] case_0017
+  case_0017: base_72_idx_43336 + base_1_idx_84449 (83342, 93933 strands), front_back; load 0.9s, membership 11.9s
+    mask_only: 0.0s, grid score 0.0131, crossing pairs 1824674, kept [17927, 70602]
+| 2026-10-15 15:30:33,828 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 276.63s, grid score 0.0128, crossing pairs 1659850, kept [17856, 70637]
+[19/50] case_0018
+  case_0018: base_2_idx_25819 + base_72_idx_43336 (99876, 83342 strands), polygon; load 1.4s, membership 12.3s
+    mask_only: 0.0s, grid score 0.1065, crossing pairs 64741326, kept [85387, 10945]
+| 2026-10-15 15:35:45,813 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 296.86s, grid score 0.0384, crossing pairs 3760007, kept [76554, 14966]
+[20/50] case_0019
+  case_0019: base_35_idx_35904 + base_1_idx_60473 (100518, 96788 strands), front_back; load 2.2s, membership 13.2s
+    mask_only: 0.0s, grid score 0.2273, crossing pairs 344218273, kept [72128, 28365]
+| 2026-10-15 15:41:20,105 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 343.33s, grid score 0.0836, crossing pairs 24386946, kept [81404, 15474]
+[21/50] case_0020
+  case_0020: base_41_idx_9945 + base_67_idx_36358 (94455, 94438 strands), half_plane; load 1.4s, membership 12.7s
+    mask_only: 0.0s, grid score 0.0233, crossing pairs 1863462, kept [56272, 38177]
+| 2026-10-15 15:47:41,272 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 303.05s, grid score 0.0111, crossing pairs 1347103, kept [56285, 38164]
+[22/50] case_0021
+  case_0021: base_1_idx_60473 + base_72_idx_43336 (96788, 83342 strands), front_back; load 0.2s, membership 12.1s
+    mask_only: 0.0s, grid score 0.0121 (/black 0.0565, /white 0.0258), crossing pairs 1759836, kept [67981, 19858]
+| 2026-10-15 15:53:13,027 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 280.84s, grid score 0.0118 (/black 0.0548, /white 0.0250), crossing pairs 1544746, kept [67930, 19825], overlap matrix nnz 59390270 (density 7.36e-03)
+[23/50] case_0022
+  case_0022: base_2_idx_25819 + base_29_idx_36240 (99876, 100706 strands), half_plane; load 1.2s, membership 13.4s
+    mask_only: 0.0s, grid score 0.3570 (/black 0.9138, /white 1.1387), crossing pairs 984050146, kept [22304, 77939]
+| 2026-10-15 15:58:33,329 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: SKIPPED_OOM RSS 21.8 GB > --max_mem_gb 21.3
+[24/50] case_0023
+  case_0023: base_33_idx_76353 + base_65_idx_52011 (99453, 94464 strands), polygon; load 1.8s, membership 13.0s
+    mask_only: 0.0s, grid score 0.3540 (/black 1.8492, /white 0.6943), crossing pairs 228051445, kept [75503, 21858]
+| 2026-10-15 16:05:14,904 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 331.54s, grid score 0.0815 (/black 0.2642, /white 0.2082), crossing pairs 23087846, kept [60522, 34023], overlap matrix nnz 257926781 (density 2.75e-02)
+[25/50] case_0024
+  case_0024: base_9_idx_60120 + base_8_idx_25613 (97886, 96739 strands), left_right; load 1.9s, membership 13.0s
+    mask_only: 0.0s, grid score 0.2134 (/black 0.3861, /white 1.5721), crossing pairs 587679435, kept [31053, 66289]
+| 2026-10-15 16:11:23,363 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: SKIPPED_OOM RSS 21.7 GB > --max_mem_gb 21.3
+[26/50] case_0025
+  case_0025: base_33_idx_76353 + base_15_idx_1144 (99453, 98297 strands), left_right; load 1.0s, membership 13.2s
+    mask_only: 0.0s, grid score 0.1701 (/black 0.2461, /white 14.5192), crossing pairs 513136702, kept [16982, 81533]
+| 2026-10-15 16:17:47,291 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 370.06s, grid score 0.0351 (/black 0.0768, /white 0.1427), crossing pairs 18094027, kept [29440, 69129], overlap matrix nnz 496109845 (density 5.07e-02)
+[27/50] case_0026
+  case_0026: base_20_idx_51928 + base_75_idx_59606 (94257, 100353 strands), half_plane; load 1.9s, membership 13.0s
+    mask_only: 0.0s, grid score 0.1772 (/black 9.0732, /white 0.2634), crossing pairs 127129433, kept [69212, 26671]
+| 2026-10-15 16:24:37,069 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 305.28s, grid score 0.0854 (/black 2.3018, /white 0.1304), crossing pairs 11379130, kept [83727, 9515], overlap matrix nnz 60047885 (density 6.35e-03)
+[28/50] case_0027
+  case_0027: base_74_idx_42427 + base_20_idx_51928 (100637, 94257 strands), half_plane; load 1.1s, membership 13.0s
+    mask_only: 0.0s, grid score 0.1675 (/black 0.6330, /white 0.3908), crossing pairs 94615180, kept [79500, 15835]
+| 2026-10-15 16:30:16,451 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 318.62s, grid score 0.0210 (/black 0.1547, /white 0.0389), crossing pairs 5108325, kept [84085, 11284], overlap matrix nnz 191142107 (density 2.02e-02)
+[29/50] case_0028
+  case_0028: base_67_idx_36358 + base_29_idx_35629 (94438, 99077 strands), front_back; load 1.9s, membership 12.9s
+    mask_only: 0.0s, grid score 0.0639 (/black 0.3147, /white 0.1256), crossing pairs 9135874, kept [65911, 28378]
+| 2026-10-15 16:36:03,267 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 331.82s, grid score 0.0582 (/black 0.2993, /white 0.1124), crossing pairs 7199684, kept [67346, 26928], overlap matrix nnz 257588740 (density 2.75e-02)
+[30/50] case_0029
+  case_0029: base_1_idx_84449 + base_41_idx_61194 (93933, 100569 strands), polygon; load 1.9s, membership 13.0s
+    mask_only: 0.0s, grid score 0.1169 (/black 0.5298, /white 0.2586), crossing pairs 205909522, kept [69743, 24190]
+| 2026-10-15 16:42:08,578 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 363.6s, grid score 0.1749 (/black 1.5175, /white 0.2955), crossing pairs 25127861, kept [85834, 9639], overlap matrix nnz 423118643 (density 4.48e-02)
+[31/50] case_0030
+  case_0030: base_23_idx_1963 + base_69_idx_41742 (93051, 100696 strands), polygon; load 1.8s, membership 12.9s
+    mask_only: 0.0s, grid score 0.1858 (/black 2.3200, /white 0.3010), crossing pairs 167723808, kept [70246, 22825]
+| 2026-10-15 16:48:47,021 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 316.78s, grid score 0.0361 (/black 0.1664, /white 0.0751), crossing pairs 8930640, kept [60595, 31932], overlap matrix nnz 169445337 (density 1.81e-02)
+[32/50] case_0031
+  case_0031: base_65_idx_52011 + base_26_idx_33729 (94464, 99109 strands), polygon; load 1.0s, membership 12.9s
+    mask_only: 0.0s, grid score 0.1121 (/black 0.3984, /white 0.2739), crossing pairs 363520229, kept [70153, 27775]
+| 2026-10-15 16:54:36,183 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 345.68s, grid score 0.0164 (/black 0.0514, /white 0.0440), crossing pairs 3462197, kept [56499, 40819], overlap matrix nnz 321596770 (density 3.44e-02)
+[33/50] case_0032
+  case_0032: base_23_idx_1963 + base_15_idx_1144 (93051, 98297 strands), polygon; load 0.2s, membership 12.8s
+    mask_only: 0.0s, grid score 0.1049 (/black 5.1145, /white 0.1550), crossing pairs 175379009, kept [80177, 12864]
+| 2026-10-15 17:00:54,455 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: SKIPPED_OOM RSS 21.8 GB > --max_mem_gb 21.3
+[34/50] case_0033
+  case_0033: base_67_idx_36358 + base_35_idx_35904 (94438, 100518 strands), front_back; load 1.2s, membership 13.0s
+    mask_only: 0.0s, grid score 0.0211 (/black 0.0376, /white 0.1374), crossing pairs 4317135, kept [12215, 82022]
+| 2026-10-15 17:07:08,059 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 313.04s, grid score 0.0087 (/black 0.0154, /white 0.0599), crossing pairs 1018861, kept [11272, 82892], overlap matrix nnz 137335184 (density 1.45e-02)
+[35/50] case_0034
+  case_0034: base_15_idx_50537 + base_33_idx_76353 (95882, 99453 strands), half_plane; load 1.8s, membership 13.0s
+    mask_only: 0.0s, grid score 0.2052 (/black 1.3135, /white 0.3800), crossing pairs 243226270, kept [63846, 32037]
+| 2026-10-15 17:12:55,920 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 355.46s, grid score 0.0151 (/black 0.2576, /white 0.0236), crossing pairs 1535290, kept [92288, 3490], overlap matrix nnz 457529210 (density 4.80e-02)
+[36/50] case_0035
+  case_0035: base_72_idx_18875 + base_29_idx_36240 (92141, 100706 strands), left_right; load 2.0s, membership 12.9s
+    mask_only: 0.0s, grid score 0.3676 (/black 0.7143, /white 2.0570), crossing pairs 143308610, kept [55999, 39318]
+| 2026-10-15 17:19:24,743 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 309.78s, grid score 0.0155 (/black 0.0683, /white 0.0358), crossing pairs 2620134, kept [64927, 27658], overlap matrix nnz 109173901 (density 1.18e-02)
+[37/50] case_0036
+  case_0036: base_6_idx_9475 + base_70_idx_10270 (100728, 100161 strands), half_plane; load 1.9s, membership 13.4s
+    mask_only: 0.0s, grid score 0.1560 (/black 159.7847, /white 0.2192), crossing pairs 177462626, kept [81413, 19205]
+| 2026-10-15 17:25:06,233 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 328.18s, grid score 0.0000 (/black 0.0000, /white 0.0000), crossing pairs 0, kept [100464, 0], overlap matrix nnz 211226401 (density 2.09e-02)
+[38/50] case_0037
+  case_0037: base_72_idx_18875 + base_20_idx_51928 (92141, 94257 strands), left_right; load 0.9s, membership 12.5s
+    mask_only: 0.0s, grid score 0.0344 (/black 0.1511, /white 0.0802), crossing pairs 3688872, kept [61387, 30640]
+| 2026-10-15 17:31:04,220 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 295.73s, grid score 0.0345 (/black 0.1516, /white 0.0805), crossing pairs 3377627, kept [61186, 30674], overlap matrix nnz 112355399 (density 1.29e-02)
+[39/50] case_0038
+  case_0038: base_67_idx_36358 + base_41_idx_18223 (94438, 99429 strands), polygon; load 1.0s, membership 12.9s
+    mask_only: 0.0s, grid score 0.2430 (/black 1.2763, /white 0.4795), crossing pairs 105500101, kept [76606, 18099]
+| 2026-10-15 17:36:28,012 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 309.73s, grid score 0.0482 (/black 0.3084, /white 0.0889), crossing pairs 9634210, kept [75820, 18304], overlap matrix nnz 119165111 (density 1.27e-02)
+[40/50] case_0039
+  case_0039: base_70_idx_10270 + base_70_idx_91926 (100161, 93931 strands), polygon; load 1.1s, membership 13.0s
+    mask_only: 0.0s, grid score 0.1955 (/black 1.1060, /white 0.3850), crossing pairs 54816806, kept [67558, 32545]
+| 2026-10-15 17:42:05,664 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 304.75s, grid score 0.1155 (/black 1.1260, /white 0.1984), crossing pairs 26337194, kept [80127, 19726], overlap matrix nnz 92794760 (density 9.86e-03)
+[41/50] case_0040
+  case_0040: base_75_idx_59606 + base_55_idx_17478 (100353, 100125 strands), left_right; load 1.0s, membership 13.3s
+    mask_only: 0.0s, grid score 0.2745 (/black 0.3909, /white 46.8412), crossing pairs 171410871, kept [41718, 58374]
+| 2026-10-15 17:47:42,669 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 322.66s, grid score 0.0268 (/black 0.0787, /white 0.0761), crossing pairs 2938005, kept [55556, 43615], overlap matrix nnz 83058961 (density 8.27e-03)
+[42/50] case_0041
+  case_0041: base_75_idx_75839 + base_23_idx_1963 (81328, 93051 strands), front_back; load 0.9s, membership 11.7s
+    mask_only: 0.0s, grid score 0.0166 (/black 0.1028, /white 0.0324), crossing pairs 1014879, kept [62413, 17724]
+| 2026-10-15 17:53:30,050 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 268.59s, grid score 0.0166 (/black 0.1028, /white 0.0324), crossing pairs 1014879, kept [62413, 17724], overlap matrix nnz 54615162 (density 7.22e-03)
+[43/50] case_0042
+  case_0042: base_20_idx_51928 + base_74_idx_42427 (94257, 100637 strands), front_back; load 0.2s, membership 13.0s
+    mask_only: 0.0s, grid score 0.1499 (/black 7.6748, /white 0.2228), crossing pairs 199952280, kept [76043, 18379]
+| 2026-10-15 17:58:29,383 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 320.41s, grid score 0.0202 (/black 1.0356, /white 0.0301), crossing pairs 6317761, kept [90747, 3450], overlap matrix nnz 191142107 (density 2.02e-02)
+[44/50] case_0043
+  case_0043: base_0_idx_69418 + base_68_idx_9235 (95810, 94602 strands), front_back; load 1.8s, membership 12.7s
+    mask_only: 0.0s, grid score 0.1800 (/black 0.9910, /white 0.3777), crossing pairs 126546594, kept [51609, 44297]
+| 2026-10-15 18:04:24,989 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 300.26s, grid score 0.0671 (/black 1.2486, /white 0.1109), crossing pairs 20141689, kept [85385, 10358], overlap matrix nnz 89756607 (density 9.90e-03)
+[45/50] case_0044
+  case_0044: base_41_idx_61194 + base_30_idx_77769 (100569, 97929 strands), half_plane; load 1.2s, membership 13.2s
+    mask_only: 0.0s, grid score 0.2767 (/black 0.5927, /white 1.1242), crossing pairs 305964165, kept [40755, 58483]
+| 2026-10-15 18:09:58,656 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 351.47s, grid score 0.1072 (/black 0.3588, /white 0.2627), crossing pairs 64474709, kept [52495, 46177], overlap matrix nnz 326738095 (density 3.32e-02)
+[46/50] case_0045
+  case_0045: base_18_idx_44359 + base_67_idx_36358 (94377, 94438 strands), half_plane; load 1.0s, membership 12.6s
+    mask_only: 0.0s, grid score 0.0770 (/black 0.2347, /white 0.2027), crossing pairs 5709765, kept [52863, 41658]
+| 2026-10-15 18:16:22,421 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 299.41s, grid score 0.0148 (/black 0.0449, /white 0.0391), crossing pairs 1917090, kept [52557, 41930], overlap matrix nnz 109685261 (density 1.23e-02)
+[47/50] case_0046
+  case_0046: base_15_idx_50537 + base_65_idx_52011 (95882, 94464 strands), half_plane; load 1.0s, membership 12.7s
+    mask_only: 0.0s, grid score 0.2038 (/black 0.4982, /white 0.7100), crossing pairs 419234102, kept [22250, 73761]
+| 2026-10-15 18:21:52,858 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 331.2s, grid score 0.0504 (/black 0.1318, /white 0.1625), crossing pairs 11688402, kept [39275, 55065], overlap matrix nnz 316443045 (density 3.49e-02)
+[48/50] case_0047
+  case_0047: base_72_idx_18875 + base_41_idx_61194 (92141, 100569 strands), half_plane; load 0.2s, membership 12.8s
+    mask_only: 0.0s, grid score 0.3356 (/black 0.6147, /white 2.0332), crossing pairs 151980786, kept [52212, 49086]
+| 2026-10-15 18:27:55,322 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 305.76s, grid score 0.0799 (/black 0.2171, /white 0.2332), crossing pairs 9122898, kept [55245, 45028], overlap matrix nnz 88528994 (density 9.55e-03)
+[49/50] case_0048
+  case_0048: base_15_idx_50537 + base_18_idx_44359 (95882, 94377 strands), half_plane; load 0.2s, membership 12.7s
+    mask_only: 0.0s, grid score 0.2407 (/black 0.6452, /white 0.7446), crossing pairs 526247263, kept [27714, 68171]
+| 2026-10-15 18:33:33,188 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 344.28s, grid score 0.1620 (/black 1.4684, /white 0.2738), crossing pairs 26544459, kept [77721, 17445], overlap matrix nnz 426868179 (density 4.72e-02)
+[50/50] case_0049
+  case_0049: base_6_idx_9475 + base_68_idx_36392 (100728, 100372 strands), polygon; load 1.1s, membership 13.4s
+    mask_only: 0.0s, grid score 0.1322 (/black 4.5116, /white 0.1934), crossing pairs 37877286, kept [80847, 20361]
+| 2026-10-15 18:39:52,256 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+    tsai_joint_fm: 312.49s, grid score 0.0966 (/black 0.9697, /white 0.1575), crossing pairs 11928142, kept [79135, 21603], overlap matrix nnz 52982922 (density 5.24e-03)
+all cases done in 296.0 min
+rendering the lowest / highest grid_score.mean_all case of every group: ['case_0006', 'case_0009', 'case_0011', 'case_0013', 'case_0015', 'case_0023', 'case_0029', 'case_0033', 'case_0034', 'case_0039', 'case_0049']
+  case_0006/mask_only: rendering
+| 2026-10-15 18:45:16,466 | [[ natten.context ]] [ WARNING ]: You're enabling KV parallelism in Fused Neighborhood Attention. This feature will improve backpropagation latency, but will use some additional memory, and is non-deterministic. For more information please refer to https://github.com/SHI-Labs/NATTEN/blob/main/docs/fna/kv-parallelism.md
+--- 4. Create blender file ---
+Import npz file into blender
+00:05.482  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (92545, 256, 3)
+creating geometry
+逐髮絲上色完成：92545 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.128  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0006/mask_only/blender_scene.blend"
+00:00.793  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:05.236  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0006/mask_only/render/gpu_render_ovyhdixs/left.png'
+00:08.254  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0006/mask_only/render/gpu_render_ovyhdixs/front.png'
+00:11.006  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0006/mask_only/render/gpu_render_ovyhdixs/right.png'
+00:14.013  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0006/mask_only/render/gpu_render_ovyhdixs/back.png'
+00:16.335  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0006/mask_only/render/gpu_render_ovyhdixs/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0006/mask_only/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0006/tsai_joint_fm: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.143  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (91591, 256, 3)
+creating geometry
+逐髮絲上色完成：91591 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.102  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0006/tsai_joint_fm/blender_scene.blend"
+00:00.641  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:02.693  cycles           | ERROR Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow integrator_queued_shadow_paths_array)
+00:02.693  cycles           | ERROR Refer to the Cycles GPU rendering documentation for possible solutions:
+                            | https://docs.blender.org/manual/en/latest/render/cycles/gpu_rendering.html
+                            | 
+00:02.693  cycles           | ERROR Misaligned address in cuStreamCreate(&cuda_stream_, CU_STREAM_NON_BLOCKING) (intern/cycles/device/cuda/queue.cpp:21)
+00:02.693  cycles           | ERROR Misaligned address in CUDA queue copy_from_device ()
+00:04.215  cycles           | ERROR Misaligned address in CUDA queue copy_to_device ()
+00:04.217  cycles           | ERROR Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow integrator_queued_shadow_paths_array)
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+Traceback (most recent call last):
+  File "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/experiments/gpu_render.py", line 126, in <module>
+    bpy.ops.render.render(write_still=True)
+  File "/home/kyh/blender/5.0/scripts/modules/bpy/ops.py", line 109, in __call__
+    ret = _op_call(self.idname_py(), kw)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Error: Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow integrator_queued_shadow_paths_array)
+Error: Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow integrator_queued_shadow_paths_array)
+
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+Error: Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow integrator_queued_shadow_paths_array)
+Error: Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow integrator_queued_shadow_paths_array)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.282  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.283  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:04.284  cycles           | ERROR Error synching on OptixPipeline event (CUDA error string: misaligned address, CUDA error code: 716)
+00:04.289  cycles           | ERROR Error destroying resource event. (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Failed to destroy launch resources (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Error destroying resource event. (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Failed to destroy launch resources (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Error destroying resource event. (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Failed to destroy launch resources (CUDA error string: misaligned address, CUDA error code: 716)
+00:04.289  cycles           | ERROR Misaligned address in cuModuleUnload(cuModule) (intern/cycles/device/cuda/device_impl.cpp:138)
+
+Blender quit
+  case_0009/mask_only: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.126  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (94310, 256, 3)
+creating geometry
+逐髮絲上色完成：94310 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.103  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/mask_only/blender_scene.blend"
+00:00.677  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.403  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/mask_only/render/gpu_render_4z4ui3fl/left.png'
+00:07.480  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/mask_only/render/gpu_render_4z4ui3fl/front.png'
+00:10.187  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/mask_only/render/gpu_render_4z4ui3fl/right.png'
+00:13.085  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/mask_only/render/gpu_render_4z4ui3fl/back.png'
+00:15.316  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/mask_only/render/gpu_render_4z4ui3fl/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/mask_only/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0009/tsai_joint_fm: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.139  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (93470, 256, 3)
+creating geometry
+逐髮絲上色完成：93470 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.103  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/tsai_joint_fm/blender_scene.blend"
+00:00.657  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.384  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/tsai_joint_fm/render/gpu_render_s61c6mdq/left.png'
+00:07.447  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/tsai_joint_fm/render/gpu_render_s61c6mdq/front.png'
+00:10.169  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/tsai_joint_fm/render/gpu_render_s61c6mdq/right.png'
+00:13.106  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/tsai_joint_fm/render/gpu_render_s61c6mdq/back.png'
+00:15.335  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/tsai_joint_fm/render/gpu_render_s61c6mdq/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/tsai_joint_fm/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0011/mask_only: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.144  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (97585, 256, 3)
+creating geometry
+逐髮絲上色完成：97585 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.102  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/mask_only/blender_scene.blend"
+00:00.679  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.558  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/mask_only/render/gpu_render_yc621evr/left.png'
+00:08.140  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/mask_only/render/gpu_render_yc621evr/front.png'
+00:11.039  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/mask_only/render/gpu_render_yc621evr/right.png'
+00:14.312  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/mask_only/render/gpu_render_yc621evr/back.png'
+00:16.568  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/mask_only/render/gpu_render_yc621evr/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/mask_only/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0011/tsai_joint_fm: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.142  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (96702, 256, 3)
+creating geometry
+逐髮絲上色完成：96702 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.101  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/tsai_joint_fm/blender_scene.blend"
+00:00.682  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.437  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/tsai_joint_fm/render/gpu_render_aa81sfif/left.png'
+00:07.930  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/tsai_joint_fm/render/gpu_render_aa81sfif/front.png'
+00:10.724  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/tsai_joint_fm/render/gpu_render_aa81sfif/right.png'
+00:13.908  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/tsai_joint_fm/render/gpu_render_aa81sfif/back.png'
+00:16.156  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/tsai_joint_fm/render/gpu_render_aa81sfif/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/tsai_joint_fm/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0013/mask_only: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.128  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (86979, 256, 3)
+creating geometry
+逐髮絲上色完成：86979 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.102  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0013/mask_only/blender_scene.blend"
+00:00.619  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.579  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0013/mask_only/render/gpu_render_tbw03gam/left.png'
+00:05.569  cycles           | ERROR Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow)
+00:05.569  cycles           | ERROR Refer to the Cycles GPU rendering documentation for possible solutions:
+                            | https://docs.blender.org/manual/en/latest/render/cycles/gpu_rendering.html
+                            | 
+00:05.569  cycles           | ERROR Misaligned address in cuStreamCreate(&cuda_stream_, CU_STREAM_NON_BLOCKING) (intern/cycles/device/cuda/queue.cpp:21)
+00:05.569  cycles           | ERROR Misaligned address in CUDA queue copy_from_device ()
+00:07.100  cycles           | ERROR Misaligned address in CUDA queue copy_to_device ()
+00:07.101  cycles           | ERROR Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow)
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+Traceback (most recent call last):
+  File "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/experiments/gpu_render.py", line 126, in <module>
+    bpy.ops.render.render(write_still=True)
+  File "/home/kyh/blender/5.0/scripts/modules/bpy/ops.py", line 109, in __call__
+    ret = _op_call(self.idname_py(), kw)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Error: Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow)
+Error: Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow)
+
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+Error: Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow)
+Error: Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.164  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.165  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:07.166  cycles           | ERROR Error synching on OptixPipeline event (CUDA error string: misaligned address, CUDA error code: 716)
+00:07.172  cycles           | ERROR Error destroying resource event. (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Failed to destroy launch resources (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Error destroying resource event. (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Failed to destroy launch resources (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Error destroying resource event. (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Failed to destroy launch resources (CUDA error string: misaligned address, CUDA error code: 716)
+00:07.172  cycles           | ERROR Misaligned address in cuModuleUnload(cuModule) (intern/cycles/device/cuda/device_impl.cpp:138)
+
+Blender quit
+  case_0013/tsai_joint_fm: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.130  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (86946, 256, 3)
+creating geometry
+逐髮絲上色完成：86946 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.102  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0013/tsai_joint_fm/blender_scene.blend"
+00:00.631  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.596  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0013/tsai_joint_fm/render/gpu_render_5p0corqw/left.png'
+00:07.554  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0013/tsai_joint_fm/render/gpu_render_5p0corqw/front.png'
+00:10.401  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0013/tsai_joint_fm/render/gpu_render_5p0corqw/right.png'
+00:13.602  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0013/tsai_joint_fm/render/gpu_render_5p0corqw/back.png'
+00:16.155  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0013/tsai_joint_fm/render/gpu_render_5p0corqw/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0013/tsai_joint_fm/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0015/mask_only: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.138  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (98543, 256, 3)
+creating geometry
+逐髮絲上色完成：98543 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.102  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/mask_only/blender_scene.blend"
+00:00.696  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.380  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/mask_only/render/gpu_render_o9cga1dm/left.png'
+00:07.311  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/mask_only/render/gpu_render_o9cga1dm/front.png'
+00:09.882  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/mask_only/render/gpu_render_o9cga1dm/right.png'
+00:12.893  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/mask_only/render/gpu_render_o9cga1dm/back.png'
+00:15.099  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/mask_only/render/gpu_render_o9cga1dm/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/mask_only/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0015/tsai_joint_fm: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.138  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (96463, 256, 3)
+creating geometry
+逐髮絲上色完成：96463 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.102  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/tsai_joint_fm/blender_scene.blend"
+00:00.674  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.961  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/tsai_joint_fm/render/gpu_render_rm8juxga/left.png'
+00:07.986  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/tsai_joint_fm/render/gpu_render_rm8juxga/front.png'
+00:10.585  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/tsai_joint_fm/render/gpu_render_rm8juxga/right.png'
+00:13.720  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/tsai_joint_fm/render/gpu_render_rm8juxga/back.png'
+00:15.966  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/tsai_joint_fm/render/gpu_render_rm8juxga/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/tsai_joint_fm/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0023/mask_only: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.138  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (97361, 256, 3)
+creating geometry
+逐髮絲上色完成：97361 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.103  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/mask_only/blender_scene.blend"
+00:00.679  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.450  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/mask_only/render/gpu_render_gvgefbvr/left.png'
+00:07.450  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/mask_only/render/gpu_render_gvgefbvr/front.png'
+00:10.098  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/mask_only/render/gpu_render_gvgefbvr/right.png'
+00:13.010  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/mask_only/render/gpu_render_gvgefbvr/back.png'
+00:15.236  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/mask_only/render/gpu_render_gvgefbvr/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/mask_only/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0023/tsai_joint_fm: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.139  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (94545, 256, 3)
+creating geometry
+逐髮絲上色完成：94545 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.103  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/tsai_joint_fm/blender_scene.blend"
+00:00.660  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.422  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/tsai_joint_fm/render/gpu_render_7_0ktreu/left.png'
+00:07.433  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/tsai_joint_fm/render/gpu_render_7_0ktreu/front.png'
+00:10.114  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/tsai_joint_fm/render/gpu_render_7_0ktreu/right.png'
+00:13.013  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/tsai_joint_fm/render/gpu_render_7_0ktreu/back.png'
+00:15.243  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/tsai_joint_fm/render/gpu_render_7_0ktreu/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/tsai_joint_fm/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0029/mask_only: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.138  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (93933, 256, 3)
+creating geometry
+逐髮絲上色完成：93933 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.103  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/mask_only/blender_scene.blend"
+00:00.662  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.275  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/mask_only/render/gpu_render_t3a_0esj/left.png'
+00:07.508  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/mask_only/render/gpu_render_t3a_0esj/front.png'
+00:10.107  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/mask_only/render/gpu_render_t3a_0esj/right.png'
+00:12.980  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/mask_only/render/gpu_render_t3a_0esj/back.png'
+00:15.168  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/mask_only/render/gpu_render_t3a_0esj/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/mask_only/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0029/tsai_joint_fm: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.138  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (95473, 256, 3)
+creating geometry
+逐髮絲上色完成：95473 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.103  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/tsai_joint_fm/blender_scene.blend"
+00:00.668  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.293  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/tsai_joint_fm/render/gpu_render_qucq2uaj/left.png'
+00:07.501  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/tsai_joint_fm/render/gpu_render_qucq2uaj/front.png'
+00:10.044  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/tsai_joint_fm/render/gpu_render_qucq2uaj/right.png'
+00:12.923  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/tsai_joint_fm/render/gpu_render_qucq2uaj/back.png'
+00:15.090  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/tsai_joint_fm/render/gpu_render_qucq2uaj/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/tsai_joint_fm/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0033/mask_only: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.137  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (94237, 256, 3)
+creating geometry
+逐髮絲上色完成：94237 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.103  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/mask_only/blender_scene.blend"
+00:00.665  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.311  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/mask_only/render/gpu_render__jg4hbqw/left.png'
+00:07.574  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/mask_only/render/gpu_render__jg4hbqw/front.png'
+00:10.193  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/mask_only/render/gpu_render__jg4hbqw/right.png'
+00:13.052  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/mask_only/render/gpu_render__jg4hbqw/back.png'
+00:15.326  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/mask_only/render/gpu_render__jg4hbqw/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/mask_only/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0033/tsai_joint_fm: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.135  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (94164, 256, 3)
+creating geometry
+逐髮絲上色完成：94164 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.102  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/tsai_joint_fm/blender_scene.blend"
+00:00.660  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.285  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/tsai_joint_fm/render/gpu_render_uphz_eyx/left.png'
+00:07.539  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/tsai_joint_fm/render/gpu_render_uphz_eyx/front.png'
+00:10.161  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/tsai_joint_fm/render/gpu_render_uphz_eyx/right.png'
+00:13.018  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/tsai_joint_fm/render/gpu_render_uphz_eyx/back.png'
+00:15.296  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/tsai_joint_fm/render/gpu_render_uphz_eyx/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/tsai_joint_fm/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0034/mask_only: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.139  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (95883, 256, 3)
+creating geometry
+逐髮絲上色完成：95883 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.102  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/mask_only/blender_scene.blend"
+00:00.669  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.491  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/mask_only/render/gpu_render_g8w3pd39/left.png'
+00:07.731  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/mask_only/render/gpu_render_g8w3pd39/front.png'
+00:10.385  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/mask_only/render/gpu_render_g8w3pd39/right.png'
+00:13.314  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/mask_only/render/gpu_render_g8w3pd39/back.png'
+00:15.483  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/mask_only/render/gpu_render_g8w3pd39/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/mask_only/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0034/tsai_joint_fm: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.142  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (95778, 256, 3)
+creating geometry
+逐髮絲上色完成：95778 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.101  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/tsai_joint_fm/blender_scene.blend"
+00:00.672  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.503  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/tsai_joint_fm/render/gpu_render_x4reejpf/left.png'
+00:07.830  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/tsai_joint_fm/render/gpu_render_x4reejpf/front.png'
+00:10.511  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/tsai_joint_fm/render/gpu_render_x4reejpf/right.png'
+00:13.390  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/tsai_joint_fm/render/gpu_render_x4reejpf/back.png'
+00:15.561  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/tsai_joint_fm/render/gpu_render_x4reejpf/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/tsai_joint_fm/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0039/mask_only: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.144  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (100103, 256, 3)
+creating geometry
+逐髮絲上色完成：100103 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.102  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0039/mask_only/blender_scene.blend"
+00:00.687  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:01.889  cycles           | ERROR Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow)
+00:01.889  cycles           | ERROR Refer to the Cycles GPU rendering documentation for possible solutions:
+                            | https://docs.blender.org/manual/en/latest/render/cycles/gpu_rendering.html
+                            | 
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+Traceback (most recent call last):
+  File "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/experiments/gpu_render.py", line 126, in <module>
+    bpy.ops.render.render(write_still=True)
+  File "/home/kyh/blender/5.0/scripts/modules/bpy/ops.py", line 109, in __call__
+    ret = _op_call(self.idname_py(), kw)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Error: Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow)
+Error: Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow)
+
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+Error: Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow)
+Error: Misaligned address in CUDA queue copy_from_device (integrator_intersect_shadow)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.940  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.941  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.941  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.941  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.941  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.941  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.941  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Misaligned address in cuMemFree_v2((CUdeviceptr)device_pointer) (intern/cycles/device/cuda/device_impl.cpp:533)
+00:01.942  cycles           | ERROR Error synching on OptixPipeline event (CUDA error string: misaligned address, CUDA error code: 716)
+00:01.948  cycles           | ERROR Error destroying resource event. (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Failed to destroy launch resources (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Error destroying resource event. (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Failed to destroy launch resources (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Error destroying resource event. (CUDA error string: misaligned address, CUDA error code: 716)
+                            | Failed to destroy launch resources (CUDA error string: misaligned address, CUDA error code: 716)
+00:01.948  cycles           | ERROR Misaligned address in cuModuleUnload(cuModule) (intern/cycles/device/cuda/device_impl.cpp:138)
+
+Blender quit
+  case_0039/tsai_joint_fm: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.139  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (99853, 256, 3)
+creating geometry
+逐髮絲上色完成：99853 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.102  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0039/tsai_joint_fm/blender_scene.blend"
+00:00.694  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.418  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0039/tsai_joint_fm/render/gpu_render_ewn6hdy8/left.png'
+00:07.292  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0039/tsai_joint_fm/render/gpu_render_ewn6hdy8/front.png'
+00:09.889  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0039/tsai_joint_fm/render/gpu_render_ewn6hdy8/right.png'
+00:12.638  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0039/tsai_joint_fm/render/gpu_render_ewn6hdy8/back.png'
+00:14.833  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0039/tsai_joint_fm/render/gpu_render_ewn6hdy8/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0039/tsai_joint_fm/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0049/mask_only: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.147  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (101208, 256, 3)
+creating geometry
+逐髮絲上色完成：101208 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.102  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/mask_only/blender_scene.blend"
+00:00.710  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.821  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/mask_only/render/gpu_render_tzyxob1j/left.png'
+00:08.284  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/mask_only/render/gpu_render_tzyxob1j/front.png'
+00:11.241  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/mask_only/render/gpu_render_tzyxob1j/right.png'
+00:14.528  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/mask_only/render/gpu_render_tzyxob1j/back.png'
+00:16.907  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/mask_only/render/gpu_render_tzyxob1j/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/mask_only/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+  case_0049/tsai_joint_fm: rendering
+--- 4. Create blender file ---
+Import npz file into blender
+00:01.145  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/assets/blender_vis_base_v26_with_shrinkwrap_full_base.blend"
+/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/npz2blender_kung.py:193: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+main
+strands_subsample 1.0
+vertex_subsample 1.0
+alembic_resolution 3
+shrinkwrap False
+final points (100738, 256, 3)
+creating geometry
+逐髮絲上色完成：100738 根髮絲。
+已使用 npz 內附的 strand_colors 完成逐髮絲上色。
+材質節點串接完成：hair_01 已連結屬性 'VertexColor'
+saving .blend
+Info: Saved as "blender_scene.blend"
+finished saving .blend
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+Blender import script executed successfully.
+00:00.104  blend            | Read blend: "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/tsai_joint_fm/blender_scene.blend"
+00:00.696  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:04.808  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/tsai_joint_fm/render/gpu_render_v9r8pd2a/left.png'
+00:08.270  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/tsai_joint_fm/render/gpu_render_v9r8pd2a/front.png'
+00:11.356  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/tsai_joint_fm/render/gpu_render_v9r8pd2a/right.png'
+00:14.760  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/tsai_joint_fm/render/gpu_render_v9r8pd2a/back.png'
+00:17.160  render           | Saved: '/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/tsai_joint_fm/render/gpu_render_v9r8pd2a/up.png'
+OPTIX NVIDIA GeForce RTX 4060 Ti
+CPU AMD Ryzen 5 9600X 6-Core Processor
+CUDA NVIDIA GeForce RTX 4060 Ti
+Cycles device: GPU
+Samples: 64
+wrote render to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/tsai_joint_fm/render/render_multiview.png
+Blender 5.0.0 (hash a37564c4df7a built 2025-11-18 10:44:21)
+
+Blender quit
+flux / vector field analysis of ['case_0006', 'case_0009', 'case_0011', 'case_0013', 'case_0015', 'case_0023', 'case_0029', 'case_0033', 'case_0034', 'case_0039', 'case_0049']
+  case_0006: flux / vector field analysis (mask_only -> tsai_joint_fm)
+--- debug analysis: flux / vector field / grid score on a 32x32 scalp grid ---
+    base: 100696 strands, mean |flux| = 0.0609, edge cells = 65
+    donor: 82119 strands, mean |flux| = 0.0812, edge cells = 158
+    fused_before: 92545 strands, mean |flux| = 0.0762, edge cells = 106
+    fused_after: 91591 strands, mean |flux| = 0.0737, edge cells = 115
+--- debug analysis written to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0006/analysis (mean hull score before / after FM: 0.1122 / 0.0178) ---
+  case_0009: flux / vector field analysis (mask_only -> tsai_joint_fm)
+--- debug analysis: flux / vector field / grid score on a 32x32 scalp grid ---
+    base: 99109 strands, mean |flux| = 0.0550, edge cells = 70
+    donor: 94464 strands, mean |flux| = 0.0647, edge cells = 73
+    fused_before: 94310 strands, mean |flux| = 0.0687, edge cells = 64
+    fused_after: 93470 strands, mean |flux| = 0.0694, edge cells = 75
+--- debug analysis written to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0009/analysis (mean hull score before / after FM: 0.0747 / 0.0592) ---
+  case_0011: flux / vector field analysis (mask_only -> tsai_joint_fm)
+--- debug analysis: flux / vector field / grid score on a 32x32 scalp grid ---
+    base: 97929 strands, mean |flux| = 0.0665, edge cells = 38
+    donor: 94455 strands, mean |flux| = 0.0354, edge cells = 21
+    fused_before: 97585 strands, mean |flux| = 0.0494, edge cells = 48
+    fused_after: 96702 strands, mean |flux| = 0.0344, edge cells = 37
+--- debug analysis written to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0011/analysis (mean hull score before / after FM: 0.2573 / 0.0121) ---
+  case_0013: flux / vector field analysis (mask_only -> tsai_joint_fm)
+--- debug analysis: flux / vector field / grid score on a 32x32 scalp grid ---
+    base: 94438 strands, mean |flux| = 0.0943, edge cells = 143
+    donor: 83342 strands, mean |flux| = 0.0519, edge cells = 78
+    fused_before: 86979 strands, mean |flux| = 0.0886, edge cells = 156
+    fused_after: 86946 strands, mean |flux| = 0.0885, edge cells = 154
+--- debug analysis written to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0013/analysis (mean hull score before / after FM: 0.0308 / 0.0304) ---
+  case_0015: flux / vector field analysis (mask_only -> tsai_joint_fm)
+--- debug analysis: flux / vector field / grid score on a 32x32 scalp grid ---
+    base: 94942 strands, mean |flux| = 0.0744, edge cells = 110
+    donor: 97595 strands, mean |flux| = 0.0623, edge cells = 46
+    fused_before: 98543 strands, mean |flux| = 0.0744, edge cells = 117
+    fused_after: 96463 strands, mean |flux| = 0.0681, edge cells = 68
+--- debug analysis written to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0015/analysis (mean hull score before / after FM: 0.2457 / 0.0841) ---
+  case_0023: flux / vector field analysis (mask_only -> tsai_joint_fm)
+--- debug analysis: flux / vector field / grid score on a 32x32 scalp grid ---
+    base: 99453 strands, mean |flux| = 0.0475, edge cells = 55
+    donor: 94464 strands, mean |flux| = 0.0647, edge cells = 73
+    fused_before: 97361 strands, mean |flux| = 0.0534, edge cells = 65
+    fused_after: 94545 strands, mean |flux| = 0.0630, edge cells = 103
+--- debug analysis written to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0023/analysis (mean hull score before / after FM: 0.3540 / 0.0815) ---
+  case_0029: flux / vector field analysis (mask_only -> tsai_joint_fm)
+--- debug analysis: flux / vector field / grid score on a 32x32 scalp grid ---
+    base: 93933 strands, mean |flux| = 0.0437, edge cells = 31
+    donor: 100569 strands, mean |flux| = 0.0481, edge cells = 31
+    fused_before: 93933 strands, mean |flux| = 0.0417, edge cells = 34
+    fused_after: 95473 strands, mean |flux| = 0.0489, edge cells = 46
+--- debug analysis written to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0029/analysis (mean hull score before / after FM: 0.1169 / 0.1749) ---
+  case_0033: flux / vector field analysis (mask_only -> tsai_joint_fm)
+--- debug analysis: flux / vector field / grid score on a 32x32 scalp grid ---
+    base: 94438 strands, mean |flux| = 0.0943, edge cells = 143
+    donor: 100518 strands, mean |flux| = 0.0496, edge cells = 31
+    fused_before: 94237 strands, mean |flux| = 0.0705, edge cells = 65
+    fused_after: 94164 strands, mean |flux| = 0.0698, edge cells = 60
+--- debug analysis written to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0033/analysis (mean hull score before / after FM: 0.0211 / 0.0087) ---
+  case_0034: flux / vector field analysis (mask_only -> tsai_joint_fm)
+--- debug analysis: flux / vector field / grid score on a 32x32 scalp grid ---
+    base: 95882 strands, mean |flux| = 0.0537, edge cells = 45
+    donor: 99453 strands, mean |flux| = 0.0475, edge cells = 55
+    fused_before: 95883 strands, mean |flux| = 0.0571, edge cells = 37
+    fused_after: 95778 strands, mean |flux| = 0.0587, edge cells = 54
+--- debug analysis written to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0034/analysis (mean hull score before / after FM: 0.2052 / 0.0151) ---
+  case_0039: flux / vector field analysis (mask_only -> tsai_joint_fm)
+--- debug analysis: flux / vector field / grid score on a 32x32 scalp grid ---
+    base: 100161 strands, mean |flux| = 0.0603, edge cells = 37
+    donor: 93931 strands, mean |flux| = 0.0574, edge cells = 53
+    fused_before: 100103 strands, mean |flux| = 0.0554, edge cells = 35
+    fused_after: 99853 strands, mean |flux| = 0.0599, edge cells = 29
+--- debug analysis written to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0039/analysis (mean hull score before / after FM: 0.1955 / 0.1155) ---
+  case_0049: flux / vector field analysis (mask_only -> tsai_joint_fm)
+--- debug analysis: flux / vector field / grid score on a 32x32 scalp grid ---
+    base: 100728 strands, mean |flux| = 0.0588, edge cells = 43
+    donor: 100372 strands, mean |flux| = 0.0709, edge cells = 95
+    fused_before: 101208 strands, mean |flux| = 0.0594, edge cells = 40
+    fused_after: 100738 strands, mean |flux| = 0.0589, edge cells = 37
+--- debug analysis written to /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/cases/case_0049/analysis (mean hull score before / after FM: 0.1322 / 0.0966) ---
+# Benchmark summary: /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run
+
+Length classes (median strand length): short [0, 5) cm, mid [5, 15) cm, long [15, inf) cm
+Degenerate = min_head_retention < 0.1 (a head practically vanished); counted in the averages, picked as lowest / highest only when a group has nothing else.
+
+## All cases (50 cases)
+
+| method | ok | failed | degenerate | grid_score.mean_all | grid_score.mixed_mean | grid_score.frac_above | crossings.pairs | crossings.conflict_cells | coverage.bald_frac | flux.abs_mean | strands.donor_share | strands.changed_frac | min_head_retention | method_seconds |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| mask_only | 50 | 0 | 0 | 0.1695 ± 0.098 | 0.7067 ± 0.19 | 0.2782 ± 0.14 | 2.327e+08 ± 2.9e+08 | 224.3 ± 1.1e+02 | 0.02646 ± 0.026 | 0.0876 ± 0.018 | 0.4307 ± 0.22 | 0 ± 0 | 1 ± 0 | 0 ± 0 |
+| tsai_joint_fm | 44 | 6 | 3 case_0007 case_0008 case_0036 | 0.04791 ± 0.04 | 0.3769 ± 0.14 | 0.1114 ± 0.078 | 9.098e+06 ± 1.1e+07 | 113 ± 74 | 0.02855 ± 0.024 | 0.08844 ± 0.019 | 0.3891 ± 0.27 | 0.1511 ± 0.13 | 0.7049 ± 0.32 | 318 ± 25 |
+
+Paired vs `mask_only` (same cases; win = better than the reference):
+
+| method | metric | n | mean delta | mean rel. delta | win rate |
+|---|---|---|---|---|---|
+| tsai_joint_fm | grid_score.mean_all | 44 | -0.1112 | -56.4% | 91% |
+| tsai_joint_fm | grid_score.mixed_mean | 44 | -0.3115 | -40.6% | 98% |
+| tsai_joint_fm | grid_score.frac_above | 44 | -0.1525 | -46.9% | 86% |
+| tsai_joint_fm | crossings.pairs | 44 | -1.41e+08 | -74.1% | 98% |
+| tsai_joint_fm | crossings.conflict_cells | 44 | -101.1 | -38.0% | 77% |
+| tsai_joint_fm | coverage.bald_frac | 44 | 0.001718 | +39.9% | 5% |
+| tsai_joint_fm | flux.abs_mean | 44 | -0.0009617 | -1.1% | - |
+| tsai_joint_fm | strands.donor_share | 44 | -0.03348 | -9.4% | - |
+| tsai_joint_fm | strands.changed_frac | 44 | 0.1511 | - | - |
+| tsai_joint_fm | min_head_retention | 44 | -0.2951 | -29.5% | - |
+| tsai_joint_fm | method_seconds | 44 | 318 | - | 0% |
+
+lowest grid_score.mean_all: case_0033 (base_67_idx_36358+base_35_idx_35904, short+long, front_back) mask_only 0.0211, tsai_joint_fm 0.0087
+
+highest grid_score.mean_all: case_0029 (base_1_idx_84449+base_41_idx_61194, long+long, polygon) mask_only 0.1169, tsai_joint_fm 0.1749
+
+## short+short (1 cases)
+
+| method | ok | failed | degenerate | grid_score.mean_all | grid_score.mixed_mean | grid_score.frac_above | crossings.pairs | crossings.conflict_cells | coverage.bald_frac | flux.abs_mean | strands.donor_share | strands.changed_frac | min_head_retention | method_seconds |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| mask_only | 1 | 0 | 0 | 0.0308 ± 0 | 0.3122 ± 0 | 0.09726 ± 0 | 2.601e+06 ± 0 | 101 ± 0 | 0.05547 ± 0 | 0.1267 ± 0 | 0.3377 ± 0 | 0 ± 0 | 1 ± 0 | 0 ± 0 |
+| tsai_joint_fm | 1 | 0 | 0 | 0.03043 ± 0 | 0.3086 ± 0 | 0.09726 ± 0 | 2.354e+06 ± 0 | 101 ± 0 | 0.05547 ± 0 | 0.1266 ± 0 | 0.3367 ± 0 | 0.001119 ± 0 | 0.9965 ± 0 | 273.8 ± 0 |
+
+Paired vs `mask_only` (same cases; win = better than the reference):
+
+| method | metric | n | mean delta | mean rel. delta | win rate |
+|---|---|---|---|---|---|
+| tsai_joint_fm | grid_score.mean_all | 1 | -0.0003613 | -1.2% | 100% |
+| tsai_joint_fm | grid_score.mixed_mean | 1 | -0.003663 | -1.2% | 100% |
+| tsai_joint_fm | grid_score.frac_above | 1 | 0 | +0.0% | 0% |
+| tsai_joint_fm | crossings.pairs | 1 | -2.476e+05 | -9.5% | 100% |
+| tsai_joint_fm | crossings.conflict_cells | 1 | 0 | +0.0% | 0% |
+| tsai_joint_fm | coverage.bald_frac | 1 | 0 | +0.0% | 0% |
+| tsai_joint_fm | flux.abs_mean | 1 | -0.0001208 | -0.1% | - |
+| tsai_joint_fm | strands.donor_share | 1 | -0.001068 | -0.3% | - |
+| tsai_joint_fm | strands.changed_frac | 1 | 0.001119 | - | - |
+| tsai_joint_fm | min_head_retention | 1 | -0.0035 | -0.3% | - |
+| tsai_joint_fm | method_seconds | 1 | 273.8 | - | 0% |
+
+lowest grid_score.mean_all: case_0013 (base_67_idx_36358+base_72_idx_43336, short+short, polygon) mask_only 0.0308, tsai_joint_fm 0.0304
+
+highest grid_score.mean_all: case_0013 (base_67_idx_36358+base_72_idx_43336, short+short, polygon) mask_only 0.0308, tsai_joint_fm 0.0304
+
+## short+mid (3 cases)
+
+| method | ok | failed | degenerate | grid_score.mean_all | grid_score.mixed_mean | grid_score.frac_above | crossings.pairs | crossings.conflict_cells | coverage.bald_frac | flux.abs_mean | strands.donor_share | strands.changed_frac | min_head_retention | method_seconds |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| mask_only | 3 | 0 | 0 | 0.1793 ± 0.054 | 0.7583 ± 0.058 | 0.2932 ± 0.082 | 1.255e+08 ± 9.8e+07 | 238.7 ± 60 | 0.01361 ± 0.017 | 0.09618 ± 0.018 | 0.3376 ± 0.11 | 0 ± 0 | 1 ± 0 | 0 ± 0 |
+| tsai_joint_fm | 3 | 0 | 0 | 0.05632 ± 0.028 | 0.4175 ± 0.084 | 0.1342 ± 0.056 | 1.042e+07 ± 8e+06 | 128.3 ± 49 | 0.01519 ± 0.016 | 0.08853 ± 0.021 | 0.2498 ± 0.13 | 0.2156 ± 0.14 | 0.69 ± 0.33 | 296.8 ± 12 |
+
+Paired vs `mask_only` (same cases; win = better than the reference):
+
+| method | metric | n | mean delta | mean rel. delta | win rate |
+|---|---|---|---|---|---|
+| tsai_joint_fm | grid_score.mean_all | 3 | -0.123 | -70.9% | 100% |
+| tsai_joint_fm | grid_score.mixed_mean | 3 | -0.3408 | -45.5% | 100% |
+| tsai_joint_fm | grid_score.frac_above | 3 | -0.1589 | -56.2% | 100% |
+| tsai_joint_fm | crossings.pairs | 3 | -1.151e+08 | -89.2% | 100% |
+| tsai_joint_fm | crossings.conflict_cells | 3 | -110.3 | -48.0% | 100% |
+| tsai_joint_fm | coverage.bald_frac | 3 | 0.001576 | +25.0% | 0% |
+| tsai_joint_fm | flux.abs_mean | 3 | -0.007652 | -8.9% | - |
+| tsai_joint_fm | strands.donor_share | 3 | -0.08771 | -15.8% | - |
+| tsai_joint_fm | strands.changed_frac | 3 | 0.2156 | - | - |
+| tsai_joint_fm | min_head_retention | 3 | -0.31 | -31.0% | - |
+| tsai_joint_fm | method_seconds | 3 | 296.8 | - | 0% |
+
+lowest grid_score.mean_all: case_0006 (base_69_idx_41742+base_75_idx_10886, mid+short, polygon) mask_only 0.1122, tsai_joint_fm 0.0178
+
+highest grid_score.mean_all: case_0015 (base_75_idx_17704+base_42_idx_67191, short+mid, half_plane) mask_only 0.2457, tsai_joint_fm 0.0841
+
+## short+long (22 cases)
+
+| method | ok | failed | degenerate | grid_score.mean_all | grid_score.mixed_mean | grid_score.frac_above | crossings.pairs | crossings.conflict_cells | coverage.bald_frac | flux.abs_mean | strands.donor_share | strands.changed_frac | min_head_retention | method_seconds |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| mask_only | 22 | 0 | 0 | 0.13 ± 0.11 | 0.6094 ± 0.22 | 0.2226 ± 0.16 | 7.152e+07 ± 7.3e+07 | 184 ± 1.2e+02 | 0.02833 ± 0.024 | 0.09381 ± 0.018 | 0.3883 ± 0.21 | 0 ± 0 | 1 ± 0 | 0 ± 0 |
+| tsai_joint_fm | 22 | 0 | 0 | 0.03816 ± 0.027 | 0.375 ± 0.11 | 0.09191 ± 0.051 | 4.859e+06 ± 3.3e+06 | 96.09 ± 51 | 0.03068 ± 0.025 | 0.09452 ± 0.019 | 0.3671 ± 0.22 | 0.07798 ± 0.077 | 0.8512 ± 0.21 | 303.9 ± 16 |
+
+Paired vs `mask_only` (same cases; win = better than the reference):
+
+| method | metric | n | mean delta | mean rel. delta | win rate |
+|---|---|---|---|---|---|
+| tsai_joint_fm | grid_score.mean_all | 22 | -0.09184 | -48.8% | 86% |
+| tsai_joint_fm | grid_score.mixed_mean | 22 | -0.2344 | -32.7% | 95% |
+| tsai_joint_fm | grid_score.frac_above | 22 | -0.1307 | -40.5% | 82% |
+| tsai_joint_fm | crossings.pairs | 22 | -6.666e+07 | -60.7% | 95% |
+| tsai_joint_fm | crossings.conflict_cells | 22 | -87.91 | -31.8% | 68% |
+| tsai_joint_fm | coverage.bald_frac | 22 | 0.002347 | +15.1% | 0% |
+| tsai_joint_fm | flux.abs_mean | 22 | 0.0007081 | +0.7% | - |
+| tsai_joint_fm | strands.donor_share | 22 | -0.02123 | -6.3% | - |
+| tsai_joint_fm | strands.changed_frac | 22 | 0.07798 | - | - |
+| tsai_joint_fm | min_head_retention | 22 | -0.1488 | -14.9% | - |
+| tsai_joint_fm | method_seconds | 22 | 303.9 | - | 0% |
+
+lowest grid_score.mean_all: case_0033 (base_67_idx_36358+base_35_idx_35904, short+long, front_back) mask_only 0.0211, tsai_joint_fm 0.0087
+
+highest grid_score.mean_all: case_0049 (base_6_idx_9475+base_68_idx_36392, long+short, polygon) mask_only 0.1322, tsai_joint_fm 0.0966
+
+## mid+mid (3 cases)
+
+| method | ok | failed | degenerate | grid_score.mean_all | grid_score.mixed_mean | grid_score.frac_above | crossings.pairs | crossings.conflict_cells | coverage.bald_frac | flux.abs_mean | strands.donor_share | strands.changed_frac | min_head_retention | method_seconds |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| mask_only | 3 | 0 | 0 | 0.2423 ± 0.079 | 0.8065 ± 0.047 | 0.3845 ± 0.12 | 1.519e+08 ± 7.2e+07 | 304.3 ± 84 | 0.0118 ± 0.0077 | 0.07892 ± 0.0033 | 0.4349 ± 0.23 | 0 ± 0 | 1 ± 0 | 0 ± 0 |
+| tsai_joint_fm | 3 | 0 | 1 case_0008 | 0.08224 ± 0.027 | 0.4587 ± 0.12 | 0.1808 ± 0.04 | 1.736e+07 ± 1e+07 | 180.7 ± 22 | 0.01689 ± 0.013 | 0.08056 ± 0.014 | 0.5177 ± 0.34 | 0.2175 ± 0.041 | 0.4752 ± 0.33 | 322.3 ± 12 |
+
+Paired vs `mask_only` (same cases; win = better than the reference):
+
+| method | metric | n | mean delta | mean rel. delta | win rate |
+|---|---|---|---|---|---|
+| tsai_joint_fm | grid_score.mean_all | 3 | -0.1601 | -63.3% | 100% |
+| tsai_joint_fm | grid_score.mixed_mean | 3 | -0.3479 | -42.2% | 100% |
+| tsai_joint_fm | grid_score.frac_above | 3 | -0.2037 | -50.5% | 100% |
+| tsai_joint_fm | crossings.pairs | 3 | -1.346e+08 | -80.1% | 100% |
+| tsai_joint_fm | crossings.conflict_cells | 3 | -123.7 | -38.0% | 100% |
+| tsai_joint_fm | coverage.bald_frac | 3 | 0.005084 | +84.9% | 33% |
+| tsai_joint_fm | flux.abs_mean | 3 | 0.001642 | +1.9% | - |
+| tsai_joint_fm | strands.donor_share | 3 | 0.08274 | +17.6% | - |
+| tsai_joint_fm | strands.changed_frac | 3 | 0.2175 | - | - |
+| tsai_joint_fm | min_head_retention | 3 | -0.5248 | -52.5% | - |
+| tsai_joint_fm | method_seconds | 3 | 322.3 | - | 0% |
+
+lowest grid_score.mean_all: case_0023 (base_33_idx_76353+base_65_idx_52011, mid+mid, polygon) mask_only 0.3540, tsai_joint_fm 0.0815
+
+highest grid_score.mean_all: case_0039 (base_70_idx_10270+base_70_idx_91926, mid+mid, polygon) mask_only 0.1955, tsai_joint_fm 0.1155
+
+## mid+long (10 cases)
+
+| method | ok | failed | degenerate | grid_score.mean_all | grid_score.mixed_mean | grid_score.frac_above | crossings.pairs | crossings.conflict_cells | coverage.bald_frac | flux.abs_mean | strands.donor_share | strands.changed_frac | min_head_retention | method_seconds |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| mask_only | 10 | 0 | 0 | 0.1818 ± 0.065 | 0.7929 ± 0.067 | 0.2922 ± 0.098 | 3.16e+08 ± 1.9e+08 | 232.5 ± 78 | 0.03451 ± 0.028 | 0.08531 ± 0.013 | 0.5105 ± 0.24 | 0 ± 0 | 1 ± 0 | 0 ± 0 |
+| tsai_joint_fm | 9 | 1 | 2 case_0007 case_0036 | 0.0279 ± 0.02 | 0.307 ± 0.19 | 0.06636 ± 0.041 | 6.617e+06 ± 5.7e+06 | 69.11 ± 40 | 0.03456 ± 0.028 | 0.08263 ± 0.012 | 0.4792 ± 0.33 | 0.1965 ± 0.064 | 0.5237 ± 0.36 | 343 ± 15 |
+
+Paired vs `mask_only` (same cases; win = better than the reference):
+
+| method | metric | n | mean delta | mean rel. delta | win rate |
+|---|---|---|---|---|---|
+| tsai_joint_fm | grid_score.mean_all | 9 | -0.1442 | -80.1% | 100% |
+| tsai_joint_fm | grid_score.mixed_mean | 9 | -0.4854 | -60.3% | 100% |
+| tsai_joint_fm | grid_score.frac_above | 9 | -0.2107 | -72.8% | 100% |
+| tsai_joint_fm | crossings.pairs | 9 | -2.634e+08 | -95.6% | 100% |
+| tsai_joint_fm | crossings.conflict_cells | 9 | -150.8 | -65.6% | 100% |
+| tsai_joint_fm | coverage.bald_frac | 9 | 0.001565 | +60.0% | 0% |
+| tsai_joint_fm | flux.abs_mean | 9 | -0.0009806 | -0.8% | - |
+| tsai_joint_fm | strands.donor_share | 9 | -0.03433 | -12.7% | - |
+| tsai_joint_fm | strands.changed_frac | 9 | 0.1965 | - | - |
+| tsai_joint_fm | min_head_retention | 9 | -0.4763 | -47.6% | - |
+| tsai_joint_fm | method_seconds | 9 | 343 | - | 0% |
+
+lowest grid_score.mean_all: case_0034 (base_15_idx_50537+base_33_idx_76353, long+mid, half_plane) mask_only 0.2052, tsai_joint_fm 0.0151
+
+highest grid_score.mean_all: case_0009 (base_26_idx_33729+base_65_idx_52011, long+mid, front_back) mask_only 0.0747, tsai_joint_fm 0.0592
+
+## long+long (11 cases)
+
+| method | ok | failed | degenerate | grid_score.mean_all | grid_score.mixed_mean | grid_score.frac_above | crossings.pairs | crossings.conflict_cells | coverage.bald_frac | flux.abs_mean | strands.donor_share | strands.changed_frac | min_head_retention | method_seconds |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| mask_only | 11 | 0 | 0 | 0.2275 ± 0.069 | 0.8174 ± 0.067 | 0.3601 ± 0.1 | 5.516e+08 ± 4.2e+08 | 283.1 ± 79 | 0.02026 ± 0.026 | 0.07372 ± 0.012 | 0.4755 ± 0.23 | 0 ± 0 | 1 ± 0 | 0 ± 0 |
+| tsai_joint_fm | 6 | 5 | 0 | 0.09519 ± 0.061 | 0.4391 ± 0.11 | 0.2068 ± 0.12 | 2.469e+07 ± 2e+07 | 201.7 ± 1.1e+02 | 0.01973 ± 0.011 | 0.07241 ± 0.012 | 0.3489 ± 0.29 | 0.3108 ± 0.15 | 0.5141 ± 0.28 | 348.3 ± 9.7 |
+
+Paired vs `mask_only` (same cases; win = better than the reference):
+
+| method | metric | n | mean delta | mean rel. delta | win rate |
+|---|---|---|---|---|---|
+| tsai_joint_fm | grid_score.mean_all | 6 | -0.1211 | -47.6% | 83% |
+| tsai_joint_fm | grid_score.mixed_mean | 6 | -0.3515 | -43.4% | 100% |
+| tsai_joint_fm | grid_score.frac_above | 6 | -0.1416 | -33.1% | 83% |
+| tsai_joint_fm | crossings.pairs | 6 | -2.697e+08 | -91.4% | 100% |
+| tsai_joint_fm | crossings.conflict_cells | 6 | -75.67 | -20.5% | 67% |
+| tsai_joint_fm | coverage.bald_frac | 6 | -0.001684 | +99.9% | 17% |
+| tsai_joint_fm | flux.abs_mean | 6 | -0.005153 | -5.9% | - |
+| tsai_joint_fm | strands.donor_share | 6 | -0.1135 | -27.8% | - |
+| tsai_joint_fm | strands.changed_frac | 6 | 0.3108 | - | - |
+| tsai_joint_fm | min_head_retention | 6 | -0.4859 | -48.6% | - |
+| tsai_joint_fm | method_seconds | 6 | 348.3 | - | 0% |
+
+lowest grid_score.mean_all: case_0011 (base_30_idx_77769+base_41_idx_9945, long+long, half_plane) mask_only 0.2573, tsai_joint_fm 0.0121
+
+highest grid_score.mean_all: case_0029 (base_1_idx_84449+base_41_idx_61194, long+long, polygon) mask_only 0.1169, tsai_joint_fm 0.1749
+report: /home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/benchmark/data/fusion_m2_n50_s0/runs/run/report.html

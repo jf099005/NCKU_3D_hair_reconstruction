@@ -66,7 +66,7 @@ echo -e "\nDownloading files..."
 # done
 
 #HAIRSTYLES
-for i in $(seq 6 20); do
+for i in $(seq 21 100); do
     filename="difflocks_dataset_hairstyles_chunk_${i}.7z"
      # Run wget and capture status
     wget --post-data "username=$username&password=$password" \

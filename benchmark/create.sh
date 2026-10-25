@@ -1,0 +1,1 @@
+bash bench.sh build 50 --seed 0 --n_short 15 --n_mid 25 --n_long 25 --out data/m2_n50_balwhat 

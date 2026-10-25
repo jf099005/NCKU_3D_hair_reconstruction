@@ -1,0 +1,17 @@
+{
+  "method": "kung",
+  "script": "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/img2hair_kung_mul2_tsai_color.py",
+  "input_config": "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/experiments/fusing_config_new2.json",
+  "input_file_paths": [
+    "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/experiments/samples/new_samples/Lee.png",
+    "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/experiments/samples/new_samples/Tsai.png"
+  ],
+  "mask_file_paths": [
+    "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/experiments/samples/mask/M6/M62.png"
+  ],
+  "seed": 5,
+  "align_hairline": true,
+  "cwd": "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/experiments",
+  "elapsed_s": 129,
+  "finished": "2026-10-01 15:34"
+}

@@ -1,0 +1,91 @@
+{
+  "grid_n": 32,
+  "joint_fm_kwargs": {
+    "mode": "clique",
+    "max_passes": 3,
+    "lam": 100,
+    "node_unit": "cell",
+    "balance_tol": null,
+    "movable_only": false,
+    "overlap": "projection"
+  },
+  "objectives": {
+    "before": [
+      22042,
+      196627200
+    ],
+    "after": [
+      2864,
+      7949101
+    ],
+    "projection_before": [
+      29724604,
+      58040820
+    ],
+    "projection_after": [
+      843980,
+      1727480
+    ]
+  },
+  "kept": {
+    "before": {
+      "base": 48269,
+      "donor": 47571
+    },
+    "after": {
+      "base": 61237,
+      "donor": 34433
+    }
+  },
+  "n_strands": {
+    "base": 96016,
+    "donor": 95827
+  },
+  "source_colors": {
+    "base": "#2a78d6",
+    "donor": "#eb6834",
+    "excluded": "#a3a29c"
+  },
+  "heads": {
+    "base": {
+      "n_strands": 96016,
+      "mean_abs_flux": 0.042225562036037445,
+      "n_edge_cells": 33,
+      "n_valid_rc": 730
+    },
+    "donor": {
+      "n_strands": 95827,
+      "mean_abs_flux": 0.036244094371795654,
+      "n_edge_cells": 46,
+      "n_valid_rc": 730
+    },
+    "fused_before": {
+      "n_strands": 95840,
+      "mean_abs_flux": 0.03888406231999397,
+      "n_edge_cells": 49,
+      "n_valid_rc": 730,
+      "mean_abs_flux_base": 0.020303472876548767,
+      "mean_abs_flux_donor": 0.03996802866458893
+    },
+    "fused_after": {
+      "n_strands": 95670,
+      "mean_abs_flux": 0.03995031863451004,
+      "n_edge_cells": 34,
+      "n_valid_rc": 730,
+      "mean_abs_flux_base": 0.02245684713125229,
+      "mean_abs_flux_donor": 0.015890756621956825
+    }
+  },
+  "timings": {
+    "grid": 12.08,
+    "base/flux_and_vector_field": 15.53,
+    "donor/flux_and_vector_field": 14.65,
+    "fused_before/flux_and_vector_field": 20.92,
+    "fused_after/flux_and_vector_field": 21.13,
+    "fused/hull_score": 9.17
+  },
+  "mean_hull_score": {
+    "before": 0.33625489473342896,
+    "after": 0.04190701246261597
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "method": "tsai",
+  "script": "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/inference/img2hair_tsai_1.py",
+  "input_config": "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/experiments/fusing_config_tsai_hathaway.json",
+  "input_file_paths": [
+    "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/experiments/samples/hair/hathaway_1.jpg",
+    "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/experiments/samples/new_samples/Tsai.png"
+  ],
+  "mask_file_paths": [
+    "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/experiments/samples/mask/M6/M65.png"
+  ],
+  "seed": 5,
+  "align_hairline": true,
+  "cwd": "/home/kyh/Desktop/P76154862/NCKU_3D_hair_reconstruction/experiments",
+  "elapsed_s": 658,
+  "finished": "2026-10-01 20:47"
+}

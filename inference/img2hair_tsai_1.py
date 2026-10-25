@@ -436,6 +436,7 @@ class DiffLocksInference():
         scalp_texture_orig=scalp_texture
         if out_path:
             np.savez(os.path.join(out_path, "scalp_texture.npz"), scalp_texture=scalp_texture_orig.cpu().numpy())
+            save_grayscale_mask(self.density01(scalp_texture_orig), out_path, "density")
         print("scalp_texture", scalp_texture.shape)
 
         #save also img
@@ -443,6 +444,12 @@ class DiffLocksInference():
             torchvision.utils.save_image(rgb_img, os.path.join(out_path, "rgb.png"))
 
         return scalp_texture_orig, patch_embeddings_reshaped
+
+    def density01(self, scalp_texture_orig):
+        """density channel of a raw scalp texture mapped to [0, 1] (same mapping as the decoding,
+        without its <0.02 cutoff), for the density.png / density_aligned.png outputs."""
+        density_map = scalp_texture_orig[:,-1:,:,:]*(0.5/self.model_config["sigma_data"]) + 0.5
+        return density_map.clamp(0, 1)
 
     def scalp_texture2hair(self, scalp_texture_orig, patch_embeddings_reshaped, out_path=None):
         """decode a raw scalp texture (as returned by rgb2scalp_texture, possibly edited, e.g.
@@ -860,6 +867,15 @@ def ensure_aligned_strands_npz(difflocks, base_img_path, donor_img_path, out_pat
         dinov2_list.append(out[1])
 
     # --- 2. align hairlines (same function and parameters as img2hair_kung_mul2.py) ---
+    # per-head shift = deepest gap column, recomputed with align_hairline_by_shifting's own formula
+    # (it only prints it), for alignment.json / the report
+    D_union = torch.stack([T[:, -1:] for T in T_list]).max(dim=0)[0]
+    align_info = {}
+    for T, tag in zip(T_list, (base_tag, donor_tag)):
+        gap = ((D_union > 0.01).float() - (T[:, -1:] > 0.01).float()).clamp(0, 1)
+        align_info[tag] = dict(dynamic_shift=max(0, min(int(gap.sum(dim=2).max().item()), 30)),
+                               gap_texels=int(gap.sum().item()),
+                               hair_texels_raw=int((T[:, -1:] > 0.01).sum().item()))
     T_list = align_hairline_by_shifting(
         T_list,
         aligned_root,
@@ -868,9 +884,16 @@ def ensure_aligned_strands_npz(difflocks, base_img_path, donor_img_path, out_pat
         noise_std=0.08
     )
 
+    for T, tag in zip(T_list, (base_tag, donor_tag)):
+        align_info[tag]["hair_texels_aligned"] = int((T[:, -1:] > 0.01).sum().item())
+    with open(os.path.join(aligned_root, "alignment.json"), "w", encoding="utf-8") as f:
+        json.dump(dict(params=dict(shift_pixels=20, soften_sigma=3.0, noise_std=0.08), heads=align_info),
+                  f, indent=2)
+
     # --- 3. decode each aligned texture to its own strands ---
     for T_aligned, dinov2_tokens, d in zip(T_list, dinov2_list, dirs):
         np.savez(os.path.join(d, "scalp_texture_aligned.npz"), scalp_texture=T_aligned.cpu().numpy())
+        save_grayscale_mask(difflocks.density01(T_aligned), d, "density_aligned")
         print(f"--- individual_strands_aligned: decoding -> {d} ---")
         difflocks.scalp_texture2hair(T_aligned, dinov2_tokens, d)
     return tuple(npz_paths)
@@ -969,27 +992,82 @@ ANALYSIS_GRID_N = 32
 ANALYSIS_CANNY_LOW, ANALYSIS_CANNY_HIGH = 40, 120
 
 
-def debug_field_analysis(base, donor, result, out_path, n=ANALYSIS_GRID_N):
+# analysis figures color every strand-derived mark by the strand's SOURCE (categorical slots 1 / 2 of a
+# CVD-validated palette; the white / black of the renders would vanish on light or dark plot backgrounds).
+# Excluded strands (the per-strand mask drops them from the fused hair) are neutral gray.
+ANALYSIS_SOURCE_COLORS = {"base": "#2a78d6", "donor": "#eb6834", "excluded": "#a3a29c"}
+ANALYSIS_MAX_ARROWS = 6000
+
+
+def _rgb(hex_color):
+    return np.array([int(hex_color[i:i + 2], 16) / 255.0 for i in (1, 3, 5)], dtype=np.float32)
+
+
+def _source_ramp(hex_color):
+    """sequential one-hue colormap: white (|flux| = 0) -> the source color -> darker"""
+    from matplotlib.colors import LinearSegmentedColormap
+    c = _rgb(hex_color)
+    return LinearSegmentedColormap.from_list(hex_color, [(1, 1, 1), tuple(c), tuple(c * 0.45)])
+
+
+def _source_composite(score, donor_frac, valid):
+    """(n, n, 3) divergence map colored by source: hue = which source's strands pass the cell
+    (blue = base only, orange = donor only, in between = mixed), darkness = |flux| (white = 0)."""
+    hue = (1 - donor_frac[..., None]) * _rgb(ANALYSIS_SOURCE_COLORS["base"]) \
+        + donor_frac[..., None] * _rgb(ANALYSIS_SOURCE_COLORS["donor"])
+    s = np.clip(score, 0, 1)[..., None]
+    img = (1 - s) * 1.0 + s * hue * (1 - 0.4 * s)
+    img[~valid] = 0.82
+    return img
+
+
+def _source_legend(ax, sources, loc="lower right"):
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(color=ANALYSIS_SOURCE_COLORS[k], label=label) for k, label in sources],
+              loc=loc, fontsize=8, framealpha=0.9)
+
+
+def _quiver_by_source(ax, flows, max_arrows=ANALYSIS_MAX_ARROWS, seed=0, scale=20, width=0.0015, alpha=0.6):
+    """flows = [(color_key, pts2d, vec2d)]; one random subset of max_arrows over all sources, so each
+    source keeps its share of the arrows; drawn largest source first so the smaller one stays on top."""
+    total = sum(p.shape[0] for _, p, _ in flows)
+    rng = np.random.default_rng(seed)
+    for key, p, v in sorted(flows, key=lambda f: -f[1].shape[0]):
+        k = p.shape[0] if total <= max_arrows else int(round(max_arrows * p.shape[0] / total))
+        if k == 0:
+            continue
+        pick = rng.choice(p.shape[0], size=k, replace=False) if k < p.shape[0] else slice(None)
+        ax.quiver(p[pick, 0], p[pick, 1], v[pick, 0], v[pick, 1], color=ANALYSIS_SOURCE_COLORS[key],
+                  scale=scale, width=width, alpha=alpha)
+
+
+def debug_field_analysis(base, donor, result, out_path, n=ANALYSIS_GRID_N, save_field_data=True):
     """Writes <out_path>/analysis/:
-        field_data.npz  grid; per head (base, donor = whole input hairstyles; fused_before = the drawn
+        field_data.npz  (only with save_field_data; ~1.5 GB at ~95k strands per head) grid; per head (base, donor = whole input hairstyles; fused_before = the drawn
                         mask's composition; fused_after = the FM result) <head>_flux3d (signed net outward
                         flux = divergence), <head>_flux_ok, <head>_grid_score (= |flux|), <head>_edges,
-                        <head>_sobel_mag, <head>_strand_pts2d / _strand_vec2d (per control point 2D flow),
-                        <head>_grid_vec3d / _grid_vec_mag (per cell mean 3D flow); fused_{before,after}_
-                        hull_score (convex-hull overlap of base vs donor strands, larger = more mixed) and
-                        _grid_mask (per column majority, True = donor); per-strand labels before / after;
-                        base / donor strands_mask_grid (np.packbits, np.unpackbits(x, axis=-1, count=n_<head>))
-        stats.json      FM objectives, kept strand counts, mean |flux|, edge cells, mean hull score, timings
+                        <head>_sobel_mag, <head>_strand_pts2d / _strand_vec2d (per control point 2D flow) with
+                        <head>_strand_src (per control point source: 0 = base, 1 = donor, 2 = excluded),
+                        <head>_donor_frac (per cell fraction of donor strands), <head>_grid_vec3d /
+                        _grid_vec_mag (per cell mean 3D flow); fused heads also <head>_grid_score_{base,donor}
+                        (|flux| of that source's kept strands alone); fused_{before,after}_hull_score
+                        (convex-hull overlap of base vs donor strands, larger = more mixed) and _grid_mask (per
+                        column majority, True = donor); per-strand labels before / after; base / donor
+                        strands_mask_grid (np.packbits, np.unpackbits(x, axis=-1, count=n_<head>))
+        stats.json      FM objectives, kept strand counts, mean |flux| (+ per source), edge cells, mean hull
+                        score, timings
         figures/<head>/ flux_score.png, flux_edges.png, flux_with_flow.png
-        figures/        fused_hull_score.png, fused_grid_mask.png (+ fused_after flow), strand_roots.png
-    Every (n, n) map is in the scalp-grid (row, col) layout of update_contour, NOT the scalp-texture
-    layout of the fusion mask (masks/*.png); strand_roots.png is in the scalp-texture layout."""
+        figures/        fused_hull_score.png, fused_grid_mask.png, strand_roots.png
+    Every strand-derived mark is colored by source (ANALYSIS_SOURCE_COLORS: base blue, donor orange,
+    excluded gray). Every (n, n) map is in the scalp-grid (row, col) layout of update_contour, NOT the
+    scalp-texture layout of the fusion mask (masks/*.png); strand_roots.png is in the scalp-texture layout."""
     import matplotlib.pyplot as plt
     import highlighting.generate_from_3D_models.update_contour as uc
     import highlighting.generate_from_3D_models.mask_analysis as ma
     from highlighting.generate_from_3D_models.mask_analysis import plots
     plt.switch_backend("Agg")
     plots.setup_cjk_font()
+    C = ANALYSIS_SOURCE_COLORS
 
     ana_dir = os.path.join(out_path, "analysis")
     fig_dir = os.path.join(ana_dir, "figures")
@@ -1007,6 +1085,7 @@ def debug_field_analysis(base, donor, result, out_path, n=ANALYSIS_GRID_N):
     g = grid.arrays()
     geo = (g["grid_pos"], g["grid_normal"], g["grid_valid"], g["half_size"])
     tangents = dict(grid_t1=g["grid_t1"], grid_t2=g["grid_t2"])
+    valid_rc = uc.uv_to_rc(g["grid_valid"])
     smg_a = grid.strand_mask_grid(base["positions"], show_progress=False)
     smg_b = grid.strand_mask_grid(donor["positions"], show_progress=False)
     torch.cuda.empty_cache()
@@ -1015,12 +1094,31 @@ def debug_field_analysis(base, donor, result, out_path, n=ANALYSIS_GRID_N):
     # fused hair = kept base strands + kept donor strands; before = the drawn mask's labels, after = FM's
     keep = {"before": (~result["initial_state_a"], result["initial_state_b"]),
             "after": (result["visible_a"], result["visible_b"])}
-    heads = {"base": (base["positions"], smg_a), "donor": (donor["positions"], smg_b)}
-    is_donor = {}
+    ka_final, kb_final = keep["after"]
+    # every head as a list of strand groups (color key, legend label, positions, strand_mask_grid);
+    # whole input heads are split into the strands the fused hair keeps (after FM) and the excluded ones
+    groups = {
+        "base": [("base", "base, kept", base["positions"][ka_final], smg_a[..., ka_final]),
+                 ("excluded", "base, excluded", base["positions"][~ka_final], smg_a[..., ~ka_final])],
+        "donor": [("donor", "donor, kept", donor["positions"][kb_final], smg_b[..., kb_final]),
+                  ("excluded", "donor, excluded", donor["positions"][~kb_final], smg_b[..., ~kb_final])],
+    }
+    heads, is_donor = {"base": (base["positions"], smg_a), "donor": (donor["positions"], smg_b)}, {}
     for stage, (ka, kb) in keep.items():
+        groups[f"fused_{stage}"] = [("base", "base", base["positions"][ka], smg_a[..., ka]),
+                                    ("donor", "donor", donor["positions"][kb], smg_b[..., kb])]
         heads[f"fused_{stage}"] = (np.concatenate([base["positions"][ka], donor["positions"][kb]]),
                                    np.concatenate([smg_a[..., ka], smg_b[..., kb]], axis=-1))
         is_donor[stage] = np.concatenate([np.zeros(int(ka.sum()), bool), np.ones(int(kb.sum()), bool)])
+
+    def donor_fraction(head):
+        """(row, col) fraction of the strands through each cell that come from the donor"""
+        counts = {k: uc.uv_to_rc(smg.sum(-1)).astype(np.float32) for k, _, _, smg in groups[head]}
+        if head == "base":
+            return np.zeros((n, n), np.float32)
+        if head == "donor":
+            return np.ones((n, n), np.float32)
+        return counts["donor"] / np.maximum(counts["base"] + counts["donor"], 1)
 
     save = dict(grid_pos=g["grid_pos"], grid_normal=g["grid_normal"], grid_valid=g["grid_valid"],
                 grid_t1=g["grid_t1"], grid_t2=g["grid_t2"], half_size=g["half_size"],
@@ -1033,33 +1131,93 @@ def debug_field_analysis(base, donor, result, out_path, n=ANALYSIS_GRID_N):
                  objectives={k: (list(v) if isinstance(v, tuple) else v) for k, v in result["objectives"].items()},
                  kept={stage: {"base": int(ka.sum()), "donor": int(kb.sum())} for stage, (ka, kb) in keep.items()},
                  n_strands={"base": int(smg_a.shape[-1]), "donor": int(smg_b.shape[-1])},
-                 heads={}, timings=timings)
+                 source_colors=C, heads={}, timings=timings)
 
-    # ---- 3D flux (divergence), |flux| edges, vector fields: per head ----
+    # ---- 3D flux (divergence), |flux| edges, vector fields: per head, flow per source ----
     flow = {}
+    src_code = {"base": 0, "donor": 1, "excluded": 2}
     for head, (pos, smg) in heads.items():
         t0 = time.time()
         flux3d, flux_ok = uc.cal_grid_flux_3d(pos, *geo, smg, show_progress=False, **tangents)
         grid_score = ma.edge_score_from_flux(flux3d)
         edge = ma.detect_flux_edges(grid_score, g["grid_valid"],
                                     canny_low=ANALYSIS_CANNY_LOW, canny_high=ANALYSIS_CANNY_HIGH)
-        pts2d, vec2d = ma.compute_strand_vectors_2d(pos, *geo, smg, show_progress=False, **tangents)
+        flows = []
+        for key, label, gpos, gsmg in groups[head]:
+            p2, v2 = ma.compute_strand_vectors_2d(gpos, *geo, gsmg, show_progress=False, **tangents)
+            flows.append((key, label, p2, v2))
+        flow[head] = flows
         grid_vec3d, grid_vec_mag = ma.compute_grid_vector_field(pos, *geo, smg, **tangents)
-        flow[head] = (pts2d, vec2d)
+        donor_frac = donor_fraction(head)
         save.update({f"{head}_flux3d": flux3d, f"{head}_flux_ok": flux_ok, f"{head}_grid_score": grid_score,
                      f"{head}_edges": edge["edges"], f"{head}_sobel_mag": edge["sobel_mag"],
-                     f"{head}_strand_pts2d": pts2d, f"{head}_strand_vec2d": vec2d,
+                     f"{head}_strand_pts2d": np.concatenate([f[2] for f in flows]),
+                     f"{head}_strand_vec2d": np.concatenate([f[3] for f in flows]),
+                     f"{head}_strand_src": np.concatenate([np.full(f[2].shape[0], src_code[f[0]], np.int8)
+                                                           for f in flows]),
+                     f"{head}_donor_frac": donor_frac,
                      f"{head}_grid_vec3d": grid_vec3d, f"{head}_grid_vec_mag": grid_vec_mag})
         stats["heads"][head] = dict(n_strands=int(pos.shape[0]), mean_abs_flux=float(grid_score.mean()),
                                     n_edge_cells=int(edge["edges"].sum()), n_valid_rc=int(edge["valid_rc"].sum()))
-        save_fig(plots.plot_score_map(grid_score, title=f"{head}: 3D |flux|"),
-                 os.path.join(fig_dir, head, "flux_score.png"))
-        save_fig(plots.plot_flux_edges(grid_score, edge,
-                                       title_suffix=f" (low={ANALYSIS_CANNY_LOW}, high={ANALYSIS_CANNY_HIGH})"),
-                 os.path.join(fig_dir, head, "flux_edges.png"))
-        save_fig(plots.plot_score_with_flow(grid_score, pts2d, vec2d, max_arrows=6000,
-                                            title=f"{head}: |flux| + 控制點流向 (cyan)"),
-                 os.path.join(fig_dir, head, "flux_with_flow.png"))
+        fused = head.startswith("fused")
+        legend = [(k, lbl) for k, lbl, _, _ in groups[head]]
+
+        # flux_score: single head -> |flux| in its source's hue; fused -> each source's kept strands alone
+        # (own hue) + the fused |flux| colored by which source passes each cell
+        if fused:
+            per_src = {}
+            for key, _, gpos, gsmg in groups[head]:
+                f3, _ = uc.cal_grid_flux_3d(gpos, *geo, gsmg, show_progress=False, **tangents)
+                per_src[key] = ma.edge_score_from_flux(f3)
+                save[f"{head}_grid_score_{key}"] = per_src[key]
+                stats["heads"][head][f"mean_abs_flux_{key}"] = float(per_src[key].mean())
+            fig, axes = plt.subplots(1, 3, figsize=(21, 6))
+            for ax, key in zip(axes[:2], ("base", "donor")):
+                im = ax.imshow(np.where(valid_rc, per_src[key], np.nan), cmap=_source_ramp(C[key]), vmin=0, vmax=1)
+                plt.colorbar(im, ax=ax, fraction=0.046, label=f"|flux|, {key} strands only")
+                ax.set_title(f"{head}: {key} kept strands alone, mean = {per_src[key].mean():.4f}")
+            axes[2].imshow(_source_composite(grid_score, donor_frac, valid_rc))
+            axes[2].set_title(f"{head}: fused |flux| (darker = larger), hue = source")
+            _source_legend(axes[2], [("base", "base strands"), ("donor", "donor strands")])
+        else:
+            fig, ax = plt.subplots(figsize=(8, 6))
+            key = groups[head][0][0]
+            im = ax.imshow(np.where(valid_rc, grid_score, np.nan), cmap=_source_ramp(C[key]), vmin=0, vmax=1)
+            plt.colorbar(im, ax=ax, label="3D |flux|")
+            ax.set_title(f"{head}: 3D |flux| (whole head), mean = {grid_score.mean():.4f}")
+        save_fig(fig, os.path.join(fig_dir, head, "flux_score.png"))
+
+        # flux_edges: |flux| (source colored) | Sobel | Canny | edges colored by the cell's majority source
+        fig, axes = plt.subplots(2, 2, figsize=(14, 12))
+        axes[0, 0].imshow(_source_composite(grid_score, donor_frac, valid_rc))
+        axes[0, 0].set_title("|flux| (darker = larger), hue = source")
+        im = axes[0, 1].imshow(edge["sobel_mag"], cmap="Greys")
+        plt.colorbar(im, ax=axes[0, 1], fraction=0.046)
+        axes[0, 1].set_title("Sobel gradient magnitude (ksize=3)")
+        axes[1, 0].imshow(edge["edges"], cmap="Greys")
+        axes[1, 0].set_title(f"Canny edges (low={ANALYSIS_CANNY_LOW}, high={ANALYSIS_CANNY_HIGH})")
+        axes[1, 1].imshow(np.where(valid_rc, grid_score, np.nan), cmap="Greys", vmin=0, vmax=1)
+        overlay = np.zeros((n, n, 4), np.float32)
+        overlay[edge["edges"] & (donor_frac <= 0.5)] = (*_rgb(C["base"]), 1)
+        overlay[edge["edges"] & (donor_frac > 0.5)] = (*_rgb(C["donor"]), 1)
+        axes[1, 1].imshow(overlay)
+        axes[1, 1].set_title("edges over |flux|, colored by the cell's majority source")
+        _source_legend(axes[1, 1], [("base", "base-majority edge"), ("donor", "donor-majority edge")])
+        for ax in axes.ravel():
+            ax.axis("off")
+        fig.tight_layout()
+        save_fig(fig, os.path.join(fig_dir, head, "flux_edges.png"))
+
+        # flux_with_flow: |flux| in gray + control-point flow arrows colored by source
+        fig, ax = plt.subplots(figsize=(8, 6))
+        im = ax.imshow(np.where(valid_rc, grid_score, np.nan), cmap="Greys", vmin=0, vmax=1)
+        plt.colorbar(im, ax=ax, label="3D |flux|")
+        _quiver_by_source(ax, [(k, p2, v2) for k, _, p2, v2 in flows])
+        ax.set_xlim(-0.5, n - 0.5); ax.set_ylim(n - 0.5, -0.5)
+        ax.set_title(f"{head}: |flux| (gray) + control-point flow, colored by source")
+        _source_legend(ax, legend)
+        save_fig(fig, os.path.join(fig_dir, head, "flux_with_flow.png"))
+
         timings[f"{head}/flux_and_vector_field"] = round(time.time() - t0, 2)
         print(f"    {head}: {pos.shape[0]} strands, mean |flux| = {grid_score.mean():.4f}, "
               f"edge cells = {int(edge['edges'].sum())}")
@@ -1080,27 +1238,37 @@ def debug_field_analysis(base, donor, result, out_path, n=ANALYSIS_GRID_N):
     for ax, stage, h in zip(fig.axes[:len(hull)], keep, hull):   # fig.axes = the panels, then their colorbars
         ax.set_title(f"fused {stage} FM: convex hull overlap, mean = {float(h.mean()):.4f}")
     save_fig(fig, os.path.join(fig_dir, "fused_hull_score.png"))
-    pts2d, vec2d = flow["fused_after"]
-    fig = plots.plot_grid_mask_iterations(gmask, BASE_STRAND_COLOR, DONOR_STRAND_COLOR, pts2d=pts2d, vec2d=vec2d)
-    for ax, stage in zip(fig.axes, keep):
-        ax.set_title(f"fused {stage} FM: grid mask (white = base, black = donor) + fused_after flow")
+
+    # grid mask: cells in a light tint of their majority source, that stage's flow arrows in full source color
+    tint = {k: 0.35 * _rgb(C[k]) + 0.65 for k in ("base", "donor")}
+    fig, axes = plt.subplots(1, 2, figsize=(16, 8))
+    for i, (ax, stage, gm) in enumerate(zip(axes, keep, gmask)):
+        img = np.where(gm[..., None], tint["donor"], tint["base"])
+        img[~valid_rc] = 0.82
+        ax.imshow(img)
+        _quiver_by_source(ax, [(k, p2, v2) for k, _, p2, v2 in flow[f"fused_{stage}"]], seed=i,
+                          scale=60, alpha=0.7)
+        ax.set_xlim(-0.5, n - 0.5); ax.set_ylim(n - 0.5, -0.5)
+        ax.set_title(f"fused {stage} FM: grid mask (cell tint = majority source) + flow")
+        _source_legend(ax, [("base", "base"), ("donor", "donor")])
     save_fig(fig, os.path.join(fig_dir, "fused_grid_mask.png"))
 
-    # strand roots in the scalp-texture layout (the fusion mask's layout): kept in the head's color, excluded gray
+    # strand roots in the scalp-texture layout (the fusion mask's layout): kept in the source color, excluded gray
     fig, axes = plt.subplots(2, 2, figsize=(12, 12))
     for r, (stage, (ka, kb)) in enumerate(keep.items()):
-        for c, (name, head, k, color) in enumerate((("base", base, ka, BASE_STRAND_COLOR),
-                                                     ("donor", donor, kb, DONOR_STRAND_COLOR))):
+        for c, (name, head, k) in enumerate((("base", base, ka), ("donor", donor, kb))):
             ax = axes[r, c]
-            ax.set_facecolor("#6a8caf")
+            ax.set_facecolor("#fcfcfb")
             uv = head["root_uv"]
-            ax.scatter(uv[:, 1], uv[:, 0], s=0.2, linewidths=0,
-                       c=np.where(k[:, None], np.float32(color), np.float32((0.5, 0.5, 0.5))))
+            ax.scatter(uv[~k, 1], uv[~k, 0], s=0.2, linewidths=0, c=C["excluded"])
+            ax.scatter(uv[k, 1], uv[k, 0], s=0.2, linewidths=0, c=C[name])
             ax.set_xlim(0, 1); ax.set_ylim(1, 0); ax.set_aspect("equal")
-            ax.set_title(f"{name} roots, {stage} FM: kept {int(k.sum())}/{k.size} (gray = excluded)")
+            ax.set_title(f"{name} roots, {stage} FM: kept {int(k.sum())}/{k.size}")
+            _source_legend(ax, [(name, f"{name}, kept"), ("excluded", "excluded")])
     save_fig(fig, os.path.join(fig_dir, "strand_roots.png"))
 
-    np.savez_compressed(os.path.join(ana_dir, "field_data.npz"), **save)
+    if save_field_data:
+        np.savez_compressed(os.path.join(ana_dir, "field_data.npz"), **save)
     with open(os.path.join(ana_dir, "stats.json"), "w", encoding="utf-8") as f:
         json.dump(stats, f, ensure_ascii=False, indent=2)
     print(f"--- debug analysis written to {ana_dir} "

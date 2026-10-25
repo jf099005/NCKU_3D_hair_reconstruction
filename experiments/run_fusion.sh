@@ -5,13 +5,13 @@ set -e
 KUNG_SCRIPT=../inference/img2hair_kung_mul2_tsai_color.py
 TSAI_SCRIPT=../inference/img2hair_tsai_1.py
 
-input_config=./fusing_config_new1.json
-output_path=./outputs_tsai_ma/
+input_config=./fusing_config_hathaway_tsai.json
+output_path=./outputs_hathawway_tsai/
 
 mkdir -p "${output_path}"
 
 # 要跑哪個方法: kung / tsai / both
-method=tsai
+method=both
 # diffusion 的 seed（每張圖生成前都重設），兩個方法用同一個 seed 時，同一張圖會得到相同的髮型；負數 = 隨機
 seed=5
 # 是否保留3D模型檔案(.blend/.blend1/.npz)，設為0則算圖完後刪除，只留render圖節省空間
@@ -87,6 +87,7 @@ for m in "${methods[@]}"; do
 
     method_out="${output_path%/}/${m}"
     echo ">>> [${m}] ${script} -> ${method_out}"
+    t_start=$(date +%s)
     python ${script} \
         --input_config "${input_config}" \
         --output_path "${method_out}" \
@@ -94,7 +95,24 @@ for m in "${methods[@]}"; do
         "${extra_args[@]}"
 
     bash rendering.sh "${method_out}" "${method_out}/render/"
+
+    # 這次執行的設定與耗時，給 make_report.py 的 Summary 表用
+    M="${m}" SCRIPT="${script}" CFG="${input_config}" SEED="${seed}" ALIGN=$([[ "${m}" == "tsai" ]] && echo "${align_hairline}" || echo 1) \
+    ELAPSED=$(( $(date +%s) - t_start )) OUT="${method_out}" python - <<'PY'
+import datetime, json, os
+e = os.environ
+cfg = json.load(open(e["CFG"]))
+info = dict(method=e["M"], script=os.path.abspath(e["SCRIPT"]), input_config=os.path.abspath(e["CFG"]),
+            input_file_paths=[os.path.abspath(p) for p in cfg.get("input_file_paths", [])],
+            mask_file_paths=[os.path.abspath(p) for p in cfg.get("mask_file_paths", [])],
+            seed=int(e["SEED"]), align_hairline=e["ALIGN"] == "1", cwd=os.getcwd(),
+            elapsed_s=int(e["ELAPSED"]), finished=datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
+json.dump(info, open(os.path.join(e["OUT"], "run_info.json"), "w", encoding="utf-8"), indent=2, ensure_ascii=False)
+PY
 done
+
+# --- 1.5 比較報告：所有方法的結果整理成單一 HTML（圖片內嵌），用瀏覽器開啟 ---
+python make_report.py "${output_path}" -o "${output_path%/}/report.html" || echo "警告: 產生報告失敗 (不影響融合結果)"
 
 # --- 2. (可選) 是否保留3D模型檔案 ---
 if [[ "${keep_3d_model}" == "0" ]]; then

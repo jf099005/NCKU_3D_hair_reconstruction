@@ -1,0 +1,1955 @@
+nohup: ignoring input
+
+Found 79 archive(s) in ../DiffLocks_Dataset/zipfiles/
+History log: ../DiffLocks_Dataset/zipfiles//extract_history.log
+
+📦 Extracting difflocks_dataset_hairstyles_chunk_100.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1855345873 bytes (1770 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_100.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_100.7z
+Type = 7z
+Physical Size = 1855345873
+Headers Size = 1523
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+
+Archives with Errors: 1
+
+❌ Cannot extract difflocks_dataset_hairstyles_chunk_100.7z (exit 255), skipping. Break signaled 
+📦 Extracting difflocks_dataset_hairstyles_chunk_21.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1860017096 bytes (1774 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_21.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_21.7z
+Type = 7z
+Physical Size = 1860017096
+Headers Size = 1568
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+
+Archives with Errors: 1
+
+❌ Cannot extract difflocks_dataset_hairstyles_chunk_21.7z (exit 255), skipping. Break signaled 
+📦 Extracting difflocks_dataset_hairstyles_chunk_22.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1879331206 bytes (1793 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_22.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_22.7z
+Type = 7z
+Physical Size = 1879331206
+Headers Size = 1561
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+
+Archives with Errors: 1
+
+❌ Cannot extract difflocks_dataset_hairstyles_chunk_22.7z (exit 255), skipping. Break signaled 
+📦 Extracting difflocks_dataset_hairstyles_chunk_24.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1814431641 bytes (1731 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_24.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_24.7z
+Type = 7z
+Physical Size = 1814431641
+Headers Size = 1556
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+
+Archives with Errors: 1
+
+❌ Cannot extract difflocks_dataset_hairstyles_chunk_24.7z (exit 255), skipping. Break signaled 
+📦 Extracting difflocks_dataset_hairstyles_chunk_25.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 104201633 bytes (100 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_25.7z
+
+Can't open as archive: 1
+Files: 0
+Size:       0
+Compressed: 0
+❌ Cannot extract difflocks_dataset_hairstyles_chunk_25.7z (exit 2), skipping. ERROR: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_25.7z ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_25.7z Open ERROR: Cannot open the file as [7z] archive ERRORS: Unexpected end of archive 
+📦 Extracting difflocks_dataset_hairstyles_chunk_26.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1687495146 bytes (1610 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_26.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_26.7z
+Type = 7z
+Physical Size = 1687495146
+Headers Size = 1506
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+
+Archives with Errors: 1
+
+❌ Cannot extract difflocks_dataset_hairstyles_chunk_26.7z (exit 255), skipping. Break signaled 
+📦 Extracting difflocks_dataset_hairstyles_chunk_27.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1849742110 bytes (1765 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_27.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_27.7z
+Type = 7z
+Physical Size = 1849742110
+Headers Size = 1537
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       3068861751
+Compressed: 1849742110
+✅ Done: difflocks_dataset_hairstyles_chunk_27.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_28.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1939101169 bytes (1850 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_28.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_28.7z
+Type = 7z
+Physical Size = 1939101169
+Headers Size = 1575
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 78
+Size:       3093260788
+Compressed: 1939101169
+✅ Done: difflocks_dataset_hairstyles_chunk_28.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_29.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1933560542 bytes (1844 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_29.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_29.7z
+Type = 7z
+Physical Size = 1933560542
+Headers Size = 1573
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3090083706
+Compressed: 1933560542
+✅ Done: difflocks_dataset_hairstyles_chunk_29.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_30.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1923115873 bytes (1835 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_30.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_30.7z
+Type = 7z
+Physical Size = 1923115873
+Headers Size = 1558
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3094885746
+Compressed: 1923115873
+✅ Done: difflocks_dataset_hairstyles_chunk_30.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_31.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1857375948 bytes (1772 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_31.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_31.7z
+Type = 7z
+Physical Size = 1857375948
+Headers Size = 1585
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3028674111
+Compressed: 1857375948
+✅ Done: difflocks_dataset_hairstyles_chunk_31.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_32.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1864730014 bytes (1779 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_32.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_32.7z
+Type = 7z
+Physical Size = 1864730014
+Headers Size = 1574
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       3146831956
+Compressed: 1864730014
+✅ Done: difflocks_dataset_hairstyles_chunk_32.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_33.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1883425237 bytes (1797 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_33.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_33.7z
+Type = 7z
+Physical Size = 1883425237
+Headers Size = 1565
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3017568798
+Compressed: 1883425237
+✅ Done: difflocks_dataset_hairstyles_chunk_33.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_34.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1920597991 bytes (1832 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_34.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_34.7z
+Type = 7z
+Physical Size = 1920597991
+Headers Size = 1556
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 77
+Size:       3004043665
+Compressed: 1920597991
+✅ Done: difflocks_dataset_hairstyles_chunk_34.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_35.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1867870861 bytes (1782 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_35.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_35.7z
+Type = 7z
+Physical Size = 1867870861
+Headers Size = 1574
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3121046904
+Compressed: 1867870861
+✅ Done: difflocks_dataset_hairstyles_chunk_35.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_36.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1938361391 bytes (1849 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_36.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_36.7z
+Type = 7z
+Physical Size = 1938361391
+Headers Size = 1558
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 77
+Size:       3101623442
+Compressed: 1938361391
+✅ Done: difflocks_dataset_hairstyles_chunk_36.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_37.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1823751680 bytes (1740 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_37.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_37.7z
+Type = 7z
+Physical Size = 1823751680
+Headers Size = 1512
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       2942965379
+Compressed: 1823751680
+✅ Done: difflocks_dataset_hairstyles_chunk_37.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_38.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1811296391 bytes (1728 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_38.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_38.7z
+Type = 7z
+Physical Size = 1811296391
+Headers Size = 1564
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       2983676836
+Compressed: 1811296391
+✅ Done: difflocks_dataset_hairstyles_chunk_38.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_39.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1925603505 bytes (1837 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_39.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_39.7z
+Type = 7z
+Physical Size = 1925603505
+Headers Size = 1595
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 77
+Size:       3083122909
+Compressed: 1925603505
+✅ Done: difflocks_dataset_hairstyles_chunk_39.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_40.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1824439651 bytes (1740 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_40.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_40.7z
+Type = 7z
+Physical Size = 1824439651
+Headers Size = 1544
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       3039705293
+Compressed: 1824439651
+✅ Done: difflocks_dataset_hairstyles_chunk_40.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_41.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1915572953 bytes (1827 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_41.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_41.7z
+Type = 7z
+Physical Size = 1915572953
+Headers Size = 1597
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3039689644
+Compressed: 1915572953
+✅ Done: difflocks_dataset_hairstyles_chunk_41.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_42.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1960505426 bytes (1870 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_42.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_42.7z
+Type = 7z
+Physical Size = 1960505426
+Headers Size = 1603
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 78
+Size:       3083345676
+Compressed: 1960505426
+✅ Done: difflocks_dataset_hairstyles_chunk_42.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_43.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1873621081 bytes (1787 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_43.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_43.7z
+Type = 7z
+Physical Size = 1873621081
+Headers Size = 1592
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       3081254441
+Compressed: 1873621081
+✅ Done: difflocks_dataset_hairstyles_chunk_43.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_44.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1808223287 bytes (1725 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_44.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_44.7z
+Type = 7z
+Physical Size = 1808223287
+Headers Size = 1596
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 77
+Size:       2923437805
+Compressed: 1808223287
+✅ Done: difflocks_dataset_hairstyles_chunk_44.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_45.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 553467297 bytes (528 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_45.7z
+
+Can't open as archive: 1
+Files: 0
+Size:       0
+Compressed: 0
+❌ Cannot extract difflocks_dataset_hairstyles_chunk_45.7z (exit 2), skipping. ERROR: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_45.7z ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_45.7z Open ERROR: Cannot open the file as [7z] archive ERRORS: Unexpected end of archive 
+📦 Extracting difflocks_dataset_hairstyles_chunk_46.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1992076419 bytes (1900 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_46.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_46.7z
+Type = 7z
+Physical Size = 1992076419
+Headers Size = 1605
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 79
+Size:       3077444242
+Compressed: 1992076419
+✅ Done: difflocks_dataset_hairstyles_chunk_46.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_47.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1835184425 bytes (1751 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_47.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_47.7z
+Type = 7z
+Physical Size = 1835184425
+Headers Size = 1548
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       2973313856
+Compressed: 1835184425
+✅ Done: difflocks_dataset_hairstyles_chunk_47.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_48.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1811883212 bytes (1728 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_48.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_48.7z
+Type = 7z
+Physical Size = 1811883212
+Headers Size = 1538
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       3041356213
+Compressed: 1811883212
+✅ Done: difflocks_dataset_hairstyles_chunk_48.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_49.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1758590351 bytes (1678 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_49.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_49.7z
+Type = 7z
+Physical Size = 1758590351
+Headers Size = 1533
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       3017400010
+Compressed: 1758590351
+✅ Done: difflocks_dataset_hairstyles_chunk_49.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_50.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1799704349 bytes (1717 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_50.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_50.7z
+Type = 7z
+Physical Size = 1799704349
+Headers Size = 1582
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       2943670113
+Compressed: 1799704349
+✅ Done: difflocks_dataset_hairstyles_chunk_50.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_51.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1858701189 bytes (1773 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_51.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_51.7z
+Type = 7z
+Physical Size = 1858701189
+Headers Size = 1591
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       3089775510
+Compressed: 1858701189
+✅ Done: difflocks_dataset_hairstyles_chunk_51.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_52.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1913730450 bytes (1826 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_52.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_52.7z
+Type = 7z
+Physical Size = 1913730450
+Headers Size = 1537
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3128876768
+Compressed: 1913730450
+✅ Done: difflocks_dataset_hairstyles_chunk_52.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_53.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1873397290 bytes (1787 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_53.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_53.7z
+Type = 7z
+Physical Size = 1873397290
+Headers Size = 1551
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       3038578941
+Compressed: 1873397290
+✅ Done: difflocks_dataset_hairstyles_chunk_53.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_54.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1780629012 bytes (1699 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_54.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_54.7z
+Type = 7z
+Physical Size = 1780629012
+Headers Size = 1518
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       3009111565
+Compressed: 1780629012
+✅ Done: difflocks_dataset_hairstyles_chunk_54.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_55.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1886560422 bytes (1800 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_55.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_55.7z
+Type = 7z
+Physical Size = 1886560422
+Headers Size = 1523
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       3110859517
+Compressed: 1886560422
+✅ Done: difflocks_dataset_hairstyles_chunk_55.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_56.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1933779855 bytes (1845 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_56.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_56.7z
+Type = 7z
+Physical Size = 1933779855
+Headers Size = 1579
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 78
+Size:       3040433965
+Compressed: 1933779855
+✅ Done: difflocks_dataset_hairstyles_chunk_56.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_57.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 2002571146 bytes (1910 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_57.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_57.7z
+Type = 7z
+Physical Size = 2002571146
+Headers Size = 1590
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 77
+Size:       3094824915
+Compressed: 2002571146
+✅ Done: difflocks_dataset_hairstyles_chunk_57.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_58.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1919533838 bytes (1831 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_58.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_58.7z
+Type = 7z
+Physical Size = 1919533838
+Headers Size = 1537
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3125361504
+Compressed: 1919533838
+✅ Done: difflocks_dataset_hairstyles_chunk_58.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_59.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1736754458 bytes (1657 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_59.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_59.7z
+Type = 7z
+Physical Size = 1736754458
+Headers Size = 1552
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 77
+Size:       2891744522
+Compressed: 1736754458
+✅ Done: difflocks_dataset_hairstyles_chunk_59.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_60.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1898575549 bytes (1811 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_60.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_60.7z
+Type = 7z
+Physical Size = 1898575549
+Headers Size = 1541
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       3120937897
+Compressed: 1898575549
+✅ Done: difflocks_dataset_hairstyles_chunk_60.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_61.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1880955695 bytes (1794 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_61.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_61.7z
+Type = 7z
+Physical Size = 1880955695
+Headers Size = 1533
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3045593765
+Compressed: 1880955695
+✅ Done: difflocks_dataset_hairstyles_chunk_61.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_62.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1913668668 bytes (1826 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_62.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_62.7z
+Type = 7z
+Physical Size = 1913668668
+Headers Size = 1577
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3070104627
+Compressed: 1913668668
+✅ Done: difflocks_dataset_hairstyles_chunk_62.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_63.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1824273465 bytes (1740 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_63.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_63.7z
+Type = 7z
+Physical Size = 1824273465
+Headers Size = 1532
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3053354190
+Compressed: 1824273465
+✅ Done: difflocks_dataset_hairstyles_chunk_63.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_64.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1875067022 bytes (1789 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_64.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_64.7z
+Type = 7z
+Physical Size = 1875067022
+Headers Size = 1577
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 77
+Size:       3127901798
+Compressed: 1875067022
+✅ Done: difflocks_dataset_hairstyles_chunk_64.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_65.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1704971542 bytes (1626 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_65.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_65.7z
+Type = 7z
+Physical Size = 1704971542
+Headers Size = 1544
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       2858477481
+Compressed: 1704971542
+✅ Done: difflocks_dataset_hairstyles_chunk_65.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_66.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1886971751 bytes (1800 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_66.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_66.7z
+Type = 7z
+Physical Size = 1886971751
+Headers Size = 1581
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       3079560612
+Compressed: 1886971751
+✅ Done: difflocks_dataset_hairstyles_chunk_66.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_67.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1797444344 bytes (1715 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_67.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_67.7z
+Type = 7z
+Physical Size = 1797444344
+Headers Size = 1564
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 73
+Size:       3043997115
+Compressed: 1797444344
+✅ Done: difflocks_dataset_hairstyles_chunk_67.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_68.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1833502596 bytes (1749 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_68.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_68.7z
+Type = 7z
+Physical Size = 1833502596
+Headers Size = 1563
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       3051532417
+Compressed: 1833502596
+✅ Done: difflocks_dataset_hairstyles_chunk_68.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_69.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1926115389 bytes (1837 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_69.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_69.7z
+Type = 7z
+Physical Size = 1926115389
+Headers Size = 1559
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3124823468
+Compressed: 1926115389
+✅ Done: difflocks_dataset_hairstyles_chunk_69.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_70.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1898828631 bytes (1811 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_70.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_70.7z
+Type = 7z
+Physical Size = 1898828631
+Headers Size = 1569
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 78
+Size:       3003988183
+Compressed: 1898828631
+✅ Done: difflocks_dataset_hairstyles_chunk_70.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_71.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1862190367 bytes (1776 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_71.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_71.7z
+Type = 7z
+Physical Size = 1862190367
+Headers Size = 1563
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       2990985672
+Compressed: 1862190367
+✅ Done: difflocks_dataset_hairstyles_chunk_71.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_72.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1959730449 bytes (1869 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_72.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_72.7z
+Type = 7z
+Physical Size = 1959730449
+Headers Size = 1556
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 77
+Size:       3166561884
+Compressed: 1959730449
+✅ Done: difflocks_dataset_hairstyles_chunk_72.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_73.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1834753220 bytes (1750 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_73.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_73.7z
+Type = 7z
+Physical Size = 1834753220
+Headers Size = 1593
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       2995298098
+Compressed: 1834753220
+✅ Done: difflocks_dataset_hairstyles_chunk_73.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_74.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1959638686 bytes (1869 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_74.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_74.7z
+Type = 7z
+Physical Size = 1959638686
+Headers Size = 1558
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 78
+Size:       3151956566
+Compressed: 1959638686
+✅ Done: difflocks_dataset_hairstyles_chunk_74.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_75.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1920745689 bytes (1832 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_75.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_75.7z
+Type = 7z
+Physical Size = 1920745689
+Headers Size = 1560
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       3123270987
+Compressed: 1920745689
+✅ Done: difflocks_dataset_hairstyles_chunk_75.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_76.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1746099900 bytes (1666 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_76.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_76.7z
+Type = 7z
+Physical Size = 1746099900
+Headers Size = 1561
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       2891826571
+Compressed: 1746099900
+✅ Done: difflocks_dataset_hairstyles_chunk_76.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_77.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1881697412 bytes (1795 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_77.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_77.7z
+Type = 7z
+Physical Size = 1881697412
+Headers Size = 1556
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 77
+Size:       3036277181
+Compressed: 1881697412
+✅ Done: difflocks_dataset_hairstyles_chunk_77.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_78.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1763423257 bytes (1682 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_78.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_78.7z
+Type = 7z
+Physical Size = 1763423257
+Headers Size = 1570
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       2941202002
+Compressed: 1763423257
+✅ Done: difflocks_dataset_hairstyles_chunk_78.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_79.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1759870585 bytes (1679 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_79.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_79.7z
+Type = 7z
+Physical Size = 1759870585
+Headers Size = 1576
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       2848405346
+Compressed: 1759870585
+✅ Done: difflocks_dataset_hairstyles_chunk_79.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_80.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1892345942 bytes (1805 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_80.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_80.7z
+Type = 7z
+Physical Size = 1892345942
+Headers Size = 1548
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 77
+Size:       2968344141
+Compressed: 1892345942
+✅ Done: difflocks_dataset_hairstyles_chunk_80.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_81.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1851694261 bytes (1766 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_81.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_81.7z
+Type = 7z
+Physical Size = 1851694261
+Headers Size = 1557
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       3025652211
+Compressed: 1851694261
+✅ Done: difflocks_dataset_hairstyles_chunk_81.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_82.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1824526203 bytes (1741 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_82.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_82.7z
+Type = 7z
+Physical Size = 1824526203
+Headers Size = 1556
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 73
+Size:       3074952792
+Compressed: 1824526203
+✅ Done: difflocks_dataset_hairstyles_chunk_82.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_83.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1881743286 bytes (1795 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_83.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_83.7z
+Type = 7z
+Physical Size = 1881743286
+Headers Size = 1540
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       3112864253
+Compressed: 1881743286
+✅ Done: difflocks_dataset_hairstyles_chunk_83.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_84.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1952662220 bytes (1863 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_84.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_84.7z
+Type = 7z
+Physical Size = 1952662220
+Headers Size = 1566
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3123272998
+Compressed: 1952662220
+✅ Done: difflocks_dataset_hairstyles_chunk_84.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_85.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1873372740 bytes (1787 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_85.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_85.7z
+Type = 7z
+Physical Size = 1873372740
+Headers Size = 1586
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3049793881
+Compressed: 1873372740
+✅ Done: difflocks_dataset_hairstyles_chunk_85.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_86.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 2023073043 bytes (1930 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_86.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_86.7z
+Type = 7z
+Physical Size = 2023073043
+Headers Size = 1586
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 80
+Size:       3124705810
+Compressed: 2023073043
+✅ Done: difflocks_dataset_hairstyles_chunk_86.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_87.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1891422683 bytes (1804 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_87.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_87.7z
+Type = 7z
+Physical Size = 1891422683
+Headers Size = 1533
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       3107275458
+Compressed: 1891422683
+✅ Done: difflocks_dataset_hairstyles_chunk_87.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_88.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1750740655 bytes (1670 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_88.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_88.7z
+Type = 7z
+Physical Size = 1750740655
+Headers Size = 1514
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 74
+Size:       3000011182
+Compressed: 1750740655
+✅ Done: difflocks_dataset_hairstyles_chunk_88.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_89.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1887301168 bytes (1800 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_89.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_89.7z
+Type = 7z
+Physical Size = 1887301168
+Headers Size = 1584
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 77
+Size:       3084869773
+Compressed: 1887301168
+✅ Done: difflocks_dataset_hairstyles_chunk_89.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_90.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1832344929 bytes (1748 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_90.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_90.7z
+Type = 7z
+Physical Size = 1832344929
+Headers Size = 1600
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       2999440197
+Compressed: 1832344929
+✅ Done: difflocks_dataset_hairstyles_chunk_90.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_91.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1870704989 bytes (1785 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_91.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_91.7z
+Type = 7z
+Physical Size = 1870704989
+Headers Size = 1575
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       2956801856
+Compressed: 1870704989
+✅ Done: difflocks_dataset_hairstyles_chunk_91.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_92.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1866618636 bytes (1781 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_92.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_92.7z
+Type = 7z
+Physical Size = 1866618636
+Headers Size = 1554
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       3037433690
+Compressed: 1866618636
+✅ Done: difflocks_dataset_hairstyles_chunk_92.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_93.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1926199671 bytes (1837 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_93.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_93.7z
+Type = 7z
+Physical Size = 1926199671
+Headers Size = 1569
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 78
+Size:       3073902236
+Compressed: 1926199671
+✅ Done: difflocks_dataset_hairstyles_chunk_93.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_94.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1786638446 bytes (1704 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_94.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_94.7z
+Type = 7z
+Physical Size = 1786638446
+Headers Size = 1571
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       2887066147
+Compressed: 1786638446
+✅ Done: difflocks_dataset_hairstyles_chunk_94.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_95.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1940114454 bytes (1851 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_95.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_95.7z
+Type = 7z
+Physical Size = 1940114454
+Headers Size = 1588
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 77
+Size:       3131481710
+Compressed: 1940114454
+✅ Done: difflocks_dataset_hairstyles_chunk_95.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_96.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1882093897 bytes (1795 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_96.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_96.7z
+Type = 7z
+Physical Size = 1882093897
+Headers Size = 1556
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3057444450
+Compressed: 1882093897
+✅ Done: difflocks_dataset_hairstyles_chunk_96.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_97.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1787185588 bytes (1705 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_97.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_97.7z
+Type = 7z
+Physical Size = 1787185588
+Headers Size = 1553
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       2951010388
+Compressed: 1787185588
+✅ Done: difflocks_dataset_hairstyles_chunk_97.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_98.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1897426027 bytes (1810 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_98.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_98.7z
+Type = 7z
+Physical Size = 1897426027
+Headers Size = 1560
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 76
+Size:       3012929557
+Compressed: 1897426027
+✅ Done: difflocks_dataset_hairstyles_chunk_98.7z
+📦 Extracting difflocks_dataset_hairstyles_chunk_99.7z ...
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:12 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 1736883516 bytes (1657 MiB)
+
+Extracting archive: ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_99.7z
+--
+Path = ../DiffLocks_Dataset/zipfiles//difflocks_dataset_hairstyles_chunk_99.7z
+Type = 7z
+Physical Size = 1736883516
+Headers Size = 1554
+Method = LZMA2:384m
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 11
+Files: 75
+Size:       2859052618
+Compressed: 1736883516
+✅ Done: difflocks_dataset_hairstyles_chunk_99.7z
+
+🎉 Finished: 72 extracted, 0 skipped, 7 failed
+Failed archives (will be retried on next run):
+   - difflocks_dataset_hairstyles_chunk_100.7z
+   - difflocks_dataset_hairstyles_chunk_21.7z
+   - difflocks_dataset_hairstyles_chunk_22.7z
+   - difflocks_dataset_hairstyles_chunk_24.7z
+   - difflocks_dataset_hairstyles_chunk_25.7z
+   - difflocks_dataset_hairstyles_chunk_26.7z
+   - difflocks_dataset_hairstyles_chunk_45.7z
