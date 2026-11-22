@@ -177,3 +177,73 @@ def evaluate(cc, keep, init_keep, names=DEFAULT_METRICS):
         scalars[name] = s
         maps.update({f"{name}/{k}": v for k, v in mp.items()})
     return scalars, maps, timings
+
+
+# ---------------------------------------------------------------- view_mix (opt-in: --metrics ...,view_mix)
+# What the renders show, without Blender: every kept strand point is splatted into orthographic z-buffers of
+# VIEW_DIRS (front, back, left, right, top); each pixel shows the head of its nearest point. Unlike the column
+# grid score this sees layering (a strand lifted over the other head hides it), so it can score strand editing.
+#   edge_frac   4-neighbor pixel pairs (both hair) showing different heads / hair pixels (speckle + boundary)
+#   block_mix   mean over VIEW_BLOCK x VIEW_BLOCK blocks of 4 p (1 - p), p = donor share of its hair pixels,
+#               weighted by hair pixels (0 = every block one head; 1 = 50/50 salt and pepper)
+#   donor_vis   donor share of all visible hair pixels (compare with strands.donor_share: a head that vanishes
+#               from view shows up here)
+VIEW_DIRS = {"front": (0, 0, 1), "back": (0, 0, -1), "left": (1, 0, 0), "right": (-1, 0, 0), "top": (0, 1, 0)}
+VIEW_RES, VIEW_HALF, VIEW_BLOCK, VIEW_STEP = 192, 0.22, 8, 2
+
+
+def _view_frame(d):
+    d = np.asarray(d, np.float64)
+    d /= np.linalg.norm(d)
+    up = np.array([0, 1.0, 0]) if abs(d[1]) < 0.9 else np.array([0, 0, -1.0])
+    x = np.cross(up, d)
+    x /= np.linalg.norm(x)
+    return x, np.cross(d, x), d
+
+
+def view_images(cc, keep):
+    """{view: (VIEW_RES, VIEW_RES) int8 image, -1 = no hair, i = head i}"""
+    roots = np.concatenate([h["positions"][:, 0] for h in cc.heads])
+    c = roots.mean(0)
+    pts = np.concatenate([h["positions"][k][:, ::VIEW_STEP].reshape(-1, 3) for h, k in zip(cc.heads, keep)])
+    src = np.concatenate([np.full(int(k.sum()) * h["positions"][:, ::VIEW_STEP].shape[1], i, np.int8)
+                          for i, (h, k) in enumerate(zip(cc.heads, keep))])
+    out = {}
+    for name, d in VIEW_DIRS.items():
+        x, y, z = _view_frame(d)
+        q = pts - c
+        u = np.floor((q @ x + VIEW_HALF) / (2 * VIEW_HALF) * VIEW_RES).astype(np.int64)
+        v = np.floor((VIEW_HALF - q @ y) / (2 * VIEW_HALF) * VIEW_RES).astype(np.int64)
+        depth = -(q @ z)                      # smaller = closer to the camera (camera at +d)
+        ok = (u >= 0) & (u < VIEW_RES) & (v >= 0) & (v < VIEW_RES)
+        pix = (v * VIEW_RES + u)[ok]
+        order = np.lexsort((depth[ok], pix))
+        pix_o = pix[order]
+        first = np.ones(pix_o.size, bool)
+        first[1:] = pix_o[1:] != pix_o[:-1]
+        img = np.full(VIEW_RES * VIEW_RES, -1, np.int8)
+        img[pix_o[first]] = src[ok][order][first]
+        out[name] = img.reshape(VIEW_RES, VIEW_RES)
+    return out
+
+
+@register_metric("view_mix")
+def view_mix(cc, keep, init_keep):
+    imgs = view_images(cc, keep)
+    edge, blk, dv, maps = [], [], [], {}
+    for name, img in imgs.items():
+        hair = img >= 0
+        n_h = max(int(hair.sum()), 1)
+        d = 0
+        for a, b in ((img[1:], img[:-1]), (img[:, 1:], img[:, :-1])):
+            d += int(((a >= 0) & (b >= 0) & (a != b)).sum())
+        edge.append(d / n_h)
+        B = VIEW_BLOCK
+        h_ = hair.reshape(VIEW_RES // B, B, VIEW_RES // B, B).sum((1, 3)).astype(np.float64)
+        don = (img > 0).reshape(VIEW_RES // B, B, VIEW_RES // B, B).sum((1, 3))
+        p = np.where(h_ > 0, don / np.maximum(h_, 1), 0)
+        blk.append(float((4 * p * (1 - p) * h_).sum() / max(h_.sum(), 1)))
+        dv.append(float((img > 0).sum() / n_h))
+        maps[name] = img
+    return (dict(edge_frac=float(np.mean(edge)), block_mix=float(np.mean(blk)), donor_vis=float(np.mean(dv)),
+                 **{f"edge_frac_{k}": float(e) for k, e in zip(imgs, edge)}), maps)

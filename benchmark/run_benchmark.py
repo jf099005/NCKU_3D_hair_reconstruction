@@ -244,7 +244,15 @@ def run_case(case_dir, run_dir, args, ctx):
             fr = fusion_methods.METHODS[mt](heads, labels, ctx)
             res["method_seconds"] = round(time.time() - t0, 2)
             res["method_info"] = fr.info
-            scalars, maps, timings = metrics_mod.evaluate(cc, fr.keep, init_keep, args.metrics)
+            cc_m = cc
+            if fr.heads is not None:   # strand-editing method: score the edited geometry
+                cc_m = metrics_mod.CaseContext(fr.heads, args.grid_n, ctx["dataset_path"], ctx)
+                np.savez_compressed(os.path.join(od, "edited_heads.npz"),
+                                    **{f"positions_{i}": h["positions"].astype(np.float16)
+                                       for i, h in enumerate(fr.heads)})
+            scalars, maps, timings = metrics_mod.evaluate(cc_m, fr.keep, init_keep, args.metrics)
+            if cc_m is not cc:
+                del cc_m
             res["metrics"], res["metric_seconds"] = scalars, timings
             np.savez_compressed(os.path.join(od, "maps.npz"), **maps,
                                 **{f"keep_{i}": k for i, k in enumerate(fr.keep)})

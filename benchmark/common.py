@@ -102,7 +102,7 @@ def load_hairstyle(npz_path, max_strands=None, seed=0, root_uv_only=False):
     idx = np.arange(root_uv.shape[0])
     if max_strands is not None and max_strands < idx.size:
         idx = np.sort(np.random.default_rng(seed).choice(idx.size, max_strands, replace=False))
-    head = {"root_uv": root_uv[idx], "strand_idx": idx, "mirror_hair": mirror}
+    head = {"root_uv": root_uv[idx], "strand_idx": idx, "mirror_hair": mirror, "npz_path": npz_path}
     if not root_uv_only:
         head["positions"] = np.ascontiguousarray(d["positions"][idx], dtype=np.float32)
     return head

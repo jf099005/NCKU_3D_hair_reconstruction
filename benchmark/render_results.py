@@ -57,13 +57,70 @@ def render_case(run_dir, cid, methods=None, overwrite=False, keep_blend=False, b
                   "(dataset or max_strands changed?), not rendered")
             out[mt] = None
             continue
+        heads_mt = heads
+        ed = os.path.join(od, "edited_heads.npz")
+        if os.path.exists(ed):   # strand-editing method: render its edited positions
+            e = np.load(ed)
+            heads_mt = [dict(h, positions=e[f"positions_{k}"].astype(np.float32)) for k, h in enumerate(heads)]
         print(f"  {cid}/{mt}: rendering")
-        ok = render_fused(heads, keep, od, blender_path, keep_blend) and os.path.exists(png)
+        ok = render_fused(heads_mt, keep, od, blender_path, keep_blend) and os.path.exists(png)
         out[mt] = png if ok else None
         res_path = os.path.join(od, "result.json")
         res = common.read_json(res_path)
         res["rendered"] = bool(ok)
         common.write_json(res, res_path)
+    return out
+
+
+def render_case_optical(run_dir, cid, methods=None, overwrite=False, device=None):
+    """highlighting's optical render (strands_editing.pipeline.render, preset "optical": every strand at the
+    hairstyle's metadata radius, Chiang hair BSDF in melanin colors, 32 bounces; base = OPTICAL_COLORS base (dark
+    brown), donor = its highlight (golden blonde)) of each method's fused hair -> <method>/render_optical/.
+    Meant for full-strand runs (the preset assumes every strand). -> {method: png dir or None}"""
+    import json
+    from highlighting.generate_from_3D_models.strands_editing import pipeline as pl
+    cfg = common.read_json(os.path.join(run_dir, "run_config.json"))
+    case = common.read_json(os.path.join(cfg["benchmark_dir"], "cases", cid, "case.json"))
+    case_dir = os.path.join(run_dir, "cases", cid)
+    heads = [common.load_hairstyle(h["npz_path"], cfg.get("max_strands"), seed=case["seed"] + k)
+             for k, h in enumerate(case["heads"])]
+    normals = [np.load(h["npz_path"])["root_normal"][hh["strand_idx"]] for h, hh in zip(case["heads"], heads)]
+    meta = json.load(open(os.path.join(os.path.dirname(case["heads"][0]["npz_path"]), "metadata.json")))
+    out = {}
+    for mt in sorted(os.listdir(case_dir)):
+        od = os.path.join(case_dir, mt)
+        if (methods and mt not in methods) or not os.path.exists(os.path.join(od, "maps.npz")):
+            continue
+        rd = os.path.join(od, "render_optical")
+        if os.path.isdir(rd) and any(f.endswith(".png") for f in os.listdir(rd)) and not overwrite:
+            out[mt] = rd
+            continue
+        d = np.load(os.path.join(od, "maps.npz"))
+        keep = [d[f"keep_{k}"] for k in range(len(heads))]
+        pos = [h["positions"] for h in heads]
+        ed = os.path.join(od, "edited_heads.npz")
+        if os.path.exists(ed):
+            e = np.load(ed)
+            pos = [e[f"positions_{k}"].astype(np.float32) for k in range(len(heads))]
+        P = np.concatenate([p[k] for p, k in zip(pos, keep)])
+        labels = np.concatenate([np.full(int(k.sum()), i > 0) for i, k in enumerate(keep)])
+        ruv = np.concatenate([h["root_uv"][k] for h, k in zip(heads, keep)]).astype(np.float32)
+        rn = np.concatenate([n[k] for n, k in zip(normals, keep)]).astype(np.float32)
+        print(f"  {cid}/{mt}: optical render ({P.shape[0]} strands)")
+        try:
+            try:
+                sec = pl.render(rd, P, labels, ruv, rn, preset="optical", meta=meta, device=device)
+            except RuntimeError:
+                if device == "CUDA":
+                    raise
+                # Blender 5.0 OptiX "Misaligned address" on some hair scenes: retry with CUDA
+                print("    OptiX failed, retrying with CYCLES_DEVICE=CUDA")
+                sec = pl.render(rd, P, labels, ruv, rn, preset="optical", meta=meta, device="CUDA")
+            out[mt] = rd
+            print(f"    {sec}s")
+        except RuntimeError as e:
+            print(f"    failed: {e}")
+            out[mt] = None
     return out
 
 
@@ -75,6 +132,9 @@ def main():
     p.add_argument("--overwrite", action="store_true", help="re-render results that already have a render")
     p.add_argument("--keep_blend", action="store_true", help="keep the .blend / fused npz after rendering")
     p.add_argument("--blender_path", default=common.BLENDER_PATH)
+    p.add_argument("--optical", action="store_true",
+                   help="highlighting's optical render (render_case_optical) instead of the default white/black one")
+    p.add_argument("--device", default=None, help="with --optical: CYCLES_DEVICE (CUDA if OptiX crashes)")
     args = p.parse_args()
 
     run_dir = os.path.abspath(args.run_dir)
@@ -83,7 +143,10 @@ def main():
     methods = [m.strip() for m in args.methods.split(",")] if args.methods else None
     for i, cid in enumerate(cases):
         print(f"[{i + 1}/{len(cases)}] {cid}")
-        render_case(run_dir, cid, methods, args.overwrite, args.keep_blend, args.blender_path)
+        if args.optical:
+            render_case_optical(run_dir, cid, methods, args.overwrite, args.device)
+        else:
+            render_case(run_dir, cid, methods, args.overwrite, args.keep_blend, args.blender_path)
 
 
 if __name__ == "__main__":

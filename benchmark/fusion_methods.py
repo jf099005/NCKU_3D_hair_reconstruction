@@ -42,6 +42,8 @@ class FusionResult:
     keep: list                       # per head (S_i,) bool: strand goes into the fused hair
     refined_labels: np.ndarray = None  # optional (res, res) label map after refinement
     info: dict = field(default_factory=dict)   # method-specific numbers (JSON-serializable)
+    heads: list = None               # optional: edited heads (strand-editing methods move strands); None = the
+                                     # input heads unchanged. Metrics / renders then use these positions.
 
 
 def initial_keep(heads, labels):
@@ -206,3 +208,9 @@ def tsai2_joint_fm_trim(heads, labels, ctx):
     info.update(trim=r["trim_info"], trim_seconds=round(time.time() - t0, 2))
     return FusionResult(keep=[r["visible_a"], r["visible_b"]], refined_labels=r["binary_mask"].astype(np.int16),
                         info=info)
+
+
+# experimental variants (adaptive_fm.py) register themselves here; they run only when named in --methods
+import adaptive_fm  # noqa: E402,F401
+import strand_edit  # noqa: E402,F401
+import flow_band  # noqa: E402,F401
