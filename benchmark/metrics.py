@@ -247,3 +247,35 @@ def view_mix(cc, keep, init_keep):
         maps[name] = img
     return (dict(edge_frac=float(np.mean(edge)), block_mix=float(np.mean(blk)), donor_vis=float(np.mean(dv)),
                  **{f"edge_frac_{k}": float(e) for k, e in zip(imgs, edge)}), maps)
+
+
+# ---------------------------------------------------------------- slabx (opt-in: --metrics ...,slabx)
+# Projection crossings of the kept strands on the analysis grid, as the joint FM counts them, with and without
+# the depth rule (slab_edges.py, dz = SLABX_DZ): pairs in the same column but > ~dz apart in height are allowed.
+#   proj_w / slab_w   weighted crossings (pair x columns) of kept base x kept donor strands, in thousands
+#   slab_frac         slab_w / proj_w: share of the crossings that are at about the same height
+SLABX_DZ = 0.01
+
+
+@register_metric("slabx")
+def slabx(cc, keep, init_keep):
+    from fusion_refine.fast_membership import fast_strand_cell_membership
+    from fusion_refine.slab_edges import slab_projection_edges
+    from highlighting.generate_from_3D_models.joint_contour.grid import JointMembership
+    from highlighting.generate_from_3D_models.joint_contour.overlap import joint_projection_objectives
+    if len(cc.heads) != 2:
+        return {}, {}
+    pa, pb = (h["positions"][k] for h, k in zip(cc.heads, keep))
+    if len(pa) == 0 or len(pb) == 0:
+        return dict(proj_w=0.0, slab_w=0.0, slab_frac=float("nan")), {}
+    n = cc.grid.n
+    levels = (16, 4) if n >= 16 else (n,)
+    mem = JointMembership.from_heads(fast_strand_cell_membership(cc.grid, pa, levels=levels),
+                                     fast_strand_cell_membership(cc.grid, pb, levels=levels), n)
+    state = np.concatenate([np.zeros(len(pa), bool), np.ones(len(pb), bool)])
+    out = {}
+    for tag, dz in (("proj", 10.0), ("slab", SLABX_DZ)):
+        e = slab_projection_edges(cc.grid, mem, pa, pb, dz=dz)
+        out[f"{tag}_w"] = joint_projection_objectives(e, state, len(pa))[1] / 1e3
+    out["slab_frac"] = out["slab_w"] / max(out["proj_w"], 1e-9)
+    return out, {}

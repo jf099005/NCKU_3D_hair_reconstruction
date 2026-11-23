@@ -214,3 +214,5 @@ def tsai2_joint_fm_trim(heads, labels, ctx):
 import adaptive_fm  # noqa: E402,F401
 import strand_edit  # noqa: E402,F401
 import flow_band  # noqa: E402,F401
+import two_stage  # noqa: E402,F401
+import strand_comb  # noqa: E402,F401

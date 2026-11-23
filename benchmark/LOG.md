@@ -283,3 +283,182 @@ r6 結果（8 case、20k；edge = view_mix.edge_frac）：
   → band 系列在 8 case 上的優勢是選樣造成的，不能單獨取代 guard FM。
 - guard FM 與 band 互補（guard 在重疊大的 case 幾乎不動，band 在那裡有效）→ r11：每個 case 同時算兩者，
   只保留 ret ≥ 0.7 的候選，選加權投影交叉數（FM 自己的目標，不用評估指標）最少者：`afs_guard_or_band`、`afs_guard_or_band3`（多 afb_flow16_lic12）。
+
+## 2026-11-22 [14] 資料遺失與重建（23:37）
+
+- 23:37（使用者 commit `1122` 之後兩分鐘）`benchmark/data/` 底下所有 .json / .log / .html / .md / .csv 被刪除（原因不明；png / npz 都在）：
+  包括 `fusion_m2_n50_s0` 的 benchmark.json、50 個 case.json、原始 50 case run 的 result.json / summary / report，以及本實驗所有 run 的 result.json / log。
+  執行中的 r10 / r11 中斷。程式碼與 LOG 在 commit 中，未受影響。
+- 重新 build（現行 / 10-26 版 builder、seed 0、有無 --min_hair_length 0.12）都**無法重現**原 case（髮型與 mask 不同；原 benchmark 建於 10-15，早於第一個 commit）。
+- 經使用者同意，改為重建 case.json：髮型名稱與 mask 類型取自原 run 的 log（`benchmark/nohup.out`，50 個 case 都有）、mask 用保留下來的 `mask_1.png`、
+  長度重新計算；每顆頭的全髮絲數與 log 一致（50/50）。**case seed 無法還原**，改為 1000 + index（`seed_reconstructed: true`），
+  所以 `--max_strands` 子集與原本不同；全髮絲結果不受影響。驗證：case_0023 mask_only 全髮絲 gs 0.3540、kept [75503, 21858]，與遺失前完全相同。
+- 原始 50 case run（`runs/run`）：由保留的 maps.npz keep mask 重算所有指標寫回 result.json（`restored` 欄位；FM objectives / 時間等 method_info 遺失；
+  6 個 tsai skipped_oom case 依先前 summary 標回 skipped_oom）。抽查 case_0000 / 0001 與遺失前一致。
+- 本實驗 20k 結果（r1、r3、r6、r9）的數字只保留在本 LOG；其 keep mask 對應舊 seed，無法再重算。之後的 20k 比較全部在新 seed 下重跑：
+  r12 = 28 case（8 調參 + 20 held-out）× mask_only / tsai / guard / afb_flow16_lic12 / afb_flow32_a0.4_lic24_cap0.5 / afs_guard_or_band(3)。
+  r10（全髮絲 4 case + optical）重跑並加入 `afs_guard_or_band`。
+
+## 2026-11-23 [15] r12（28 case、20k、新 seed）與 r10（全髮絲 4 case + optical）
+
+r12（`data/dev_adaptive/r12_all28_s20k`）：
+
+| method | 28 case gs / ret / ret_min / #<.5 / edge | 調參 8：gs / ret / edge | held-out 20：gs / ret / edge |
+|---|---|---|---|
+| mask_only | 0.167 / 1.00 / 1.00 / 0 / 0.054 | 0.184 / 1.00 / 0.062 | 0.160 / 1.00 / 0.050 |
+| tsai_joint_fm | 0.072 / 0.72 / 0.06 / 7 / 0.041 | 0.077 / 0.51 / 0.042 | 0.070 / 0.81 / 0.040 |
+| afm_a2_guard0.7 | 0.104 / 0.85 / 0.72 / 0 / 0.050 | 0.150 / 0.83 / 0.059 | 0.086 / 0.85 / 0.047 |
+| afb_flow16_lic12 | 0.141 / 0.90 / 0.58 / 0 / 0.051 | – | – |
+| afb_flow32_a0.4_lic24_cap0.5 | 0.118 / 0.86 / 0.61 / 0 / 0.050 | 0.128 / 0.83 / 0.050 | 0.114 / 0.87 / 0.050 |
+| afs_guard_or_band(3) | 0.103 / 0.84 / 0.72 / 0 / 0.051 | 0.152 / 0.82 / 0.065 | 0.083 / 0.85 / 0.045 |
+
+- 新 seed 下重現 r9 的結論：held-out 上 guard FM 最好；調參 8 case 上 band 最好。
+- `afs_guard_or_band`：25/28 選了 guard。以「加權投影交叉數」挑選**挑錯**：調參 8 case edge 0.065（比兩個候選都差），
+  全髮絲 0011 選了 guard（0.292）而非 band（0.147），0007 選了最差的 band。交叉數會偏好藏較多髮絲 / 改動較大的候選 → 棄用此選擇準則。
+
+r10（`data/dev_adaptive/r5_full_optical`，全髮絲 4 個重疊大的代表 case，比較圖 `compare/compare_<case>.png`）：
+
+| method | gs | ret | ret_min | edge |
+|---|---|---|---|---|
+| mask_only | 0.235 | 1.00 | 1.00 | 0.067 |
+| tsai_joint_fm | 0.045 | 0.44 | 0.00 | 0.028 |
+| afm_a2_guard0.7 | 0.196 | 0.89 | 0.76 | 0.054 |
+| afb_flow16_lic12 | 0.172 | 0.89 | 0.82 | 0.049 |
+| afb_flow32_a0.4_lic24_cap0.5 | 0.164 | 0.85 | 0.73 | 0.051 |
+| afb_flow32_lic24_cap0.3 | 0.189 | 0.90 | 0.74 | 0.054 |
+
+- optical 渲染（0011 long+long）：band 兩版的邊界沿髮流、乾淨，兩顆頭都保留（ret 0.97–0.98，gs 0.257 → 0.147–0.192）；guard ≈ 不動（0.292）；baseline 換成 donor 髮型。
+  0007：afb_flow32_a0.4 變差（0.231 / edge 0.077），flow16_lic12 較穩（0.153 / 0.92）。
+- 結論：沒有單一方法支配。guard FM = 一般 case 的穩健選擇；band 系列 = 重疊大時唯一能精修又不換髮型的方法。下一步需要一個好的「何時用 band」準則
+  （候選：兩頭重疊度 / overlap_matrix.density、guard 的 lam 被拉高的倍數 = 衝突嚴重程度），而不是交叉數。
+- 2026-11-23：原始 run 的 run_config.json 依 session 早先印出的內容補回，summarize 重新產生 summary / report：All cases mask_only gs 0.1695 ± 0.098、tsai 44 ok / 6 failed，與遺失前的 summary 一致。
+
+## 2026-11-23 12:00 checkpoint
+
+- 無執行中的實驗；文件（LOG / SUMMARY / checkpoints）已同步到 [15]。
+- 目前最佳：`afm_a2_guard0.7`（Promising，穩健、0/28 崩）；重疊大的髮型用方向 A `afb_flow16_lic12` / `afb_flow32_a0.4_lic24_cap0.5`（Experimental）。
+- 已棄用：純自適應 lam（alpha ≤ 1）、rlift 類 strand editing、無平滑 / 無 cap 的 band、以交叉數挑選的 `afs_*`。
+- 未完成：何時改用 band 的準則；band 參數在全髮絲 held-out 上的驗證；回寫 `img2hair_tsai_1.py`（需加預設關閉的 flag，並經使用者同意）。
+
+## 2026-11-23 [16] 少量髮絲能否取代完整投影？（使用者提問）
+
+- DiffLocks 的 guide strands 只有 135 根 × 32 點，且推論流程沒有 → 不可行；「少量髮絲」= 解碼髮絲的隨機子集。
+- 子集測試（4 個全髮絲 case，guard FM 在子集上跑、mask 套回全部髮絲再評分；腳本 `/tmp/claude-1000/subset/subset_test.py`）：
+  - 子集 + 256 解析度：子集沒抽到的格子 FM 決定不了、保留原標籤 → 翻與沒翻的格子交錯，常比不精修還差（0023：20k → gs 0.357 > mask 0.354）。
+  - 子集 + 粗解析度（2k@32 / 5k@64）：與全髮絲 FM 的改動 IoU 約 0.6–0.7、0.2–2 s，但品質差（0023：0.29 vs 全髮絲 0.17）——粗格放大後階梯邊界、子集交叉估計雜訊大。
+  - 結論：少量髮絲能快速找出「大致該改哪裡」，但不能直接取代完整投影。
+- → 兩段式（`two_stage.py`）：(1) 5k / 2k 髮絲、64 / 32 粗格跑 guard FM（約 1–3 s）；(2) 全部髮絲，從 stage-1 mask 出發，
+  只讓「stage-1 改動區 + 邊界」擴張 W texel 的帶內節點可動，且**只在帶內髮絲經過的柱體建投影交叉**（帶外兩根髮絲之間的交叉不影響任何移動 → 最佳解不變，省掉大部分圖）。
+  lam = 2·W0/S_band，guard 0.7。adaptive_fm 加兩個 hook：`edge_rows`（限制建邊柱體，guard 重跑時共用）、`lam_scope="movable"`。
+- smoke（0023、20k）：guard FM 108 s、gs 0.128、kept [13662, 3872]；`ts_5k_r64_w8` 7 s、gs 0.118、kept [13850, 4822]（更好且保留更多）。
+- r13：全髮絲 4 case（0023 / 0007 / 0000 / 0011）跑 `ts_5k_r64_w8`、`ts_5k_r64_w16`、`ts_2k_r32_w16`，之後 optical 渲染。
+
+## 2026-11-23 [17] r13 兩段式（全髮絲 4 case）與時間分析；membership 加速
+
+r13（全髮絲 4 case）：
+
+| method | gs | ret | ret_min | edge | 時間 |
+|---|---|---|---|---|---|
+| mask_only | 0.235 | 1.00 | 1.00 | 0.067 | – |
+| tsai_joint_fm | 0.045 | 0.44 | 0.00 | 0.028 | 410 s |
+| afm_a2_guard0.7 | 0.196 | 0.89 | 0.76 | 0.054 | 412 s |
+| ts_5k_r64_w8 | 0.198 | 0.86 | 0.72 | 0.061 | 321 s（含 membership） |
+| ts_5k_r64_w16 | 0.176 | 0.84 | 0.68 | 0.049 | 33 s + membership |
+| ts_2k_r32_w16 | 0.114 | 0.86 | 0.73 | 0.041 | 33 s + membership |
+
+- 時間拆解：全髮絲每 case 的 membership（256 格、strand → column）約 **290 s**，舊方法 410 s 中只有約 120 s 是交叉圖 + FM；
+  兩段式把後者降到約 33 s（第 1 段 2 s、限制柱體的建邊 15–28 s、FM 約 8 s），記憶體峰值 17 → 11.7 GB（整個 case 進程，僅供參考）。
+- 注意：ts_2k_r32_w16 在 0000 gs 0.065、kept [58338, 40725]，與 baseline 幾乎相同（donor 從 28.5k 擴張到 40.7k）——guard 只擋減少、不擋增加，需看渲染確認是否「改髮型」。
+- membership 加速（`fast_membership.py`，不改 joint_contour）：256 格分 16×16 → 4×4 兩層區塊，每層用區塊平均座標系 + 容許值
+  （區塊大小 + 高度 × 法向傾角 + 1 mm）過濾候選點，最細層用原本的精確測試。結果與原函式比對：20k 髮絲 29.2 → 5.2 s（差 1 個 entry，邊界浮點），
+  **全髮絲 144 → 28 s，完全相同（0 差異）**。以 `fast_membership=True`（預設關閉）接入 `adaptive_fm.run_variant`；新方法
+  `afm_a2_guard0.7_fast`（結果應與 guard 完全相同）、`ts_5k_r64_w16_fast`、`ts_2k_r32_w16_fast`。
+- r14：全髮絲 4 case 跑上述三者（兩段式先跑，量單獨使用的總時間）。
+
+## 2026-11-23 [18] r14：fast membership 驗證、從 0 跑的時間、兩段式 vs guard
+
+- `afm_a2_guard0.7_fast` 的 keep mask 在 4/4 個全髮絲 case 與 `afm_a2_guard0.7` **逐根完全相同**；兩段式 fast / 非 fast 的 gs 也完全相同。
+- 從 0 跑的時間（全髮絲，不含讀檔 / 評估）：舊 guard / tsai 約 410–460 s（其中交叉圖 + FM 只約 47 s，其餘幾乎都是 membership 等前置）；
+  **guard_fast 約 100 s（結果相同，約 4–5×）**；兩段式 fast 約 80–95 s（第 1 段 4–7 s + membership 56 s + 限制柱體投影 15–28 s + FM）。
+  → 主要加速來自 fast membership；兩段式相對 guard_fast 只再省 5–20 s。
+- 兩段式是否逼近 guard：guard 有在精修的 case 逼近良好（0023：改動髮絲 IoU 0.92 / 0.95、98.8–99.2% 髮絲決定相同；0007：IoU 0.66–0.67、97.4%）；
+  guard 因重疊大幾乎不動的 case（0000 改動 2.5%、0011 0.1%）兩段式改得多（7–22%）——第 1 段的保留率檢查在子集 / 粗格上、第 2 段 lam 只以帶內正規化，保守程度不同。
+- 渲染（`compare/compare_case_0000.png`）：`ts_2k_r32_w16` 在 0000 重現 baseline 的「donor 擴張到頭頂、改髮型」（kept mask 幾乎與 tsai 相同）；
+  `ts_5k_r64_w16` 的 kept mask 出現顆粒狀區域。0011 上 ts_2k 較好（gs 0.292 → 0.131、ret 0.99）。
+- 結論：要「更快得到 guard 的結果」用 `afm_a2_guard0.7_fast`；兩段式不是 guard 的近似，而是較積極、較不穩定的變體（有時更好、有時改髮型），暫列 Experimental。
+  guard 只擋「某頭減少」、不擋「某頭擴張」是 0000 失敗的共同原因 → 可加「donor / base 各自不超過 mask 的 1 + δ」的雙向 guard。
+
+## 2026-11-23 [19] 合併效果與髮流的關係（使用者提問；r12 的 28 case、20k，數據 `/tmp/claude-1000/flow_dependence.json`）
+
+- 兩個便宜、FM 前就能算的特徵：
+  - intrusion = 依 drawn mask，保留髮絲的點落在「另一顆頭區域」上方的比例（整根髮絲的走向 × 長度，footprint = 最近髮根）；
+  - flow_across = drawn 邊界上 |髮流 · 邊界法向| × coherence 的平均（髮根附近 1.5 cm 的局部髮流，即 flow_band 的方向場）。
+- Spearman（28 case）：intrusion vs mask_only gs 0.46（p 0.013）；**intrusion vs guard gs 0.78（p < 0.001）**；**intrusion vs tsai 保留率 −0.66（p < 0.001）**；
+  flow_across vs mask_only gs 0.10（p 0.60，無關）；flow_across vs intrusion 0.33。
+- 解讀：難度由「整根髮絲跨進對方區域多少」決定（長髮下垂、髮流與 mask 的相對方向），**不是髮根附近的局部髮流方向**；
+  intrusion 高時 baseline 傾向吃掉一顆頭、guard 傾向不動（例如 0007 0.22、0011 0.18、0019 0.29、0034 0.24、0042 0.43）。
+  但不是單調門檻（0002 0.20、0015 0.26、0016 0.27 guard 仍有效）。
+- intrusion 不需要交叉圖即可算 → 可作為「何時改用 band / 較積極方法」準則的候選；也提示方向 A 的方向場應改用整根髮絲的走向（而非髮根 1.5 cm）。
+
+## 2026-11-23 [20] 深度分離規則（slab）與側向梳理（使用者要求）
+
+- 使用者規則：同一投影柱體內、但高度（沿格子法向）明顯不同的兩種髮絲可以允許（分層，不算交錯）。
+- `slab_edges.py`：每個柱體投影一次，線段依高度分到厚 dz、半重疊的 slab，只有同一 slab 內投影相交才算交叉（權重 = 有此交叉的柱體數）。
+  只用 joint_contour 現有的 numba 函式，不改它。驗證：dz 涵蓋整個高度時與 `joint_projection_edges` **完全相同**。
+  case_0011（20k）：dz 2 / 1 / 0.5 cm 時只剩 63% / 40% / 24% 的交叉對（權重 56% / 33% / 18%）——長髮的「交叉」多半是上下分層；建邊時間約 2×。
+- 接入 guard FM：`afm_a2_guard0.7_slab1` / `_slab2`（fast membership + slab dz 1 / 2 cm，自適應 lam 以 slab 圖的 W0 正規化）。
+- 新的 opt-in 指標 `slabx`：在 32×32 分析格上算保留髮絲的投影交叉權重 `proj_w` 與同高度交叉 `slab_w`（dz 1 cm），千為單位。
+- `strand_comb.py`（側向梳理）：FM 後，保留髮絲上 footprint 落在對方區域、且 3 mm 體素鄰域內確實有對方頭髮（深度分離者不動）的點，
+  沿切面往自己區域（侵蝕 2 texel 後的最近 texel 的頭皮點）移動，上限 d_max；沿髮絲平滑、髮根漸入、同頭 8 個鄰近髮絲平均，FTL 保長、轉折 ≤ 30°。
+  變體 `comb10/20_guard`、`comb10_guard_refit`（梳完再跑一次 FM）、`comb10/20_slab1`。
+- smoke（0011、20k）：guard（原規則）slab_w 929 → 222、view_mix 0.082 → 0.121（變差）、lam 被拉到 317；
+  **guard + slab 1 cm：slab_w 79（-91%）、view_mix 0.070、ret 0.86–0.91、lam 60 不需升高**；梳理再降 10–20%（slab1：79 → 70），位移平均 3–6 mm、p99 9–11 mm。
+- r15：28 case（20k）× mask_only / tsai / guard_fast / guard_slab1 / guard_slab2 / comb10/20 × guard/slab1，指標含 view_mix、slabx。
+
+r15 結果（`data/dev_adaptive/r15_slab_comb_s20k`，28 case、20k；same-h = slabx 的同高度交叉 / mask_only；p99 = 被移動髮絲位移的 p99）：
+
+| method | 28：gs / ret_min / #<.5 / vm / same-h | 調參 8：gs / vm / same-h | held-out 20：gs / vm / same-h | p99 |
+|---|---|---|---|---|
+| mask_only | 0.167 / 1.00 / 0 / 0.0535 / 1.00 | 0.184 / 0.0620 / 1.00 | 0.160 / 0.0500 / 1.00 | – |
+| tsai_joint_fm | 0.072 / 0.06 / **7** / 0.0408 / 0.20 | 0.077 / 0.0419 / 0.07 | 0.070 / 0.0404 / 0.26 | – |
+| guard_fast | 0.104 / 0.72 / 0 / 0.0501 / 0.21 | 0.150 / 0.0588 / 0.35 | 0.086 / 0.0466 / 0.16 | – |
+| guard_slab1 | 0.115 / 0.72 / 0 / 0.0463 / 0.14 | 0.144 / 0.0497 / 0.19 | 0.103 / 0.0449 / 0.12 | – |
+| guard_slab2 | 0.108 / 0.72 / 0 / 0.0461 / 0.17 | 0.138 / 0.0525 / 0.23 | 0.096 / 0.0436 / 0.14 | – |
+| comb10_guard | 0.095 / 0.72 / 0 / 0.0463 / 0.15 | 0.141 / 0.0524 / 0.25 | 0.077 / 0.0438 / 0.11 | 8.4 mm |
+| comb20_guard | 0.089 / 0.72 / 0 / 0.0427 / 0.12 | 0.135 / 0.0477 / 0.20 | **0.071** / **0.0407** / 0.09 | 14.8 mm |
+| comb10_slab1 | 0.106 / 0.72 / 0 / 0.0433 / 0.11 | 0.136 / 0.0447 / 0.14 | 0.094 / 0.0427 / 0.09 | 8.0 mm |
+| **comb20_slab1** | 0.101 / 0.72 / 0 / **0.0413** / **0.09** | 0.131 / **0.0411** / 0.12 | 0.090 / 0.0414 / **0.08** | 14.1 mm |
+
+- 全部梳理 / slab 版本 0/28 崩（baseline 7/28）。**梳理 2 cm 讓 view_mix 達到 baseline 水準（0.041）而不吃頭**；調參 8（重疊大）上 comb20_slab1 0.0411 < baseline 0.0419。
+- slab 規則降低「同高度交叉」（guard 0.21 → 0.14），view_mix 也降；但 grid score 與全投影交叉上升（不看高度，預期）。
+- 梳理的代價是位移：1 cm 版 p99 約 8 mm、2 cm 版約 14–15 mm（重疊大的 case 17–19 mm）。外觀需 optical 渲染確認（reward hacking 風險）。
+- r16：全髮絲 4 case 跑 guard_slab1、comb10_slab1、comb20_slab1、comb20_guard + optical 渲染。
+
+## 2026-11-23 [21] r16：全髮絲 4 case + optical（slab / 梳理）
+
+| method | gs | ret_min | view_mix | 0000 / 0007 / 0011 / 0023 的 view_mix |
+|---|---|---|---|---|
+| mask_only | 0.235 | 1.00 | 0.067 | 0.051 / 0.028 / 0.065 / 0.122 |
+| tsai_joint_fm | 0.045 | 0.00 | 0.028 | 0.034 / 0（base 消失）/ 0.033 / 0.044 |
+| afm_a2_guard0.7 | 0.196 | 0.76 | 0.054 | 0.061 / 0.024 / 0.072 / 0.059 |
+| guard_slab1 | 0.191 | 0.75 | 0.045 | 0.052 / 0.026 / 0.046 / 0.054 |
+| comb10_slab1 | 0.179 | 0.75 | 0.041 | 0.046 / 0.024 / 0.042 / 0.052 |
+| **comb20_slab1** | **0.173** | 0.75 | **0.040** | 0.042 / 0.023 / 0.042 / 0.052 |
+| comb20_guard | 0.180 | 0.76 | 0.045 | 0.048 / 0.021 / 0.062 / 0.051 |
+
+- 渲染（`r5_full_optical/compare/compare_<case>.png`，欄 mask_only / tsai / guard / guard_slab1 / comb20_slab1）：0011（long+long）guard 幾乎不動、
+  slab 版邊界清楚且兩頭都保留（ret 0.86），梳理後交界處的金色細絲更少；0023 各版邊界乾淨。整頭視角下**未見豎起、成團或明顯彎折**（2 cm 上限、p99 約 14 mm）。
+  近距離細節尚未檢查。
+- 結論：`comb20_slab1` 在 28 case（20k）與 4 個全髮絲重疊大 case 上 view_mix 都是不崩方法中最好（≈ baseline 水準），且 0 崩 → 升為 Promising。
+
+## 2026-11-23 [22] 演算法移到 `inference/fusion_refine/`（使用者要求）
+
+- 套件：`adaptive.py`（自適應 lam、guard、node / column 限制、slab、fast membership；`refine_joint_fm`）、`fast_membership.py`、`slab_edges.py`、
+  `comb.py`、`flow.py`、`two_stage.py`（helpers）、`presets.py`（`refine(heads, labels, "comb20_slab1" | ...)`，給推論腳本用）、`checks.py`（與 joint_contour 原函式的等價檢查）。
+  只依賴 `{"positions", "root_uv"}` + scalp-texture mask，不依賴 benchmark；joint_contour 不變。
+- benchmark 的 `adaptive_fm.py`、`flow_band.py`、`two_stage.py`、`strand_comb.py` 改為只註冊方法的 wrapper（方法名不變）；`benchmark/fast_membership.py`、`slab_edges.py` 移除，
+  `metrics.slabx` 改 import 套件。`strand_edit.py`（已棄用）留在 benchmark。
+- 驗證：移動前後在 case_0011 / 0023（20k）跑 10 個方法（mask_only、guard、guard_fast、guard_slab1、comb20_slab1、comb10_guard_refit、afb×2、ts_fast、afs），
+  maps.npz（keep mask）、edited_heads.npz、全部指標 **20/20 完全相同**；`presets.refine(..., "comb20_slab1")` 的 keep 與位置也與 benchmark 版相同。
+  `python -m fusion_refine.checks membership` 重現 fast membership 的等價檢查。
+- `img2hair_tsai_1.py` 尚未改動（接入需預設關閉的 flag）。

@@ -35,12 +35,14 @@ they share the GPU and RAM.
 | `summarize.py`, `report.py` | averages per length pair, paired comparison vs `mask_only`, extremes, HTML report |
 | `analysis.py` | `tsai.debug_field_analysis` on the extreme cases (`mask_only` = before, `tsai_joint_fm` = after) |
 | `render_results.py` | renders from saved keep masks with Blender (`experiments/gpu_render.py`); `--optical` = highlighting's optical preset (full-strand runs) |
-| `adaptive_fm.py`, `strand_edit.py` | experimental methods (`afm_*`, `edit_*`), registered at the end of `fusion_methods.py`, opt-in via `--methods` |
+| `adaptive_fm.py`, `flow_band.py`, `two_stage.py`, `strand_comb.py` | experimental methods (`afm_*`, `afb_*`, `afs_*`, `ts_*`, `comb*`), registered at the end of `fusion_methods.py`, opt-in via `--methods`; thin wrappers around `inference/fusion_refine/` (the algorithms) |
+| `strand_edit.py` | deprecated radial-lift methods (`edit_*`), kept for reference |
 | `dev_table.py`, `compare_page.py` | quick per-case tables of a dev run; comparison images (originals, 2D / scalp mask, optical renders) |
 
 Experiment tracking for method development: `LOG.md` (append only), `SUMMARY.md` (current status), `checkpoints.md` (usable versions).
 A method may return `FusionResult.heads` (moved strands); metrics and renders then use them (`edited_heads.npz`). `view_mix` is an
-opt-in metric (`--metrics ...,view_mix`) that sees layering, unlike the column grid score.
+opt-in metric (`--metrics ...,view_mix`) that sees layering, unlike the column grid score; `slabx` reports the
+depth-aware crossings.
 
 ## Conventions that must hold
 
